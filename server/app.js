@@ -7,10 +7,6 @@ app.use(cors());
 
 // Routes
 
-// app.use("/user", require("./routes/user.routes"));
-
-app.get('/', (req, res) => {
-    res.json({ 'ping': 'pong' });
-});
+app.use("/user", require("./routes/user.routes"));
 
 module.exports = app;
