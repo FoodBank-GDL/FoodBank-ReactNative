@@ -1,3 +1,7 @@
+# Node
+node_modules/
+
+# Default Stuff
 logs
 *.log
 npm-debug.log*
