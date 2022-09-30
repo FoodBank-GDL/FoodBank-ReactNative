@@ -1,15 +1,15 @@
-const Firebase=require('firebase/app');
-const FirebaseAuth=require('firebase/auth');
-const auth=require('../utils/firebase_auth_config');
+// const Firebase=require('firebase/app');
+// const FirebaseAuth=require('firebase/auth');
+const { FirebaseAuth, auth } = require('../utils/firebase_auth_config');
 
 //const Parse = require("../utils/parse_config");
 
 
 class UserClass {
     static async loginUser(body) {
-        try{
+        try {
 
-        }catch(error){
+        } catch (error) {
 
         }
     }
@@ -19,29 +19,29 @@ class UserClass {
         try {
             //Aqui metemos la logica de firebase
             //console.log(body);
-            const email=body.email;
-            const password=body.password;
+            const email = body.email;
+            const password = body.password;
             FirebaseAuth.createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
+                .then((userCredential) => {
+                    // Signed in 
 
-                //console.log(userCredential);
-                const user = userCredential.user;
-                return {"userCredentials":userCredential};
-                // ...
-            })
-            .catch((error) => {
-                throw error;
-            });
+                    //console.log(userCredential);
+                    const user = userCredential.user;
+                    return { "userCredentials": userCredential };
+                    // ...
+                })
 
         } catch (error) {
-            print("error en la clase");
-            throw error;
+            throw new Error(error.message);
         }
     }
 
     static async testGet() {
-        return { "ping": "pong" }
+        try {
+            throw new Error("Something went wrong!");
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
 }
