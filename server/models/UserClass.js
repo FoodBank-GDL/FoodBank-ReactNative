@@ -15,21 +15,27 @@ class UserClass {
     }
 
     static async registerUser(body) {
-        console.log("estamos en la clase");
         try {
             //Aqui metemos la logica de firebase
-            //console.log(body);
             const email = body.email;
             const password = body.password;
-            FirebaseAuth.createUserWithEmailAndPassword(auth, email, password)
+
+            const re = await FirebaseAuth.createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in 
 
-                    //console.log(userCredential);
                     const user = userCredential.user;
                     return { "userCredentials": userCredential };
-                    // ...
                 })
+                .catch((error) => {
+                    return { "message": error.code, "status": "error" };
+                });
+
+            if (re.status === "error") {
+                throw new Error(re.message)
+            } else {
+                return re
+            }
 
         } catch (error) {
             throw new Error(error.message);
