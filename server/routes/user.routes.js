@@ -9,7 +9,7 @@ const {
 } = require("../controllers/user.controller");
 
 // Core
-router.get("/test", getTesting)
+router.get("/test", getTesting);
 router.post("/login", userLogin);
 router.post("/register", userRegister);
 

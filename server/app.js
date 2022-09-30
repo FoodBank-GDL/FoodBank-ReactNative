@@ -9,4 +9,5 @@ app.use(cors());
 
 app.use("/user", require("./routes/user.routes"));
 
+
 module.exports = app;
