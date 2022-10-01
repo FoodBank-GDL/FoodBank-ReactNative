@@ -22,8 +22,9 @@ controller.userLogin = async (req, res) => {
         const response = await loginUser(req.body);
 
         res.send(response);
-    } catch {
-        // error
+    } catch(error) {
+        res.status(404).send(error.message);
+
     }
 };
 

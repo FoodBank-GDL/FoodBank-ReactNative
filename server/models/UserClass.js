@@ -8,9 +8,21 @@ const { FirebaseAuth, auth } = require('../utils/firebase_auth_config');
 class UserClass {
     static async loginUser(body) {
         try {
+            const login=await FirebaseAuth.signInWithEmailAndPassword(auth, body.email, body.password)
+            .then((loginCredentials)=>{
+                return{"credentials":loginCredentials};
+            }).catch(error=>{
+                return { "message": error.code, "status": "error" };
+            })
+
+            if (login.status==="error"){
+                throw new Error(login.message);
+            }else{
+                return login;
+            }
 
         } catch (error) {
-
+            throw new Error(error.message);
         }
     }
 
