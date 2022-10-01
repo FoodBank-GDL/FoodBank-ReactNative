@@ -1,6 +1,6 @@
 // const Firebase=require('firebase/app');
 // const FirebaseAuth=require('firebase/auth');
-const { FirebaseAuth, auth } = require('../utils/firebase_auth_config');
+const {Firestore, db, FirebaseAuth, auth } = require('../utils/firebase_config');
 
 //const Parse = require("../utils/parse_config");
 
@@ -43,11 +43,24 @@ class UserClass {
                     return { "message": error.code, "status": "error" };
                 });
 
+
             if (re.status === "error") {
                 throw new Error(re.message)
             } else {
+                try{
+                    const reFireStore= await Firestore.addDoc(Firestore.collection(db,"usuarios"),{
+                        email:body.email,
+                        nombre:body.nombre,
+                        telefono:body.telefono
+                    }).catch((error)=>{
+                        return { "message": error.code, "status": "error" };
+                    });
+                }catch(err){
+                    throw new Error(reFireStore.message)
+                }
                 return re
             }
+
 
         } catch (error) {
             throw new Error(error.message);
