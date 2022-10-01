@@ -1,9 +1,4 @@
-// const Firebase=require('firebase/app');
-// const FirebaseAuth=require('firebase/auth');
 const {Firestore, db, FirebaseAuth, auth } = require('../utils/firebase_config');
-
-//const Parse = require("../utils/parse_config");
-
 
 class UserClass {
     static async loginUser(body) {
@@ -28,14 +23,11 @@ class UserClass {
 
     static async registerUser(body) {
         try {
-            //Aqui metemos la logica de firebase
             const email = body.email;
             const password = body.password;
 
             const re = await FirebaseAuth.createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    // Signed in 
-
                     const user = userCredential.user;
                     return { "userCredentials": userCredential };
                 })
