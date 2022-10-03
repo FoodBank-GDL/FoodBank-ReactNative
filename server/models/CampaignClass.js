@@ -1,4 +1,4 @@
-const { where, getDoc } = require('firebase/firestore');
+const { where } = require('firebase/firestore');
 const {Firestore, db } = require('../utils/firebase_config');
 async function updateDocuments(userId) {
     try {
@@ -15,6 +15,17 @@ async function updateDocuments(userId) {
 }
 
 class UserClass {
+
+    static async getActiveCampaigns(){
+        try{
+            const myQuery=Firestore.query(Firestore.collection(db,"campaigns"), where('isActive','==',true));
+            const querySnap=await Firestore.getDocs(myQuery);
+            return querySnap.docs.map(doc => doc.data());
+        }catch(error){
+            throw new Error(error);
+        }
+
+    }
 
     static async createCampaign(body){
         try{
