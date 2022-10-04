@@ -3,7 +3,7 @@ const {Firestore, db, FirebaseAuth, auth } = require('../utils/firebase_config')
 class UserClass {
     static async loginUser(body) {
         try {
-            const login=await FirebaseAuth.signInWithEmailAndPassword(auth, body.email, body.password)
+            const login = await FirebaseAuth.signInWithEmailAndPassword(auth, body.email, body.password)
             .then((loginCredentials)=>{
                 return{"credentials":loginCredentials};
             }).catch(error=>{
