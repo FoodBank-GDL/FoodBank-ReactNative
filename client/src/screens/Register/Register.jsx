@@ -1,5 +1,7 @@
+import { Text } from "react-native";
+
 const Register = () => {
-  return <div>Register</div>;
+  return <Text>Register</Text>;
 };
 
 export default Register;
