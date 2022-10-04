@@ -19,8 +19,8 @@ export default function App() {
         <Stack.Screen name="Login" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Register">
-          {(props) => <Register {...props} options={{ headerShown: false }} />}
+        <Stack.Screen name="Register" options={{ headerShown: false }}>
+          {(props) => <Register {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
