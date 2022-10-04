@@ -5,6 +5,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
+
 const Stack = createNativeStackNavigator();
 export default function App() {
   //Push notifs
