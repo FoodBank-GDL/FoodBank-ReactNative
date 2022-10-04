@@ -1,4 +1,5 @@
 const {Firestore, db, FirebaseAuth, auth } = require('../utils/firebase_config');
+const { where } = require("firebase/firestore");
 
 class UserClass {
     static async loginUser(body) {
@@ -40,20 +41,44 @@ class UserClass {
                 throw new Error(re.message)
             } else {
                 try{
-                    const reFireStore= await Firestore.addDoc(Firestore.collection(db,"usuarios"),{
+                    const reFireStore = await Firestore.addDoc(Firestore.collection(db,"usuarios"),{
                         email:body.email,
                         nombre:body.nombre,
                         telefono:body.telefono
                     }).catch((error)=>{
                         return { "message": error.code, "status": "error" };
                     });
-                }catch(err){
+                } catch(err) {
                     throw new Error(reFireStore.message)
                 }
                 return re
             }
 
 
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    static async updateUser(body) {
+        try {
+            const userInfo = {
+                userId: body.userId,
+                email: body.email,
+                telefono: body.telefono,
+                ubicacion: body.ubicacion
+            }
+            console.log(userInfo);
+            try {
+                const myQuery=Firestore.query(Firestore.collection(db, "usuarios"), where("userId", "==", userInfo.userId));
+                const querySnap=await Firestore.getDocs(myQuery);
+                querySnap.forEach((currDoc)=>{
+                    Firestore.updateDoc(currDoc.ref, userInfo);
+                });
+                return {status:201};
+            } catch (err) {
+                throw new Error(err.message);
+            }
         } catch (error) {
             throw new Error(error.message);
         }

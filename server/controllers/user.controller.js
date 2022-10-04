@@ -3,6 +3,7 @@ const {
     registerUser,
     loginUser,
     testGet,
+    updateUser,
 } = require("../models/UserClass");
 
 controller = {};
