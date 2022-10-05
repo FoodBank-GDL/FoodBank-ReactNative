@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 
 import StatusBar from "../../components/StatusBar";
 
-const Login = () => {
+const Login = ({navigation}) => {
   return (
     <View>
       <StatusBar/>
