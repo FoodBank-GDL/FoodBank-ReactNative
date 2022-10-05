@@ -43,7 +43,8 @@ class UserClass {
                     const reFireStore= await Firestore.addDoc(Firestore.collection(db,"usuarios"),{
                         email:body.email,
                         nombre:body.nombre,
-                        telefono:body.telefono
+                        telefono:body.telefono,
+                        userId:re.userCredentials.user.uid
                     }).catch((error)=>{
                         return { "message": error.code, "status": "error" };
                     });
