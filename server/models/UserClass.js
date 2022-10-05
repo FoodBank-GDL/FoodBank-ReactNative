@@ -68,7 +68,6 @@ class UserClass {
                 telefono: body.telefono,
                 ubicacion: body.ubicacion
             }
-            console.log(userInfo);
             try {
                 const myQuery=Firestore.query(Firestore.collection(db, "usuarios"), where("userId", "==", userInfo.userId));
                 const querySnap=await Firestore.getDocs(myQuery);
