@@ -17,7 +17,6 @@ const ProgressBar = ({
             <View style={{ justifyContent: 'center', position: 'relative', marginTop: 15 }}>
                 <View
                     style={{
-
                         width: '100%',
                         height: getheight,
                         marginVertical: 10,

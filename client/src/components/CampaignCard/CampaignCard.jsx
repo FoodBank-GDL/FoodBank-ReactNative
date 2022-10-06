@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 
 import IconFA from 'react-native-vector-icons/FontAwesome'
 import IconAnt from 'react-native-vector-icons/AntDesign'
+import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
@@ -20,6 +22,34 @@ const CapmpaignCard = (props) => {
 
     return (
         <View style={Styles.container}>
+
+            <View style={Styles.categories}>
+                <IconMCI
+                    name="food-apple"
+                    size={15}
+                    color="gray"
+                    style={Styles.category}
+                />
+                <IconFA5
+                    name="tshirt"
+                    size={15}
+                    color="#71D1FB"
+                    style={Styles.category}
+                />
+                <IconMCI
+                    name="bottle-soda-classic"
+                    size={15}
+                    color="gray"
+                    style={Styles.category}
+                />
+                <IconFA5
+                    name="shopping-basket"
+                    size={15}
+                    color="#FC8181"
+                    style={Styles.category}
+                />
+            </View>
+
             <Text style={Styles.title}>ITESM Invierno 2022</Text>
 
             <View>
@@ -59,7 +89,7 @@ const CapmpaignCard = (props) => {
 
 const Styles = StyleSheet.create({
     container: {
-        height: 160,
+        height: 170,
         backgroundColor: "white",
         shadowColor: "#000",
         shadowOffset: {
@@ -70,7 +100,7 @@ const Styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 7,
-        borderRadius: 5,
+        borderRadius: 15,
         marginBottom: 20,
         paddingLeft: 20,
         paddingRight: 20,
@@ -93,6 +123,15 @@ const Styles = StyleSheet.create({
     contentText: {
         fontSize: 11,
         paddingLeft: 10
+    },
+    categories: {
+        flexDirection: 'row',
+        position: 'absolute',
+        right: 10,
+        top: 5
+    },
+    category: {
+        marginLeft: 7
     }
 })
 
