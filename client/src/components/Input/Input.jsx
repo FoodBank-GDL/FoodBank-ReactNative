@@ -1,42 +1,70 @@
-import { useState } from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { useEffect, useState } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+import Icon from "react-native-vector-icons/Entypo";
 
 const Input = (props) => {
   const [inputStyle, setInputStyle] = useState(Styles.input);
+  const [focus, setFocus] = useState(false);
+
+  useEffect(() => {
+    if (focus === true) {
+      setInputStyle([Styles.input_container, Styles.input_focused]);
+    } else {
+      setInputStyle(Styles.input_container);
+    }
+  }, [focus]);
 
   return (
-    <TextInput
-      style={inputStyle}
-      placeholder={props.placeholder}
-      onChangeText={(val) => props.handleTextChange(val)}
-      value={props.value}
-      secureTextEntry={props.secureTextEntry}
-      onFocus={() => setInputStyle(Styles.input_focused)}
-      onBlur={() => setInputStyle(Styles.input)}
-    />
+    <View style={inputStyle}>
+      <TextInput
+        style={Styles.input}
+        placeholder={props.placeholder}
+        onChangeText={(val) => props.handleTextChange(val)}
+        value={props.value}
+        keyboardType={props.keyboardType}
+        secureTextEntry={props.secureTextEntry || false}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
+      />
+      <Icon
+        style={Styles.icon}
+        name={props.icon}
+        color={props.iconColor}
+        size={props.iconSize}
+      />
+    </View>
   );
 };
 
 const Styles = StyleSheet.create({
-  input: {
-    paddingStart: 10,
+  input_container: {
+    width: "100%",
+
+    borderRadius: 10,
+
+    marginTop: 10,
+
     borderWidth: 1,
     borderColor: "#B0B0B0",
-    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  input: {
     height: 40,
-    marginTop: 20,
+    paddingStart: 10,
+    width: "100%",
     borderRadius: 10,
     backgroundColor: "#FFF",
   },
   input_focused: {
-    paddingStart: 10,
-    borderWidth: 1,
-    width: "100%",
-    height: 40,
-    marginTop: 20,
-    borderRadius: 10,
-    backgroundColor: "#FFF",
     borderColor: "#FF9900",
+  },
+  icon: {
+    position: "absolute",
+    right: 20,
+    zIndex: 100,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

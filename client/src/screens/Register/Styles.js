@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 
 export const Styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
     backgroundColor: "#FFF",
+    position: "absolute",
   },
   content: {
     flex: 1,
     padding: 36,
+    paddingTop: 12,
   },
   image_logo: {
     width: "110%",
@@ -37,5 +40,6 @@ export const Styles = StyleSheet.create({
     width: "100%",
     height: "10%",
     backgroundColor: "#FF9900",
+    bottom: 0,
   },
 });
