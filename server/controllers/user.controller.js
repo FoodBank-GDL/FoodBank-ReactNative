@@ -1,7 +1,9 @@
+const { updateCurrentUser } = require("firebase/auth");
 const {
     registerUser,
     loginUser,
     testGet,
+    updateUser,
 } = require("../models/UserClass");
 
 controller = {};
@@ -35,6 +37,16 @@ controller.userRegister = async (req, res) => {
         res.send(response);
     } catch (error) {
         res.status(404).send(error.message);
+    }
+};
+
+controller.userUpdate = async (req, res) => {
+    try {
+        const response = await updateUser(req.body);
+
+        res.send(response);
+    } catch (error) {
+        res.status(418).send(error.message); // Don't know what error it should be.
     }
 };
 
