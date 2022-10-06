@@ -2,10 +2,12 @@ import { Image, Keyboard, ScrollView, Text, View, Alert } from "react-native";
 import StatusBar from "../../components/StatusBar";
 import { Styles } from "./Styles";
 import Input from "../../components/Input";
+import axios from "axios";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
+import { API_URL } from "../../../lib/contants";
 
-const Register = (props) => {
+const Register = ({ navigation }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -71,13 +73,32 @@ const Register = (props) => {
 
   const register = () => {
     if (userData.password.length < 6) {
-      //alert("Favor de ingresar una contraseña de al menos 6 carcteres.");
       Alert.alert(
         "¡Contraseña muy corta!",
         "Favor de ingresar una contraseña de al menos 6 caracteres"
       );
+      return;
     }
-    console.log(userData);
+
+    try {
+      axios
+        .post(`${API_URL}/user/register`, {
+          email: userData.email,
+          password: userData.password,
+          nombre: userData.name,
+          telefono: userData.phone,
+        })
+        .then((res) => {
+          console.log(res);
+          navigation.navigate("Login");
+        })
+        .catch((err) => {
+          Alert.alert("Something went wrong!");
+        });
+    } catch (err) {
+      console.log("catched");
+      console.error(err);
+    }
   };
 
   const handleTextChange = (field, val) => {
@@ -161,7 +182,7 @@ const Register = (props) => {
             ¿Ya tienes cuenta?{" "}
             <Text
               style={{ color: "#FF9900", fontWeight: "bold" }}
-              onPress={() => props.navigation.navigate("Login")}
+              onPress={() => navigation.navigate("Login")}
             >
               Iniciar sesión
             </Text>
