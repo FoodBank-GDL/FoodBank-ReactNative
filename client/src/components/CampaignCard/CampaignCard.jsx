@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import IconFA from 'react-native-vector-icons/FontAwesome'
 import IconAnt from 'react-native-vector-icons/AntDesign'
 
+import ProgressBar from "../ProgressBar/ProgressBar";
 
 const CapmpaignCard = (props) => {
 
@@ -29,7 +30,7 @@ const CapmpaignCard = (props) => {
                         style={Styles.icon}
                     />
 
-                    <Text style={Styles.contentText}>Cristian Cazares</Text>
+                    <Text style={Styles.contentText}>{"Cristian Cazares"}</Text>
 
                 </View>
                 <View style={Styles.content}>
@@ -39,11 +40,18 @@ const CapmpaignCard = (props) => {
                         style={Styles.icon}
                     />
 
-                    <Text style={Styles.contentText}>Cristian Cazares</Text>
+                    <Text style={Styles.contentText}>{"24 de agosto - 25 de septiembre"}</Text>
 
                 </View>
 
             </View>
+
+            <ProgressBar
+                percentage={'80%'}
+                height={10}
+                backgroundColor={'#D9D9D9'}
+                completedColor={'#8BE794'}
+            />
 
         </View>
     );
