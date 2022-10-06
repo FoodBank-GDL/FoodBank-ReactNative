@@ -22,6 +22,7 @@ const Feed = (props) => {
         <View style={Styles.container}>
             <Header />
             <View style={{ flex: 9 }}></View>
+            <View style={{ flex: 1, backgroundColor: 'orange' }}></View>
         </View>
     );
 };
