@@ -18,7 +18,7 @@ const Header = (props) => {
                         uri: "https://raw.githubusercontent.com/FoodBank-GDL/FoodBank-ReactNative/main/client/assets/FoodBankLogo_large.png",
                     }}
                 />
-                <Text style={Styles.text}>Campañas</Text>
+                <Text style={Styles.text}>{props.title}</Text>
             </View>
 
             <View

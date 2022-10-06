@@ -15,13 +15,14 @@ import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 
 import Header from "../../components/Header";
+import CampaignContainer from "../../components/CampaignContainer";
 
 const Feed = (props) => {
 
     return (
         <View style={Styles.container}>
-            <Header />
-            <View style={{ flex: 9 }}></View>
+            <Header title={"Campaña"} />
+            <CampaignContainer />
             <View style={{ flex: 1, backgroundColor: 'orange' }}></View>
         </View>
     );
