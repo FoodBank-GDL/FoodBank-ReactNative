@@ -14,13 +14,16 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 
-const Register = (props) => {
+import Header from "../../components/Header";
+
+const Feed = (props) => {
 
     return (
         <View style={Styles.container}>
-
+            <Header />
+            <View style={{ flex: 9 }}></View>
         </View>
     );
 };
 
-export default Register;
+export default Feed;
