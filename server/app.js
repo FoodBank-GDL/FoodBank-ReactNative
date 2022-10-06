@@ -9,6 +9,7 @@ app.use(cors());
 
 app.use("/user", require("./routes/user.routes"));
 app.use("/campaign", require("./routes/campaign.routes"))
+app.use("/donation", require("./routes/donation.routes"))
 
 
 module.exports = app;
