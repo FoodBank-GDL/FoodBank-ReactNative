@@ -38,16 +38,25 @@ const Input = (props) => {
 
 const Styles = StyleSheet.create({
   input_container: {
-    width: "100%",
+    width: "98%",
 
     borderRadius: 10,
-
+    backgroundColor: "#fff",
     marginTop: 10,
 
     borderWidth: 1,
     borderColor: "#B0B0B0",
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   input: {
     height: 40,
