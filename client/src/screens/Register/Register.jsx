@@ -1,11 +1,19 @@
-import { Image, Keyboard, ScrollView, Text, View, Alert } from "react-native";
+import {
+  Image,
+  Keyboard,
+  ScrollView,
+  Text,
+  View,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import StatusBar from "../../components/StatusBar";
 import { Styles } from "./Styles";
 import Input from "../../components/Input";
 import axios from "axios";
 import Button from "../../components/Button";
 import { useEffect, useState } from "react";
-import { API_URL } from "../../../lib/contants";
+import { API_URL } from "../../../lib/constants";
 
 const Register = ({ navigation }) => {
   const [userData, setUserData] = useState({
@@ -22,6 +30,7 @@ const Register = ({ navigation }) => {
   });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [keyboardShown, setKeyboardShown] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (
@@ -35,7 +44,7 @@ const Register = ({ navigation }) => {
     } else {
       setButtonDisabled(true);
     }
-  }, [userData]);
+  }, [userData, confirmPassInfo]);
 
   useEffect(() => {
     const keyboardShown = Keyboard.addListener("keyboardDidShow", () => {
@@ -69,9 +78,9 @@ const Register = ({ navigation }) => {
         confirmed: true,
       });
     }
-  }, [confirmPassInfo.value]);
+  }, [confirmPassInfo.value, userData.password]);
 
-  const register = () => {
+  const register = async () => {
     if (userData.password.length < 6) {
       Alert.alert(
         "¡Contraseña muy corta!",
@@ -79,26 +88,30 @@ const Register = ({ navigation }) => {
       );
       return;
     }
+    setLoading(true);
 
-    try {
-      axios
-        .post(`${API_URL}/user/register`, {
-          email: userData.email,
-          password: userData.password,
-          nombre: userData.name,
-          telefono: userData.phone,
-        })
-        .then((res) => {
-          console.log(res);
-          navigation.navigate("Login");
-        })
-        .catch((err) => {
-          Alert.alert("Something went wrong!");
-        });
-    } catch (err) {
-      console.log("catched");
-      console.error(err);
-    }
+    await axios
+      .post(`${API_URL}/user/register`, {
+        email: userData.email,
+        password: userData.password,
+        nombre: userData.name,
+        telefono: userData.phone,
+      })
+      .then((res) => {
+        Alert.alert("Registro exitoso", "Favor de iniciar sesión", [
+          "Iniciar sesión",
+        ]);
+
+        setLoading(false);
+        navigation.navigate("Login");
+      })
+      .catch((err) => {
+        setLoading(false);
+        Alert.alert(
+          "Lo sentimos. No pudimos concretar tu registro.",
+          err.response.data
+        );
+      });
   };
 
   const handleTextChange = (field, val) => {
@@ -168,14 +181,23 @@ const Register = ({ navigation }) => {
             handleTextChange={(val) => handleTextChange("name", val)}
           />
           <Input
-            style={Styles.input}
             placeholder="Número de telefono"
             handleTextChange={(val) => handleTextChange("phone", val)}
             keyboardType={"phone-pad"}
           />
         </View>
         <View style={Styles.button}>
-          <Button handlePress={() => register()} disabled={buttonDisabled} />
+          <Button
+            handlePress={() => register()}
+            disabled={buttonDisabled}
+            text={
+              loading === false ? (
+                "Registrar"
+              ) : (
+                <ActivityIndicator color="white" size={30} />
+              )
+            }
+          />
         </View>
         <View style={[Styles.centered, { marginTop: 12 }]}>
           <Text style={{ color: "#B4B4B4" }}>
