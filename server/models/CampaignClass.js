@@ -1,5 +1,7 @@
 const { where } = require("firebase/firestore");
 const { Firestore, db } = require("../utils/firebase_config");
+const userClass=require("../models/UserClass");
+
 async function updateDocuments(userId) {
   try {
     const myQuery = Firestore.query(
@@ -16,18 +18,24 @@ async function updateDocuments(userId) {
   }
 }
 
-
-async function getUserDonations(userId){
+async function completeCampaignInfo(campRef){
   try{
-    const myQuery = Firestore.query(
-      Firestore.collection(db, "donations"),
-      where("userId", "==", userId)
-    );
-    const querySnap = await Firestore.getDocs(myQuery);
-    return querySnap.docs.map((doc) => doc.data());
+
+    const activeCampaignsObject=[];
+
+    campRef.forEach(async (currDoc) => {
+      const currInfo=currDoc.data();
+      const currUserInfo=await userClass.userInfoGet(currInfo);
+      activeCampaignsObject.push({campaignLeader:currUserInfo,
+      campaign:currInfo})
+
+
+    });
+
+    return activeCampaignsObject;
 
   }catch(error){
-    throw new Error(error)
+    throw new Error(error);
   }
 }
 
@@ -55,8 +63,8 @@ class CampaignClass {
         where("userId","!=",userId)
       );
       const activeCampaignsQuerySnap = await Firestore.getDocs(activeCampaignsQuery);
-      const activeCampaignsObject=activeCampaignsQuerySnap.docs.map((doc) => doc.data());
-
+      const activeCampaignsObject=await completeCampaignInfo(activeCampaignsQuerySnap);
+      
       //Campaign del usuario
       const userCampaignQuery = Firestore.query(
         Firestore.collection(db, "campaigns"),
