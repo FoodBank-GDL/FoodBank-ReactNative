@@ -13,6 +13,7 @@ class DonationClass {
           cantidad: body.cantidad,
           medida: body.medida,
           producto: body.producto,
+          estado:body.estado
         }
       ).catch((error) => {
         return { message: error.code, status: "error" };
