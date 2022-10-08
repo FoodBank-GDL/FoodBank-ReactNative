@@ -16,6 +16,7 @@ import CapmpaignCard from "../CampaignCard/CampaignCard";
 
 const campaignExamples = [
     {
+        status: "Donativo pendiente",
         campaignId: "1GBDTWWFV8XREi9EF92m",
         accesibilidad: "Publica",
         categoriaEnseres: true,
@@ -33,6 +34,7 @@ const campaignExamples = [
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
+        status: "Dontaivo pendiente",
         campaignId: "V9CRVX7NvfFdRbASOoRe",
         accesibilidad: "Publica",
         categoriaEnseres: false,
@@ -50,6 +52,8 @@ const campaignExamples = [
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
+
+        status: "",
         campaignId: "V9CRVX7NvfFdRbASOoRewes",
         accesibilidad: "Publica",
         categoriaEnseres: true,
@@ -67,6 +71,7 @@ const campaignExamples = [
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
+        status: "",
         campaignId: "V9CRVXFdRbASOoRewes",
         accesibilidad: "Publica",
         categoriaEnseres: true,
@@ -90,7 +95,7 @@ const CampaignContainer = (props) => {
 
     const renderItem = ({ item }) => (
         <CapmpaignCard
-            donativo={true}
+            status={item.status}
             title={item.titulo}
             name={item.userId}
             startDate={item.fechaInicio}
@@ -105,12 +110,14 @@ const CampaignContainer = (props) => {
 
     return (
         <View style={Styles.container}>
+
             <FlatList
                 data={campaignExamples}
                 renderItem={renderItem}
                 keyExtractor={item => item.campaignId}
                 showsVerticalScrollIndicator={false}
             />
+
         </View>
     );
 };

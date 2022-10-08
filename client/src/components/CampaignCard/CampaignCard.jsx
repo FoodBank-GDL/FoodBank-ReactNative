@@ -18,7 +18,7 @@ import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const CapmpaignCard = ({ title, name, startDate, finishDate, progress,
+const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
     categoriaEnseres,
     categoriaFrutasVerduras,
     categoriaNoPerecederos,
@@ -26,7 +26,9 @@ const CapmpaignCard = ({ title, name, startDate, finishDate, progress,
 }) => {
 
     return (
-        <View style={Styles.container}>
+        <View style={status != "" ? Styles.containerDonativo : Styles.container}>
+
+            {/* {donativo} */}
 
             <View style={Styles.categories}>
                 <IconMCI
@@ -96,6 +98,27 @@ const Styles = StyleSheet.create({
     container: {
         height: 170,
         backgroundColor: "white",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+        borderColor: "#FAFAFA",
+        borderWidth: 3,
+        borderRadius: 15,
+        marginBottom: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 12,
+        paddingBottom: 12
+    },
+    containerDonativo: {
+        height: 170,
+        backgroundColor: "#EDF6FF",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
