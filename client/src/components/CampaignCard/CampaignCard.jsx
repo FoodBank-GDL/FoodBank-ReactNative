@@ -29,17 +29,43 @@ const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
 
     const renderIcon = () => {
 
+        let color = "gray"
+
+        if (status === "Donativo pendiente") {
+            color = "#FE4C4C"
+        } else if (status === "Donativo completado") {
+            color = "#8BE794"
+        } else {
+            color = "#FF9900"
+        }
+
+        return (
+            <View>
+                <IconFA
+                    name="circle"
+                    size={11}
+                    color={color}
+                />
+            </View>
+        )
+
+
     }
 
     return (
-        <View style={status === "" ? Styles.container : status === "Donativo pendiente" ? Styles.containerDonativo : Styles.containerLider}>
+        <View style={status === "" ? Styles.container : status === "Donativo pendiente" || status === "Donativo completado" ? Styles.containerDonativo : Styles.containerLider}>
 
 
 
             <View style={Styles.header}>
 
                 {status != "" &&
-                    <Text style={Styles.status}>{status}</Text>
+                    <View style={Styles.statusIconText}>
+                        {renderIcon()}
+
+                        <Text style={Styles.status}>{status}</Text>
+
+                    </View>
                 }
 
                 <View style={Styles.categories}>
@@ -201,10 +227,15 @@ const Styles = StyleSheet.create({
     status: {
         fontSize: 9,
         textTransform: "uppercase",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginLeft: 7
     },
     header: {
-        flexDirection: "row"
+        flexDirection: "row",
+    },
+    statusIconText: {
+        flexDirection: "row",
+        alignItems: "center",
     }
 })
 

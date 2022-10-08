@@ -52,7 +52,7 @@ const campaignExamples = [
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
-        status: "Donativo pendiente",
+        status: "Donativo completado",
         campaignId: "V9CRVX7NvfFdRbASOoRe",
         accesibilidad: "Publica",
         categoriaEnseres: false,
