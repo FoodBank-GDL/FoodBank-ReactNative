@@ -18,7 +18,11 @@ import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const CapmpaignCard = (props) => {
+const CapmpaignCard = ({ title, name, startDate, finishDate, progress, categories }) => {
+
+    const renderIcons = {
+
+    }
 
     return (
         <View style={Styles.container}>
@@ -50,7 +54,7 @@ const CapmpaignCard = (props) => {
                 />
             </View>
 
-            <Text style={Styles.title}>ITESM Invierno 2022</Text>
+            <Text style={Styles.title}>{title}</Text>
 
             <View>
                 <View style={Styles.content}>
@@ -60,7 +64,7 @@ const CapmpaignCard = (props) => {
                         style={Styles.icon}
                     />
 
-                    <Text style={Styles.contentText}>{"Cristian Cazares"}</Text>
+                    <Text style={Styles.contentText}>{name}</Text>
 
                 </View>
                 <View style={Styles.content}>
@@ -70,14 +74,14 @@ const CapmpaignCard = (props) => {
                         style={Styles.icon}
                     />
 
-                    <Text style={Styles.contentText}>{"24 de agosto - 25 de septiembre"}</Text>
+                    <Text style={Styles.contentText}>{`${startDate} - ${finishDate}`}</Text>
 
                 </View>
 
             </View>
 
             <ProgressBar
-                percentage={'80%'}
+                percentage={`${progress}%`}
                 height={10}
                 backgroundColor={'#D9D9D9'}
                 completedColor={'#8BE794'}
@@ -91,15 +95,17 @@ const Styles = StyleSheet.create({
     container: {
         height: 170,
         backgroundColor: "white",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
 
-        elevation: 7,
+        // elevation: 5,
+        borderColor: "#FAFAFA",
+        borderWidth: 3,
         borderRadius: 15,
         marginBottom: 20,
         paddingLeft: 20,
@@ -110,7 +116,7 @@ const Styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: '700',
-        marginBottom: 10
+        height: 50,
     },
     icon: {
         color: "#FF9900"
@@ -118,7 +124,7 @@ const Styles = StyleSheet.create({
     content: {
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: 15
+        paddingTop: 10
     },
     contentText: {
         fontSize: 11,
@@ -126,9 +132,8 @@ const Styles = StyleSheet.create({
     },
     categories: {
         flexDirection: 'row',
-        position: 'absolute',
-        right: 10,
-        top: 5
+        marginLeft: 'auto',
+        marginRight: 0,
     },
     category: {
         marginLeft: 7

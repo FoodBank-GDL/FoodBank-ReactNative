@@ -23,7 +23,7 @@ const Feed = (props) => {
         <View style={Styles.container}>
             <Header title={"Campaña"} />
             <CampaignContainer />
-            <View style={{ flex: 1, backgroundColor: 'orange' }}></View>
+            <View style={{ height: 80, backgroundColor: 'orange', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}></View>
         </View>
     );
 };

@@ -14,7 +14,7 @@ const ProgressBar = ({
     const [getCompletedColor, setCompletedColor] = useState(completedColor);
     return (
         <View>
-            <View style={{ justifyContent: 'center', position: 'relative', marginTop: 15 }}>
+            <View style={{ justifyContent: 'center', position: 'relative', marginTop: 5 }}>
                 <View
                     style={{
                         width: '100%',
