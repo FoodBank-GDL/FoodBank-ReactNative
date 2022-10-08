@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
 const ProgressBar = ({
     percentage,

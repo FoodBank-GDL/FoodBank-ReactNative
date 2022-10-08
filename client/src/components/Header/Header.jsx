@@ -4,7 +4,6 @@ import {
     StyleSheet,
     Text
 } from "react-native";
-import StatusBar from "../StatusBar";
 import Constants from "expo-constants";
 
 const Header = (props) => {
