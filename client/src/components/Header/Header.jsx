@@ -29,7 +29,6 @@ const Header = (props) => {
 
 const Styles = StyleSheet.create({
     container: {
-        // flex: 1,
         backgroundColor: 'white',
         paddingLeft: 20,
         paddingRight: 20,
