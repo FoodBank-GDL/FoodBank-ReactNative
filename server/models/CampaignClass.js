@@ -91,7 +91,7 @@ class CampaignClass {
       return {
         userCampaign: userCampaignObject,
         activeCampaigns: activeCampaignsObject,
-        pendingDonatios: pendingDonationsObject,
+        pendingDonations: pendingDonationsObject,
         completedDonations: completedDonationsObject
       };
 
