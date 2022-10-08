@@ -4,6 +4,7 @@ const {
     loginUser,
     testGet,
     updateUser,
+    userInfoGet
 } = require("../models/UserClass");
 
 controller = {};
@@ -43,6 +44,16 @@ controller.userRegister = async (req, res) => {
 controller.userUpdate = async (req, res) => {
     try {
         const response = await updateUser(req.body);
+
+        res.send(response);
+    } catch (error) {
+        res.status(418).send(error.message); // Don't know what error it should be.
+    }
+};
+
+controller.userInfoGetter=async (req, res) => {
+    try {
+        const response = await userInfoGet(req.body);
 
         res.send(response);
     } catch (error) {

@@ -7,10 +7,12 @@ const {
     userRegister,
     getTesting,
     userUpdate,
+    userInfoGetter
 } = require("../controllers/user.controller");
 
 // Core
 router.get("/test", getTesting);
+router.get("/info", userInfoGetter);
 router.post("/login", userLogin);
 router.post("/register", userRegister);
 router.put("/updateUserInfo", userUpdate);
