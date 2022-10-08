@@ -4,11 +4,11 @@ const router = express.Router();
 // Controller
 const {
     campaignCreation,
-    activeCampaignsGetter
+    homeCardGetter
 
 } = require("../controllers/campaign.controller");
 
 // Core
 router.post("/create", campaignCreation);
-router.get("/activeCampaigns",activeCampaignsGetter)
+router.get("/homeCards",homeCardGetter)
 module.exports = router;

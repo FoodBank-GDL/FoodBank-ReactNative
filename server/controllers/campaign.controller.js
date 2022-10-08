@@ -1,6 +1,6 @@
 const {
     createCampaign,
-    getActiveCampaigns
+    getHomeCardInfo
 } = require("../models/CampaignClass");
 
 controller = {};
@@ -14,9 +14,9 @@ controller.campaignCreation = async (req, res) => {
         res.status(404).send(error.message);
     }
 };
-controller.activeCampaignsGetter = async (req, res) => {
+controller.homeCardGetter = async (req, res) => {
     try {
-        const response = await getActiveCampaigns();
+        const response = await getHomeCardInfo(req.body.userId);
         res.send(response);
     } catch (error) {
         res.status(404).send(error.message);
