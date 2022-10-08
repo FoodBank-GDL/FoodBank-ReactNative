@@ -14,7 +14,7 @@ export const Styles = StyleSheet.create({
   },
   image_logo: {
     width: "110%",
-    height: 80,
+    height: 250,
     resizeMode: "contain",
     marginTop: 48,
     marginBottom: 24,
@@ -35,6 +35,13 @@ export const Styles = StyleSheet.create({
   centered: {
     alignItems: "center",
     justifyContent: "center",
+  },
+  error: {
+    padding: 0,
+    margin: 0,
+    paddingStart: 10,
+    color: "red",
+    paddingTop: 4,
   },
   footer: {
     width: "100%",

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 
 const Button = (props) => {
-  const {disabled, handlePress, color} = props
+  const {text, disabled, handlePress, color} = props
   const [colorState, setColorState] = useState(color)
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Button = (props) => {
       style={Styles.button}
       onPress={() => handlePress()}
     >
-      <Text style={Styles.text}>Registrar</Text>
+      <Text style={Styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 };
