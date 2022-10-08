@@ -16,7 +16,7 @@ import CapmpaignCard from "../CampaignCard/CampaignCard";
 
 const campaignExamples = [
     {
-        status: "Lider de campaña",
+        status: "Campaña activa",
         campaignId: "1GBDTWWFVREi9EF92m",
         accesibilidad: "Publica",
         categoriaEnseres: true,

@@ -25,10 +25,18 @@ const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
     categoriaRopa
 }) => {
 
+    // TODO: render icon para el status, acomodar todo con los iconos de categorias
+
+    const renderIcon = () => {
+
+    }
+
     return (
         <View style={status === "" ? Styles.container : status === "Donativo pendiente" ? Styles.containerDonativo : Styles.containerLider}>
 
-            {/* {donativo} */}
+            {status != "" &&
+                <Text style={Styles.status}>{status}</Text>
+            }
 
             <View style={Styles.categories}>
                 <IconMCI
@@ -182,6 +190,11 @@ const Styles = StyleSheet.create({
     },
     category: {
         marginLeft: 7
+    },
+    status: {
+        fontSize: 9,
+        textTransform: "uppercase",
+        fontWeight: "bold"
     }
 })
 
