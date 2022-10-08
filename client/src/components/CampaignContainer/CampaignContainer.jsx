@@ -48,7 +48,7 @@ const campaignExamples = [
         isActive: false,
         metaDonativos: 100,
         titulo: "Example User Campaign",
-        ubicacion: "En mi casa",
+        ubicacion: "Tec de Monterrey",
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
@@ -66,7 +66,7 @@ const campaignExamples = [
         isActive: false,
         metaDonativos: 100,
         titulo: "Example User Campaign 2",
-        ubicacion: "En mi casa",
+        ubicacion: "ITESO",
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
@@ -85,7 +85,7 @@ const campaignExamples = [
         isActive: false,
         metaDonativos: 100,
         titulo: "Example User Campaign 3",
-        ubicacion: "En mi casa",
+        ubicacion: "OXXO",
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
@@ -115,7 +115,8 @@ const CampaignContainer = (props) => {
         <CapmpaignCard
             status={item.status}
             title={item.titulo}
-            name={item.userId}
+            user={item.userId}
+            location={item.ubicacion}
             startDate={item.fechaInicio}
             finishDate={item.fechaExpiracion}
             progress={Math.round(item.donativosTotales * 100 / item.metaDonativos)}

@@ -1,31 +1,23 @@
 import {
-    Alert,
-    Image,
-    ScrollView,
     StyleSheet,
     Text,
-    TextInput,
-    TextInputBase,
     View,
 } from "react-native";
-import StatusBar from "../StatusBar";
-import { useEffect, useState } from "react";
 
 import IconFA from 'react-native-vector-icons/FontAwesome'
 import IconAnt from 'react-native-vector-icons/AntDesign'
 import IconMCI from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconFA5 from 'react-native-vector-icons/FontAwesome5'
+import IconE from 'react-native-vector-icons/Entypo'
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
+const CapmpaignCard = ({ status, title, user, location, startDate, finishDate, progress,
     categoriaEnseres,
     categoriaFrutasVerduras,
     categoriaNoPerecederos,
     categoriaRopa
 }) => {
-
-    // TODO: render icon para el status, acomodar todo con los iconos de categorias
 
     const renderIcon = () => {
 
@@ -108,7 +100,17 @@ const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
                         style={Styles.icon}
                     />
 
-                    <Text style={Styles.contentText}>{name}</Text>
+                    <Text style={Styles.contentText}>{user}</Text>
+
+                </View>
+                <View style={Styles.content}>
+                    <IconE
+                        name="location-pin"
+                        size={15}
+                        style={Styles.icon}
+                    />
+
+                    <Text style={Styles.contentText}>{location}</Text>
 
                 </View>
                 <View style={Styles.content}>
@@ -202,10 +204,11 @@ const Styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: '700',
-        height: 50,
+        height: 25,
     },
     icon: {
-        color: "#FF9900"
+        color: "#FF9900",
+        width: 15,
     },
     content: {
         flexDirection: "row",
