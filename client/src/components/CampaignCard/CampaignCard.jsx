@@ -34,36 +34,43 @@ const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
     return (
         <View style={status === "" ? Styles.container : status === "Donativo pendiente" ? Styles.containerDonativo : Styles.containerLider}>
 
-            {status != "" &&
-                <Text style={Styles.status}>{status}</Text>
-            }
 
-            <View style={Styles.categories}>
-                <IconMCI
-                    name="food-apple"
-                    size={15}
-                    color={categoriaFrutasVerduras ? "#50BE1C" : "gray"}
-                    style={Styles.category}
-                />
-                <IconFA5
-                    name="tshirt"
-                    size={15}
-                    color={categoriaRopa ? "#71D1FB" : "gray"}
-                    style={Styles.category}
-                />
-                <IconMCI
-                    name="bottle-soda-classic"
-                    size={15}
-                    color={categoriaNoPerecederos ? "#FFE86D" : "gray"}
-                    style={Styles.category}
-                />
-                <IconFA5
-                    name="shopping-basket"
-                    size={15}
-                    color={categoriaEnseres ? "#FC8181" : "gray"}
-                    style={Styles.category}
-                />
+
+            <View style={Styles.header}>
+
+                {status != "" &&
+                    <Text style={Styles.status}>{status}</Text>
+                }
+
+                <View style={Styles.categories}>
+                    <IconMCI
+                        name="food-apple"
+                        size={15}
+                        color={categoriaFrutasVerduras ? "#50BE1C" : "gray"}
+                        style={Styles.category}
+                    />
+                    <IconFA5
+                        name="tshirt"
+                        size={15}
+                        color={categoriaRopa ? "#71D1FB" : "gray"}
+                        style={Styles.category}
+                    />
+                    <IconMCI
+                        name="bottle-soda-classic"
+                        size={15}
+                        color={categoriaNoPerecederos ? "#FFE86D" : "gray"}
+                        style={Styles.category}
+                    />
+                    <IconFA5
+                        name="shopping-basket"
+                        size={15}
+                        color={categoriaEnseres ? "#FC8181" : "gray"}
+                        style={Styles.category}
+                    />
+                </View>
             </View>
+
+
 
             <Text style={Styles.title}>{title}</Text>
 
@@ -195,6 +202,9 @@ const Styles = StyleSheet.create({
         fontSize: 9,
         textTransform: "uppercase",
         fontWeight: "bold"
+    },
+    header: {
+        flexDirection: "row"
     }
 })
 
