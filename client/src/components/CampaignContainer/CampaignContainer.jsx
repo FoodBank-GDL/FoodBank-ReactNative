@@ -14,59 +14,62 @@ import { useEffect, useState } from "react";
 
 import CapmpaignCard from "../CampaignCard/CampaignCard";
 
+const campaignExamples = [
+    {
+        campaignId: "1GBDTWWFV8XREi9EF92m",
+        accesibilidad: "Publica",
+        categoriaEnseres: false,
+        categoriaFrutasVerduras: false,
+        categoriaNoPerecederos: false,
+        categoriaRopa: true,
+        descripcion: "Esta es la descripcion de la de prueba",
+        donativosTotales: 0,
+        fechaExpiracion: "5 de octubre de 2022",
+        fechaInicio: "2 de octubre de 2022",
+        isActive: false,
+        metaDonativos: 100,
+        titulo: "Example User Campaign",
+        ubicacion: "En mi casa",
+        userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
+    },
+    {
+        campaignId: "V9CRVX7NvfFdRbASOoRe",
+        accesibilidad: "Publica",
+        categoriaEnseres: false,
+        categoriaFrutasVerduras: false,
+        categoriaNoPerecederos: false,
+        categoriaRopa: true,
+        descripcion: "Esta es la descripcion de la de prueba",
+        donativosTotales: 0,
+        fechaExpiracion: "5 de octubre de 2022",
+        fechaInicio: "2 de octubre de 2022",
+        isActive: false,
+        metaDonativos: 100,
+        titulo: "Example User Campaign",
+        ubicacion: "En mi casa",
+        userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
+    }
+]
+
+
 const CampaignContainer = (props) => {
 
     const renderItem = ({ item }) => (
         <CapmpaignCard
-            title={item.title}
-            name={item.name}
-            startDate={item.startDate}
-            finishDate={item.finishDate}
-            progress={item.progress}
+            title={item.titulo}
+            name={item.userId}
+            startDate={item.fechaInicio}
+            finishDate={item.fechaExpiracion}
+            progress={Math.round(item.donativosTotales * 100 / item.metaDonativos)}
         />
     )
 
     return (
         <View style={Styles.container}>
             <FlatList
-                data={[
-                    {
-                        title: "ITESM Invierno 2022",
-                        name: "Cristian Cazares",
-                        startDate: "23 de septiembre",
-                        finishDate: "25 de septiembre",
-                        progress: "80"
-                    },
-                    {
-                        title: "ITESO Invierno 2022",
-                        name: "Santiago Reyes",
-                        startDate: "27 de septiembre",
-                        finishDate: "28 de septiembre",
-                        progress: "69"
-                    },
-                    {
-                        title: "UdG Apple Campaña",
-                        name: "Gael Rodriguez",
-                        startDate: "23 de septiembre",
-                        finishDate: "25 de septiembre",
-                        progress: "42"
-                    },
-                    {
-                        title: "UP Donaciones",
-                        name: "Gael Rodriguez",
-                        startDate: "23 de septiembre",
-                        finishDate: "25 de septiembre",
-                        progress: "55"
-                    },
-                    {
-                        title: "Alimentos",
-                        name: "Gael Rodriguez",
-                        startDate: "23 de septiembre",
-                        finishDate: "25 de septiembre",
-                        progress: "66"
-                    }]}
+                data={campaignExamples}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.campaignId}
                 showsVerticalScrollIndicator={false}
             />
         </View>
