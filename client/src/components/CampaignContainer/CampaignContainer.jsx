@@ -16,6 +16,24 @@ import CapmpaignCard from "../CampaignCard/CampaignCard";
 
 const campaignExamples = [
     {
+        status: "Lider de campaña",
+        campaignId: "1GBDTWWFVREi9EF92m",
+        accesibilidad: "Publica",
+        categoriaEnseres: true,
+        categoriaFrutasVerduras: false,
+        categoriaNoPerecederos: true,
+        categoriaRopa: true,
+        descripcion: "Esta es la descripcion de la de prueba",
+        donativosTotales: 56,
+        fechaExpiracion: "5 de octubre de 2022",
+        fechaInicio: "2 de octubre de 2022",
+        isActive: false,
+        metaDonativos: 100,
+        titulo: "Lider Campaign Example",
+        ubicacion: "En mi casa",
+        userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
+    },
+    {
         status: "Donativo pendiente",
         campaignId: "1GBDTWWFV8XREi9EF92m",
         accesibilidad: "Publica",
@@ -34,7 +52,7 @@ const campaignExamples = [
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
     },
     {
-        status: "Dontaivo pendiente",
+        status: "Donativo pendiente",
         campaignId: "V9CRVX7NvfFdRbASOoRe",
         accesibilidad: "Publica",
         categoriaEnseres: false,

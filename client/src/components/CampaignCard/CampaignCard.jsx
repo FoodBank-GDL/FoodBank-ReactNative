@@ -26,7 +26,7 @@ const CapmpaignCard = ({ status, title, name, startDate, finishDate, progress,
 }) => {
 
     return (
-        <View style={status != "" ? Styles.containerDonativo : Styles.container}>
+        <View style={status === "" ? Styles.container : status === "Donativo pendiente" ? Styles.containerDonativo : Styles.containerLider}>
 
             {/* {donativo} */}
 
@@ -119,6 +119,27 @@ const Styles = StyleSheet.create({
     containerDonativo: {
         height: 170,
         backgroundColor: "#EDF6FF",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+        borderColor: "#FAFAFA",
+        borderWidth: 3,
+        borderRadius: 15,
+        marginBottom: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 12,
+        paddingBottom: 12
+    },
+    containerLider: {
+        height: 170,
+        backgroundColor: "#FFFAED",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
