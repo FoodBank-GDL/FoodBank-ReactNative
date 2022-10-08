@@ -5,6 +5,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
+import Feed from "./src/screens/Feed"
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -21,6 +22,9 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="Register" options={{ headerShown: false }}>
           {(props) => <Register {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Feed" options={{ headerShown: false }}>
+          {props => <Feed {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
