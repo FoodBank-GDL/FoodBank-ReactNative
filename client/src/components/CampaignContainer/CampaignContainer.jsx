@@ -18,12 +18,12 @@ const campaignExamples = [
     {
         campaignId: "1GBDTWWFV8XREi9EF92m",
         accesibilidad: "Publica",
-        categoriaEnseres: false,
+        categoriaEnseres: true,
         categoriaFrutasVerduras: false,
-        categoriaNoPerecederos: false,
+        categoriaNoPerecederos: true,
         categoriaRopa: true,
         descripcion: "Esta es la descripcion de la de prueba",
-        donativosTotales: 0,
+        donativosTotales: 56,
         fechaExpiracion: "5 de octubre de 2022",
         fechaInicio: "2 de octubre de 2022",
         isActive: false,
@@ -36,19 +36,53 @@ const campaignExamples = [
         campaignId: "V9CRVX7NvfFdRbASOoRe",
         accesibilidad: "Publica",
         categoriaEnseres: false,
-        categoriaFrutasVerduras: false,
+        categoriaFrutasVerduras: true,
         categoriaNoPerecederos: false,
         categoriaRopa: true,
         descripcion: "Esta es la descripcion de la de prueba",
-        donativosTotales: 0,
+        donativosTotales: 10,
         fechaExpiracion: "5 de octubre de 2022",
         fechaInicio: "2 de octubre de 2022",
         isActive: false,
         metaDonativos: 100,
-        titulo: "Example User Campaign",
+        titulo: "Example User Campaign 2",
         ubicacion: "En mi casa",
         userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
-    }
+    },
+    {
+        campaignId: "V9CRVX7NvfFdRbASOoRewes",
+        accesibilidad: "Publica",
+        categoriaEnseres: true,
+        categoriaFrutasVerduras: true,
+        categoriaNoPerecederos: true,
+        categoriaRopa: true,
+        descripcion: "Esta es la descripcion de la de prueba",
+        donativosTotales: 80,
+        fechaExpiracion: "5 de octubre de 2022",
+        fechaInicio: "2 de octubre de 2022",
+        isActive: false,
+        metaDonativos: 100,
+        titulo: "Example User Campaign 3",
+        ubicacion: "En mi casa",
+        userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
+    },
+    {
+        campaignId: "V9CRVXFdRbASOoRewes",
+        accesibilidad: "Publica",
+        categoriaEnseres: true,
+        categoriaFrutasVerduras: true,
+        categoriaNoPerecederos: false,
+        categoriaRopa: true,
+        descripcion: "Esta es la descripcion de la de prueba",
+        donativosTotales: 65,
+        fechaExpiracion: "5 de octubre de 2022",
+        fechaInicio: "2 de octubre de 2022",
+        isActive: false,
+        metaDonativos: 100,
+        titulo: "Example User Campaign 4",
+        ubicacion: "En mi casa",
+        userId: "FO3D3dMS9QNYKcgkxnOYx2Tqsva2"
+    },
 ]
 
 
@@ -56,11 +90,16 @@ const CampaignContainer = (props) => {
 
     const renderItem = ({ item }) => (
         <CapmpaignCard
+            donativo={true}
             title={item.titulo}
             name={item.userId}
             startDate={item.fechaInicio}
             finishDate={item.fechaExpiracion}
             progress={Math.round(item.donativosTotales * 100 / item.metaDonativos)}
+            categoriaEnseres={item.categoriaEnseres}
+            categoriaFrutasVerduras={item.categoriaFrutasVerduras}
+            categoriaNoPerecederos={item.categoriaNoPerecederos}
+            categoriaRopa={item.categoriaRopa}
         />
     )
 

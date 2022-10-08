@@ -18,11 +18,12 @@ import IconFA5 from 'react-native-vector-icons/FontAwesome5'
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const CapmpaignCard = ({ title, name, startDate, finishDate, progress, categories }) => {
-
-    const renderIcons = {
-
-    }
+const CapmpaignCard = ({ title, name, startDate, finishDate, progress,
+    categoriaEnseres,
+    categoriaFrutasVerduras,
+    categoriaNoPerecederos,
+    categoriaRopa
+}) => {
 
     return (
         <View style={Styles.container}>
@@ -31,25 +32,25 @@ const CapmpaignCard = ({ title, name, startDate, finishDate, progress, categorie
                 <IconMCI
                     name="food-apple"
                     size={15}
-                    color="gray"
+                    color={categoriaFrutasVerduras ? "#50BE1C" : "gray"}
                     style={Styles.category}
                 />
                 <IconFA5
                     name="tshirt"
                     size={15}
-                    color="#71D1FB"
+                    color={categoriaRopa ? "#71D1FB" : "gray"}
                     style={Styles.category}
                 />
                 <IconMCI
                     name="bottle-soda-classic"
                     size={15}
-                    color="gray"
+                    color={categoriaNoPerecederos ? "#FFE86D" : "gray"}
                     style={Styles.category}
                 />
                 <IconFA5
                     name="shopping-basket"
                     size={15}
-                    color="#FC8181"
+                    color={categoriaEnseres ? "#FC8181" : "gray"}
                     style={Styles.category}
                 />
             </View>
@@ -95,15 +96,15 @@ const Styles = StyleSheet.create({
     container: {
         height: 170,
         backgroundColor: "white",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
 
-        // elevation: 5,
+        elevation: 5,
         borderColor: "#FAFAFA",
         borderWidth: 3,
         borderRadius: 15,
