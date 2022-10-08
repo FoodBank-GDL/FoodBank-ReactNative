@@ -74,7 +74,7 @@ const CapmpaignCard = ({ status, title, user, location, startDate, finishDate, p
                         style={Styles.category}
                     />
                     <IconMCI
-                        name="bottle-soda-classic"
+                        name="bottle-soda"
                         size={15}
                         color={categoriaNoPerecederos ? "#FFE86D" : "gray"}
                         style={Styles.category}
