@@ -12,4 +12,14 @@ controller.donationCreate = async (req, res) => {
   }
 };
 
+controller.dontationErase = async (req, res) => {
+  try {
+    const response = await eraseDonation(req.body);
+
+    res.send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
+
 module.exports = controller;
