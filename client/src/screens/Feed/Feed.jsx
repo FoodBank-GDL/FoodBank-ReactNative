@@ -5,6 +5,7 @@ import { Styles } from "./Styles";
 
 import Header from "../../components/Header";
 import CampaignContainer from "../../components/CampaignContainer";
+import NavBar from "../../components/NavBar";
 
 const Feed = (props) => {
 
@@ -12,7 +13,7 @@ const Feed = (props) => {
         <View style={Styles.container}>
             <Header title={"Campaña"} />
             <CampaignContainer />
-            <View style={{ height: 80, backgroundColor: 'orange', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}></View>
+            <NavBar navigation={props.navigation} />
         </View>
     );
 };
