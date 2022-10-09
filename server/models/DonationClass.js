@@ -4,7 +4,6 @@ const { Firestore, db } = require("../utils/firebase_config");
 class DonationClass {
   static async createDonation(body) {
     try {
-      console.log(body);
       const reFireStore = await Firestore.addDoc(
         Firestore.collection(db, "donations"),
         {
@@ -19,6 +18,14 @@ class DonationClass {
         return { message: error.code, status: "error" };
       });
       return reFireStore;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  static async deleteDonation(body) {
+    try {
+
     } catch (error) {
       throw new Error(error);
     }
