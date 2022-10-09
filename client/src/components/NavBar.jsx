@@ -5,8 +5,8 @@ import IconFA from "react-native-vector-icons/FontAwesome"
 
 const NavBar = ({ navigation }) => {
 
-    const handleNavigate = () => {
-
+    const handleNavigate = (name) => {
+        navigation.navigate(name)
     }
 
     return (

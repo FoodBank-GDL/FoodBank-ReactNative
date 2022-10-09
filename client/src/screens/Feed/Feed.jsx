@@ -13,7 +13,7 @@ const Feed = (props) => {
         <View style={Styles.container}>
             <Header title={"Campaña"} />
             <CampaignContainer />
-            <NavBar />
+            <NavBar navigation={props.navigation} />
         </View>
     );
 };
