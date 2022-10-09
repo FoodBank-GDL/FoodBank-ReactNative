@@ -20,10 +20,10 @@ export default function App() {
         <Stack.Screen name="Feed" options={{ headerShown: false }}>
           {props => <Feed {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Login" options={{ headerShown: false }}>
+        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Register" options={{ headerShown: false }}>
+        <Stack.Screen name="Profile" options={{ headerShown: false }}>
           {(props) => <Register {...props} />}
         </Stack.Screen>
       </Stack.Navigator>

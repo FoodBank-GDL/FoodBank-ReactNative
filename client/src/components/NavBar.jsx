@@ -32,7 +32,7 @@ const NavBar = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={() => handleNavigate("Profile")}
+                    onPress={() => handleNavigate("Register")}
                 >
                     <IconFA
                         name="user"
