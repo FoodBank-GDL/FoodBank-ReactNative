@@ -16,7 +16,7 @@ controller.campaignCreation = async (req, res) => {
 };
 controller.homeCardGetter = async (req, res) => {
     try {
-        const response = await getHomeCardInfo(req.body.userId);
+        const response = await getHomeCardInfo(req.params.userId);
         res.send(response);
     } catch (error) {
         res.status(404).send(error.message);

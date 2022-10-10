@@ -110,14 +110,15 @@ const CampaignContainer = (props) => {
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [data, setData] = useState()
 
     const getCampaigns = async () => {
-        axios.get(`${API_URL}/campaign/homeCards`, {
-            userId: "NtrDFe1Plo7lzr3mIMOq"
-        }).then((res) => {
+        axios.get(`${API_URL}/campaign/homeCards/NtrDFe1Plo7lzr3mIMOq`).then((res) => {
             setLoading(false);
 
-            console.log(res)
+            console.log(res.data)
+
+            setData(res.data)
 
 
         })
@@ -148,7 +149,7 @@ const CampaignContainer = (props) => {
 
     return (
         <CampaignsComponent
-            campaigns={campaignExamples}
+            campaigns={data}
         />
     );
 };
