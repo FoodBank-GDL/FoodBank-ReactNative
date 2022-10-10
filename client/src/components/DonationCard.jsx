@@ -38,7 +38,6 @@ const DonationCard = ({ id, name, status, selected, donations, handleSelection }
             </TouchableOpacity>
 
             {selected === id &&
-
                 <DonationList donations={donations} />
             }
 
