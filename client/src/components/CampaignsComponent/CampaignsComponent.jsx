@@ -12,7 +12,7 @@ const CampaignsComponent = ({ campaigns }) => {
         <CapmpaignCard
             status={item.status}
             title={item.titulo}
-            user={item.user.nombre}
+            user={item.user ? item.user.nombre : "Tu"}
             location={item.ubicacion}
             startDate={item.fechaInicio}
             finishDate={item.fechaExpiracion}
