@@ -76,11 +76,6 @@ const Styles = StyleSheet.create({
     name: {
         fontWeight: "500",
         marginLeft: 10
-    },
-    reverseIcon: {
-        transform: [
-            { skewX: "90deg" },
-        ],
     }
 })
 

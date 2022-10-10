@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
-import { useState } from "react";
 
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
