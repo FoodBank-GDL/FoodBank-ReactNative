@@ -4,7 +4,7 @@ import { useState } from "react";
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
-const DonationList = ({ donations }) => {
+const DonationList = ({ donations, status }) => {
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -26,10 +26,17 @@ const DonationList = ({ donations }) => {
 
             <View style={Styles.bottomBar}>
                 <View style={Styles.completed}>
-                    <IconF
-                        name="checkbox-passive"
-                        style={Styles.checkbox}
-                    />
+                    {status === "pendiente" ?
+                        <IconF
+                            name="checkbox-passive"
+                            style={Styles.checkbox}
+                        /> :
+                        <IconF
+                            name="checkbox-active"
+                            style={Styles.checkbox}
+                        />
+                    }
+
                     <Text style={{ fontSize: 15 }}>Completado</Text>
                 </View>
 
