@@ -2,13 +2,12 @@ import {
     View,
     Text
 } from "react-native";
-import { Styles } from "./Styles";
+import DonationsContainer from "../../components/DonationsContainer";
 
 const Donations = ({ }) => {
 
     return (
-        <View style={Styles.container}>
-        </View>
+        <DonationsContainer />
     );
 };
 
