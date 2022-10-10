@@ -70,8 +70,24 @@ class DonationClass {
 
   static async changeUserDonationStatus(body) {
     try {
+      const userDonationsQuery=Firestore.query(
+        Firestore.collection(db, "donations"), 
+        where("userId", "==", body.userId),
+        where("campaignId", "==", body.campaignId)
+        );
 
-      return "works"
+      const userDonationsQuerySnap=await Firestore.getDocs(userDonationsQuery);
+      
+      userDonationsQuerySnap.forEach((currDoc)=>{
+          Firestore.updateDoc(currDoc.ref, {estado:body.newState});
+      });
+      
+      const userDonationsObject=userDonationsQuerySnap.docs.map((doc) => doc.data());
+      for(const i in userDonationsObject){
+        userDonationsObject[i]['estado']=body.newState;
+      }
+      return userDonationsObject;
+       
     } catch (error) {
       throw new Error(error);
     }
