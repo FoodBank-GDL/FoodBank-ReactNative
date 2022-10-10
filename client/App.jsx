@@ -18,9 +18,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="Feed" options={{ headerShown: false }}>
+        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
+          {(props) => <Login {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Profile" options={{ headerShown: false }}>
+          {(props) => <Register {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Feed" options={{ headerShown: false }}>
           {props => <Feed {...props} />}
-        </Stack.Screen> */}
+        </Stack.Screen>
         <Stack.Screen name="Donations"
           options={{
             headerTitle: "Donaciones",
@@ -34,12 +40,6 @@ export default function App() {
             headerTitleAlign: 'center'
           }}>
           {props => <Donations {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
-          {(props) => <Login {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Profile" options={{ headerShown: false }}>
-          {(props) => <Register {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
