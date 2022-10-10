@@ -10,6 +10,7 @@ import CampaignsComponent from "../CampaignsComponent/CampaignsComponent";
 
 import axios from "axios";
 import { API_URL } from "../../../lib/constants";
+import Loading from "../Loading/Loading";
 
 const CampaignContainer = (props) => {
 
@@ -39,9 +40,7 @@ const CampaignContainer = (props) => {
 
     if (loading || error) {
         return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
+            <Loading />
         )
     }
 
