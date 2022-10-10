@@ -120,7 +120,7 @@ const CapmpaignCard = ({ status, title, user, location, startDate, finishDate, p
                         style={Styles.icon}
                     />
 
-                    <Text style={Styles.contentText}>{`${startDate} - ${finishDate}`}</Text>
+                    <Text style={Styles.contentText}>{`${startDate.split("T")[0]} - ${finishDate.split("T")[0]}`}</Text>
 
                 </View>
 
