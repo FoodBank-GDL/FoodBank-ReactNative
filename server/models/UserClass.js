@@ -92,6 +92,20 @@ class UserClass {
         }
     }
 
+    static async userInfoGet(body){
+        try {
+            const userInfoQuery = Firestore.query(
+                Firestore.collection(db, "usuarios"),
+                where("userId", "==", body.userId)
+              );
+              const userInfoQuerySnap = await Firestore.getDocs(userInfoQuery);
+              const userInfoObject=userInfoQuerySnap.docs.map((doc) => doc.data());
+              return userInfoObject
+        } catch (error) {
+            throw new Error(error);
+        }
+    }
+
 }
 
 module.exports = UserClass;
