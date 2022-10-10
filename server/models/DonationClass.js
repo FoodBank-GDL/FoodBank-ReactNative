@@ -67,6 +67,15 @@ class DonationClass {
       throw new Error(error);
     }
   }
+
+  static async changeUserDonationStatus(body) {
+    try {
+
+      return "works"
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = DonationClass;
