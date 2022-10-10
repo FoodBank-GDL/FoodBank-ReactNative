@@ -1,13 +1,33 @@
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    FlatList
 } from "react-native";
-import DonationCard from "./DonationCard";
+import { useState } from "react";
 
+import DonationCard from "./DonationCard";
 import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
 
-const DonationsComponent = ({ }) => {
+const DonationsComponent = ({ data }) => {
+
+    const [selected, setSelected] = useState("")
+
+    const handleSelection = (item) => {
+        // console.log(item) 
+        setSelected(item)
+    }
+
+    const renderItem = ({ item }) => (
+        <DonationCard
+            id={item.user.userId}
+            name={item.user.nombre}
+            status={item.estado}
+            expanded={false}
+            selected={selected}
+            handleSelection={handleSelection}
+        />
+    )
 
     return (
         <View style={Styles.container}>
@@ -42,23 +62,13 @@ const DonationsComponent = ({ }) => {
                 </View>
             </View>
 
-            <DonationCard
-                name={"Rafael Rodriguez"}
-                status={"pending"}
-            />
-            <DonationCard
-                name={"Rafael Rodriguez"}
-                status={"approval"}
-            />
-            <DonationCard
-                name={"Rafael Rodriguez"}
-                status={"pending"}
-            />
-            <DonationCard
-                name={"Rafael Rodriguez"}
-                status={"pending"}
-            />
 
+            <FlatList
+                data={data}
+                renderItem={renderItem}
+                keyExtractor={item => item.user.userId}
+                showsVerticalScrollIndicator={false}
+            />
         </View>
     );
 };
