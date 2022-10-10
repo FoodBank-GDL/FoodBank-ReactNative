@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import IconAD from "react-native-vector-icons/AntDesign";
 
 const NewCampaignButton = ({ navigation }) => {
