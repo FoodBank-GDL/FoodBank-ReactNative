@@ -66,6 +66,7 @@ class CampaignClass {
       const activeCampaignsQuerySnap = await Firestore.getDocs(activeCampaignsQuery);
       const activeCampaignsObject=await completeCampaignInfo(activeCampaignsQuerySnap);
       
+      
       //Campaign del usuario
       const userCampaignQuery = Firestore.query(
         Firestore.collection(db, "campaigns"),
@@ -97,18 +98,10 @@ class CampaignClass {
       //Formateamos la info para que Emilio sea feliz
       const formatedInfo={}
 
-      for(const currentCamp of activeCampaignsObject){
-        formatedInfo[currentCamp.campaignId]=currentCamp;
-        formatedInfo[currentCamp.campaignId]['status']=''
-        formatedInfo[currentCamp.campaignId]['fechaInicio']=Firestore.Timestamp.fromDate(new Date(currentCamp.fechaInicio.seconds * 1000 + currentCamp.fechaInicio.nanoseconds / 1000000)).toDate();
-        formatedInfo[currentCamp.campaignId]['fechaExpiracion']=Firestore.Timestamp.fromDate(new Date(currentCamp.fechaExpiracion.seconds * 1000 + currentCamp.fechaExpiracion.nanoseconds / 1000000)).toDate();
-
-      }
       formatedInfo[userCampaignObject[0].campaignId]=userCampaignObject[0]
       formatedInfo[userCampaignObject[0].campaignId]['status']='Campaña activa'
       formatedInfo[userCampaignObject[0].campaignId]['fechaInicio']=Firestore.Timestamp.fromDate(new Date(formatedInfo[userCampaignObject[0].campaignId].fechaInicio.seconds * 1000 + formatedInfo[userCampaignObject[0].campaignId].fechaInicio.nanoseconds / 1000000)).toDate();
       formatedInfo[userCampaignObject[0].campaignId]['fechaExpiracion']=Firestore.Timestamp.fromDate(new Date(formatedInfo[userCampaignObject[0].campaignId].fechaExpiracion.seconds * 1000 + formatedInfo[userCampaignObject[0].campaignId].fechaExpiracion.nanoseconds / 1000000)).toDate();
-
       for(const pendingDonation of pendingDonationsObject){
         if(formatedInfo.hasOwnProperty(pendingDonation.campaignId)){
           formatedInfo[pendingDonation.campaignId]['status']='Donativo pendiente';
@@ -119,6 +112,14 @@ class CampaignClass {
         if(formatedInfo.hasOwnProperty(completedDonation.campaignId)){
           formatedInfo[completedDonation.campaignId]['status']='Donativo completado';
         }
+      }
+
+      for(const currentCamp of activeCampaignsObject){
+        formatedInfo[currentCamp.campaignId]=currentCamp;
+        formatedInfo[currentCamp.campaignId]['status']=''
+        formatedInfo[currentCamp.campaignId]['fechaInicio']=Firestore.Timestamp.fromDate(new Date(currentCamp.fechaInicio.seconds * 1000 + currentCamp.fechaInicio.nanoseconds / 1000000)).toDate();
+        formatedInfo[currentCamp.campaignId]['fechaExpiracion']=Firestore.Timestamp.fromDate(new Date(currentCamp.fechaExpiracion.seconds * 1000 + currentCamp.fechaExpiracion.nanoseconds / 1000000)).toDate();
+
       }
 
       const res=[]
