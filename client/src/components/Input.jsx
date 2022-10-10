@@ -2,7 +2,17 @@ import { useEffect, useState } from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 
-const Input = (props) => {
+const Input = ({
+  placeholder,
+  handleTextChange,
+  value,
+  keyboardType,
+  secureTextEntry,
+  icon,
+  iconColor,
+  iconSize,
+  ...props
+}) => {
   const [inputStyle, setInputStyle] = useState(Styles.input);
   const [focus, setFocus] = useState(false);
 
@@ -18,20 +28,15 @@ const Input = (props) => {
     <View style={inputStyle}>
       <TextInput
         style={Styles.input}
-        placeholder={props.placeholder}
-        onChangeText={(val) => props.handleTextChange(val)}
-        value={props.value}
-        keyboardType={props.keyboardType}
-        secureTextEntry={props.secureTextEntry || false}
+        placeholder={placeholder}
+        onChangeText={(val) => handleTextChange(val)}
+        value={value}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry || false}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
-      <Icon
-        style={Styles.icon}
-        name={props.icon}
-        color={props.iconColor}
-        size={props.iconSize}
-      />
+      <Icon style={Styles.icon} name={icon} color={iconColor} size={iconSize} />
     </View>
   );
 };
