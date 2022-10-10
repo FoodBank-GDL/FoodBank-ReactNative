@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, StyleSheet } from "react-native";
 
-import Login from "./src/screens/Login";
-import Register from "./src/screens/Register";
-import Feed from "./src/screens/Feed"
+import { Register, Login, CampaignDetail, Feed } from "./src/screens";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -17,6 +13,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
+          {(props) => <CampaignDetail {...props} />}
+        </Stack.Screen>
         <Stack.Screen name="Login" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
         </Stack.Screen>
@@ -24,18 +23,9 @@ export default function App() {
           {(props) => <Register {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Feed" options={{ headerShown: false }}>
-          {props => <Feed {...props} />}
+          {(props) => <Feed {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
