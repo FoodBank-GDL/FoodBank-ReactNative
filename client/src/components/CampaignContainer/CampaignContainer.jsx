@@ -18,7 +18,7 @@ const CampaignContainer = (props) => {
     const [data, setData] = useState()
 
     const getCampaigns = async () => {
-        axios.get(`${API_URL}/campaign/homeCards/NtrDFe1Plo7lzr3mIMOq`).then((res) => {
+        axios.get(`${API_URL}/campaign/homeCards/JhcZP5uKzORJ3x0aKPvNfXO0Qoi1`).then((res) => {
             setLoading(false);
             setData(res.data)
         })
