@@ -1,3 +1,8 @@
+const { 
+  createDonation,
+  eraseDonation
+} = require("../models/DonationClass");
+
 const { createDonation, getCampaignDonations } = require("../models/DonationClass");
 
 controller = {};
@@ -13,10 +18,18 @@ controller.donationCreate = async (req, res) => {
 };
 
 
+controller.dontationErase = async (req, res) => {
+  try {
+    const response = await eraseDonation(req.body);
+    res.send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
+
 controller.campaignDonationsGet = async (req, res) => {
   try {
     const response = await getCampaignDonations(req.params.campaignId);
-
     res.send(response);
   } catch (error) {
     res.status(404).send(error.message);
