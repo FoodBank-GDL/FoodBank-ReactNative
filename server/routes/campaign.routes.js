@@ -10,5 +10,5 @@ const {
 
 // Core
 router.post("/create", campaignCreation);
-router.get("/homeCards",homeCardGetter)
+router.get("/homeCards/:userId", homeCardGetter)
 module.exports = router;
