@@ -14,7 +14,6 @@ const DonationsComponent = ({ data }) => {
     const [selected, setSelected] = useState("")
 
     const handleSelection = (item) => {
-        // console.log(item) 
         setSelected(item)
     }
 
@@ -23,7 +22,7 @@ const DonationsComponent = ({ data }) => {
             id={item.user.userId}
             name={item.user.nombre}
             status={item.estado}
-            expanded={false}
+            donations={item.donaciones}
             selected={selected}
             handleSelection={handleSelection}
         />

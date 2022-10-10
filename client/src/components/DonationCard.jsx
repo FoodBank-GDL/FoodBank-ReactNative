@@ -3,8 +3,9 @@ import { useState } from "react";
 
 import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
 import IconSLI from "react-native-vector-icons/SimpleLineIcons"
+import DonationList from "./DonationList";
 
-const DonationCard = ({ id, name, status, selected, handleSelection }) => {
+const DonationCard = ({ id, name, status, selected, donations, handleSelection }) => {
 
     const selectCard = () => {
         if (id === selected) {
@@ -36,6 +37,11 @@ const DonationCard = ({ id, name, status, selected, handleSelection }) => {
                 </View>
             </TouchableOpacity>
 
+            {selected === id &&
+
+                <DonationList donations={donations} />
+            }
+
         </View>
     )
 }
@@ -48,7 +54,6 @@ const Styles = StyleSheet.create({
         justifyContent: "center"
     },
     containerExpanded: {
-        height: 100,
         alignContent: "center",
         borderBottomWidth: 1,
         justifyContent: "center"
