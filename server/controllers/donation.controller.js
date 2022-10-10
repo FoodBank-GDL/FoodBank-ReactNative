@@ -1,9 +1,9 @@
 const { 
   createDonation,
-  eraseDonation
+  eraseDonation,
+  getCampaignDonations
 } = require("../models/DonationClass");
 
-const { createDonation, getCampaignDonations } = require("../models/DonationClass");
 
 controller = {};
 
