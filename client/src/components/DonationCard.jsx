@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
 import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
+import IconMI from "react-native-vector-icons/MaterialIcons"
 
 const DonationCard = ({ name, status }) => {
     return (
@@ -13,15 +14,22 @@ const DonationCard = ({ name, status }) => {
                 />
                 <Text style={Styles.name}>{name}</Text>
             </View>
+            <IconMI
+                name="arrow-forward-ios"
+                size={17}
+                color={"black"}
+            />
         </View>
     )
 }
 
 const Styles = StyleSheet.create({
     card: {
-        height: 40,
+        height: 50,
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderBottomWidth: 1,
     },
     cardContent: {
         flexDirection: "row",

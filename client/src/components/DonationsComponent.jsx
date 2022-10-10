@@ -33,7 +33,8 @@ const DonationsComponent = ({ }) => {
 export const Styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "white"
+        backgroundColor: "white",
+        padding: 20
     }
 })
 
