@@ -23,6 +23,14 @@ class DonationClass {
       throw new Error(error);
     }
   }
+
+  static async getCampaignDonations(campaignId) {
+    try {
+      return "works";
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = DonationClass;
