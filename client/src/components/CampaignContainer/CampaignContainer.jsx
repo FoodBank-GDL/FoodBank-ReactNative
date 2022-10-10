@@ -25,8 +25,6 @@ const CampaignContainer = (props) => {
             .catch((err) => {
                 setLoading(false);
                 setError(err.response.data)
-                console.log(err.response.data)
-
                 Alert.alert(
                     err.response.data
                 );
