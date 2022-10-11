@@ -56,10 +56,10 @@ export default function App() {
         <Stack.Screen name="Profile" options={{ headerShown: false }}>
           {(props) => <Register {...props} />}
         </Stack.Screen>
+        <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
+          {(props) => <CampaignDetail {...props} />}
+        </Stack.Screen>
       </Stack.Navigator>
-      <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
-        {(props) => <CampaignDetail {...props} />}
-      </Stack.Screen>
     </NavigationContainer>
   );
 }
