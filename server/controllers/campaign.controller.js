@@ -1,6 +1,7 @@
 const {
     createCampaign,
-    getHomeCardInfo
+    getHomeCardInfo,
+    getCampaignInfo
 } = require("../models/CampaignClass");
 
 controller = {};
@@ -22,6 +23,16 @@ controller.homeCardGetter = async (req, res) => {
         res.status(404).send(error.message);
     }
 };
+
+controller.campaignInfoGetter = async (req, res) => {
+    try {
+      const response = await getCampaignInfo(req.params.campaignId);
+  
+      res.send(response);
+    } catch (error) {
+      res.status(404).send(error.message);
+    }
+  };
 
 
 module.exports = controller;

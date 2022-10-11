@@ -36,4 +36,13 @@ controller.campaignDonationsGet = async (req, res) => {
   }
 };
 
+controller.userDonationStatusChange = async (req, res) => {
+  try {
+    const response = await changeUserDonationStatus(req.body);
+
+    res.send(response);
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+};
 module.exports = controller;

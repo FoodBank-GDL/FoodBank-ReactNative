@@ -1,4 +1,4 @@
-const { where } = require("firebase/firestore");
+const { where, doc, getDoc } = require("firebase/firestore");
 const { Firestore, db } = require("../utils/firebase_config");
 const userClass = require("../models/UserClass");
 
@@ -204,6 +204,18 @@ class CampaignClass {
         return { message: error.code, status: "error" };
       });
       return reFireStore;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+  static async getCampaignInfo(campaignId) {
+    try {
+      const campaignDocumentRef=doc(db, "campaigns", campaignId);
+      const campaignDocument=await getDoc(campaignDocumentRef);
+      const campaignData=campaignDocument.data()
+      const userData=await userClass.userInfoGet(campaignData);
+      campaignData['user']=userData[0];
+      return campaignData;
     } catch (error) {
       throw new Error(error);
     }
