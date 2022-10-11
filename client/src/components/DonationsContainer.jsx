@@ -43,7 +43,7 @@ const DonationsContainer = ({ campaignId }) => {
     }
 
     return (
-        <DonationsComponent data={data} />
+        <DonationsComponent data={data} campaignId={campaignId} />
     );
 };
 
