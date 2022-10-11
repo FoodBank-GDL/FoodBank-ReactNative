@@ -7,7 +7,7 @@ import DonationsContainer from "../../components/DonationsContainer";
 const Donations = ({ }) => {
 
     return (
-        <DonationsContainer />
+        <DonationsContainer campaignId={"NcbSs5ml72TqTpg26Kzc"} />
     );
 };
 
