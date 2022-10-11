@@ -10,6 +10,7 @@ import CampaignsComponent from "../CampaignsComponent/CampaignsComponent";
 
 import axios from "axios";
 import { API_URL } from "../../../lib/constants";
+import Loading from "../Loading/Loading";
 
 const CampaignContainer = (props) => {
 
@@ -23,8 +24,8 @@ const CampaignContainer = (props) => {
             setData(res.data)
         })
             .catch((err) => {
-                setLoading(false);
                 setError(err.response.data)
+                setLoading(false);
                 Alert.alert(
                     err.response.data
                 );
@@ -39,9 +40,7 @@ const CampaignContainer = (props) => {
 
     if (loading || error) {
         return (
-            <View>
-                <Text>Loading...</Text>
-            </View>
+            <Loading />
         )
     }
 

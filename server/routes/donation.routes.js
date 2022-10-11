@@ -5,11 +5,13 @@ const router = express.Router();
 const {
     donationCreate,
     campaignDonationsGet,
-    userDonationStatusChange
+    userDonationStatusChange,
+    dontationErase
 } = require("../controllers/donation.controller");
 
 // Core
 router.post("/create", donationCreate);
+router.delete("/deleteDonation", dontationErase);
 router.get("/campaignDonations/:campaignId", campaignDonationsGet);
 router.put("/changeStatus", userDonationStatusChange);
 

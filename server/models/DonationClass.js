@@ -6,7 +6,6 @@ const userClass=require("../models/UserClass");
 class DonationClass {
   static async createDonation(body) {
     try {
-      console.log(body);
       const reFireStore = await Firestore.addDoc(
         Firestore.collection(db, "donations"),
         {
@@ -25,7 +24,24 @@ class DonationClass {
       throw new Error(error);
     }
   }
-
+  
+  static async eraseDonation(body) {
+    try {
+      try {
+        const myQuery = Firestore.query(Firestore.collection(db, "donations"), where("userId", "==", body.userId, "AND", "campaignId", "==", body.campaignId));
+        const querySnap = await Firestore.getDocs(myQuery);
+        querySnap.forEach((currDoc)=>{
+          Firestore.deleteDoc(currDoc.ref);
+        });
+        return {status:200};
+      } catch (err) {
+        throw new Error(err.message);
+      } 
+     } catch (error) {
+       throw new Error(error);
+    }
+  }
+    
   static async getCampaignDonations(campaignId) {
     try {
       const campaignDonationsQuery = Firestore.query(
@@ -60,9 +76,6 @@ class DonationClass {
       }
 
       return res;
-
-
-
     } catch (error) {
       throw new Error(error);
     }
