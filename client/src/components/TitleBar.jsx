@@ -1,12 +1,16 @@
-import { Image, View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import Constants from "expo-constants";
 
-const TitleBar = ({ title }) => {
+const TitleBar = ({ title, navigation, ...props }) => {
   return (
     <View style={Styles.container}>
       <TouchableOpacity style={Styles.back_button}>
-        <Icon name="arrow-back" color="#5F5F5F" size={30} />
+        <Icon
+          name="arrow-back"
+          color="#5F5F5F"
+          size={30}
+          onPress={() => navigation.goBack()}
+        />
       </TouchableOpacity>
       <View style={Styles.content}>
         <Text style={Styles.text}>{title || " "}</Text>
