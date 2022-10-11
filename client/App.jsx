@@ -19,6 +19,24 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Feed" options={{ headerShown: false }}>
+          {props => <Feed {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="CreateCampaign"
+          options={{
+            headerTitle: "Crea una campaña",
+            headerStyle: {
+              textAlign: "center"
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              textAlign: 'center',
+            },
+            headerTitleAlign: 'center'
+          }}
+        >
+          {props => <CreateCampaign {...props} />}
+        </Stack.Screen>
         <Stack.Screen name="Donations"
           options={{
             headerTitle: "Donaciones",
@@ -38,24 +56,6 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="Profile" options={{ headerShown: false }}>
           {(props) => <Register {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Feed" options={{ headerShown: false }}>
-          {props => <Feed {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CreateCampaign"
-          options={{
-            headerTitle: "Crea una campaña",
-            headerStyle: {
-              textAlign: "center"
-            },
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              textAlign: 'center',
-            },
-            headerTitleAlign: 'center'
-          }}
-        >
-          {props => <CreateCampaign {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
