@@ -1,6 +1,6 @@
 const { where } = require("firebase/firestore");
 const { Firestore, db } = require("../utils/firebase_config");
-const userClass=require("../models/UserClass");
+const userClass = require("../models/UserClass");
 
 async function updateDocuments(userId) {
   try {
@@ -18,24 +18,20 @@ async function updateDocuments(userId) {
   }
 }
 
-async function completeCampaignInfo(campRef){
-  try{
-
-    const activeCampaignsObject=[];
+async function completeCampaignInfo(campRef) {
+  try {
+    const activeCampaignsObject = [];
 
     campRef.forEach(async (currDoc) => {
-      const currInfo=currDoc.data();
-      const currUserInfo=await userClass.userInfoGet(currInfo);
-      currInfo['user']=currUserInfo[0];
-      currInfo['campaignId']=currDoc.id;
+      const currInfo = currDoc.data();
+      const currUserInfo = await userClass.userInfoGet(currInfo);
+      currInfo["user"] = currUserInfo[0];
+      currInfo["campaignId"] = currDoc.id;
       activeCampaignsObject.push(currInfo);
-
-
     });
 
     return activeCampaignsObject;
-
-  }catch(error){
+  } catch (error) {
     throw new Error(error);
   }
 }
@@ -61,78 +57,121 @@ class CampaignClass {
       const activeCampaignsQuery = Firestore.query(
         Firestore.collection(db, "campaigns"),
         where("isActive", "==", true),
-        where("userId","!=",userId)
+        where("userId", "!=", userId)
       );
-      const activeCampaignsQuerySnap = await Firestore.getDocs(activeCampaignsQuery);
-      const activeCampaignsObject=await completeCampaignInfo(activeCampaignsQuerySnap);
-      
-      
+      const activeCampaignsQuerySnap = await Firestore.getDocs(
+        activeCampaignsQuery
+      );
+      const activeCampaignsObject = await completeCampaignInfo(
+        activeCampaignsQuerySnap
+      );
+
       //Campaign del usuario
       const userCampaignQuery = Firestore.query(
         Firestore.collection(db, "campaigns"),
         where("isActive", "==", true),
-        where("userId","==",userId)
+        where("userId", "==", userId)
       );
       const userCampaignQuerySnap = await Firestore.getDocs(userCampaignQuery);
-      const userCampaignObject=await completeCampaignInfo(userCampaignQuerySnap);
+      const userCampaignObject = await completeCampaignInfo(
+        userCampaignQuerySnap
+      );
 
       //Donaciones pendientes
       const pendingDonationsQuery = Firestore.query(
         Firestore.collection(db, "donations"),
         where("userId", "==", userId),
-        where("estado","==","pendiente")
+        where("estado", "==", "pendiente")
       );
-      const pendingDonationsQuerySnap = await Firestore.getDocs(pendingDonationsQuery);
-      const pendingDonationsObject=pendingDonationsQuerySnap.docs.map((doc) => doc.data());
+      const pendingDonationsQuerySnap = await Firestore.getDocs(
+        pendingDonationsQuery
+      );
+      const pendingDonationsObject = pendingDonationsQuerySnap.docs.map((doc) =>
+        doc.data()
+      );
 
       //Donaciones completadas
       const completedDonationQuery = Firestore.query(
         Firestore.collection(db, "donations"),
         where("userId", "==", userId),
-        where("estado","==","completado")
+        where("estado", "==", "completado")
       );
-      const completedDonationQuerySnap = await Firestore.getDocs(completedDonationQuery);
-      const completedDonationsObject=completedDonationQuerySnap.docs.map((doc) => doc.data());
-
+      const completedDonationQuerySnap = await Firestore.getDocs(
+        completedDonationQuery
+      );
+      const completedDonationsObject = completedDonationQuerySnap.docs.map(
+        (doc) => doc.data()
+      );
 
       //Formateamos la info para que Emilio sea feliz
-      const formatedInfo={}
+      const formatedInfo = {};
+      if (userCampaignObject.length > 0) {
+        formatedInfo[userCampaignObject[0].campaignId] = userCampaignObject[0];
+        formatedInfo[userCampaignObject[0].campaignId]["status"] =
+          "Campaña activa";
+        formatedInfo[userCampaignObject[0].campaignId]["fechaInicio"] =
+          Firestore.Timestamp.fromDate(
+            new Date(
+              formatedInfo[userCampaignObject[0].campaignId].fechaInicio
+                .seconds *
+                1000 +
+                formatedInfo[userCampaignObject[0].campaignId].fechaInicio
+                  .nanoseconds /
+                  1000000
+            )
+          ).toDate();
+        formatedInfo[userCampaignObject[0].campaignId]["fechaExpiracion"] =
+          Firestore.Timestamp.fromDate(
+            new Date(
+              formatedInfo[userCampaignObject[0].campaignId].fechaExpiracion
+                .seconds *
+                1000 +
+                formatedInfo[userCampaignObject[0].campaignId].fechaExpiracion
+                  .nanoseconds /
+                  1000000
+            )
+          ).toDate();
+      }
 
-      formatedInfo[userCampaignObject[0].campaignId]=userCampaignObject[0]
-      formatedInfo[userCampaignObject[0].campaignId]['status']='Campaña activa'
-      formatedInfo[userCampaignObject[0].campaignId]['fechaInicio']=Firestore.Timestamp.fromDate(new Date(formatedInfo[userCampaignObject[0].campaignId].fechaInicio.seconds * 1000 + formatedInfo[userCampaignObject[0].campaignId].fechaInicio.nanoseconds / 1000000)).toDate();
-      formatedInfo[userCampaignObject[0].campaignId]['fechaExpiracion']=Firestore.Timestamp.fromDate(new Date(formatedInfo[userCampaignObject[0].campaignId].fechaExpiracion.seconds * 1000 + formatedInfo[userCampaignObject[0].campaignId].fechaExpiracion.nanoseconds / 1000000)).toDate();
-      for(const pendingDonation of pendingDonationsObject){
-        if(formatedInfo.hasOwnProperty(pendingDonation.campaignId)){
-          formatedInfo[pendingDonation.campaignId]['status']='Donativo pendiente';
+      for (const pendingDonation of pendingDonationsObject) {
+        if (formatedInfo.hasOwnProperty(pendingDonation.campaignId)) {
+          formatedInfo[pendingDonation.campaignId]["status"] =
+            "Donativo pendiente";
         }
       }
 
-      for(const completedDonation of completedDonationsObject){
-        if(formatedInfo.hasOwnProperty(completedDonation.campaignId)){
-          formatedInfo[completedDonation.campaignId]['status']='Donativo completado';
+      for (const completedDonation of completedDonationsObject) {
+        if (formatedInfo.hasOwnProperty(completedDonation.campaignId)) {
+          formatedInfo[completedDonation.campaignId]["status"] =
+            "Donativo completado";
         }
       }
 
-      for(const currentCamp of activeCampaignsObject){
-        formatedInfo[currentCamp.campaignId]=currentCamp;
-        formatedInfo[currentCamp.campaignId]['status']=''
-        formatedInfo[currentCamp.campaignId]['fechaInicio']=Firestore.Timestamp.fromDate(new Date(currentCamp.fechaInicio.seconds * 1000 + currentCamp.fechaInicio.nanoseconds / 1000000)).toDate();
-        formatedInfo[currentCamp.campaignId]['fechaExpiracion']=Firestore.Timestamp.fromDate(new Date(currentCamp.fechaExpiracion.seconds * 1000 + currentCamp.fechaExpiracion.nanoseconds / 1000000)).toDate();
-
+      for (const currentCamp of activeCampaignsObject) {
+        formatedInfo[currentCamp.campaignId] = currentCamp;
+        formatedInfo[currentCamp.campaignId]["status"] = "";
+        formatedInfo[currentCamp.campaignId]["fechaInicio"] =
+          Firestore.Timestamp.fromDate(
+            new Date(
+              currentCamp.fechaInicio.seconds * 1000 +
+                currentCamp.fechaInicio.nanoseconds / 1000000
+            )
+          ).toDate();
+        formatedInfo[currentCamp.campaignId]["fechaExpiracion"] =
+          Firestore.Timestamp.fromDate(
+            new Date(
+              currentCamp.fechaExpiracion.seconds * 1000 +
+                currentCamp.fechaExpiracion.nanoseconds / 1000000
+            )
+          ).toDate();
       }
 
-      const res=[]
-      for(const i in formatedInfo){
+      const res = [];
+      for (const i in formatedInfo) {
         res.push(formatedInfo[i]);
       }
 
-
       return res;
-
-
-
-
     } catch (error) {
       throw new Error(error);
     }

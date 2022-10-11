@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Register, Login, CampaignDetail, Feed } from "./src/screens";
+import CreateCampaign from "./src/screens/CreateCampaign/CreateCampaign";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -21,6 +22,21 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="Profile" options={{ headerShown: false }}>
           {(props) => <Register {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="CreateCampaign" 
+        options={{
+          headerTitle: "Crea una campaña",
+          headerStyle: {
+            textAlign: "center"
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerTitleAlign: 'center'
+        }}
+        >
+          {props => <CreateCampaign {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
