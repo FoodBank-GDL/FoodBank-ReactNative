@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
-const DonationList = ({ donations, status }) => {
+const DonationList = ({ donations, status, handleChangeStatus }) => {
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -29,6 +29,7 @@ const DonationList = ({ donations, status }) => {
                         <IconF
                             name="checkbox-passive"
                             style={Styles.checkbox}
+                            onPress={handleChangeStatus}
                         /> :
                         <IconF
                             name="checkbox-active"

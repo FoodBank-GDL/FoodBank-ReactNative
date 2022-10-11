@@ -5,7 +5,17 @@ import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
 import IconSLI from "react-native-vector-icons/SimpleLineIcons"
 import DonationList from "./DonationList";
 
-const DonationCard = ({ id, name, status, selected, donations, handleSelection }) => {
+import axios from "axios";
+import { API_URL } from "../../lib/constants";
+import { Alert } from "react-native";
+
+const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection }) => {
+
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState()
+
+    const [statusState, setStatusState] = useState(status)
+
 
     const selectCard = () => {
         if (id === selected) {
@@ -13,6 +23,24 @@ const DonationCard = ({ id, name, status, selected, donations, handleSelection }
         } else {
             handleSelection(id)
         }
+    }
+
+    const handleChangeStatus = () => {
+        axios.post(`${API_URL}/donation/changeStatus`, {
+            userId: id,
+            campaignId: campaignId,
+            newState: status === "pendiente" ? "completado" : "pendiente"
+        })
+            .then((res) => {
+                setLoading(false);
+            })
+            .catch((err) =>
+                Alert.alert(
+                    err.response.data
+                )
+            )
+
+        setStatusState(status === "pendiente" ? "completado" : "pendiente")
     }
 
     return (
@@ -23,7 +51,7 @@ const DonationCard = ({ id, name, status, selected, donations, handleSelection }
                         <IconMCI
                             name="checkbox-blank-circle"
                             size={17}
-                            color={status === "pendiente" ? "#FE4C4C" : "#8BE794"}
+                            color={statusState === "pendiente" ? "#FE4C4C" : "#8BE794"}
                         />
                         <Text style={Styles.name}>{name}</Text>
                     </View>
@@ -38,7 +66,7 @@ const DonationCard = ({ id, name, status, selected, donations, handleSelection }
             </TouchableOpacity>
 
             {selected === id &&
-                <DonationList donations={donations} status={status} />
+                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} />
             }
 
         </View>
