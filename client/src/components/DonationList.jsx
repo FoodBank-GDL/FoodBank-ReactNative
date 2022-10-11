@@ -24,21 +24,23 @@ const DonationList = ({ donations, status, handleChangeStatus }) => {
             </View>
 
             <View style={Styles.bottomBar}>
-                <View style={Styles.completed}>
-                    {status === "pendiente" ?
-                        <IconF
-                            name="checkbox-passive"
-                            style={Styles.checkbox}
-                            onPress={handleChangeStatus}
-                        /> :
-                        <IconF
-                            name="checkbox-active"
-                            style={Styles.checkbox}
-                        />
-                    }
+                <TouchableOpacity onPress={handleChangeStatus}
+                >
+                    <View style={Styles.completed}>
+                        {status === "pendiente" ?
+                            <IconF
+                                name="checkbox-passive"
+                                style={Styles.checkbox}
+                            /> :
+                            <IconF
+                                name="checkbox-active"
+                                style={Styles.checkbox}
+                            />
+                        }
 
-                    <Text style={{ fontSize: 15 }}>Completado</Text>
-                </View>
+                        <Text style={{ fontSize: 15 }}>Completado</Text>
+                    </View>
+                </TouchableOpacity>
 
                 <IconFA
                     name="trash"

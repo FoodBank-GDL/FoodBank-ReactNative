@@ -1,6 +1,7 @@
-const { 
+const {
   createDonation,
   eraseDonation,
+  changeUserDonationStatus,
   getCampaignDonations
 } = require("../models/DonationClass");
 
