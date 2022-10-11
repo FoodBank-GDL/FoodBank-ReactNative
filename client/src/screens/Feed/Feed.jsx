@@ -1,6 +1,4 @@
-import {
-    View,
-} from "react-native";
+import { View } from "react-native";
 import { Styles } from "./Styles";
 
 import Header from "../../components/Header";
@@ -9,15 +7,14 @@ import NavBar from "../../components/NavBar";
 import NewCampaignButton from "../../components/NewCampaignButton";
 
 const Feed = (props) => {
-
-    return (
-        <View style={Styles.container}>
-            <Header title={"Campaña"} />
-            <CampaignContainer />
-            <NavBar navigation={props.navigation} />
-            <NewCampaignButton navigation={props.navigation} />
-        </View>
-    );
+  return (
+    <View style={Styles.container}>
+      <Header title={"Campaña"} />
+      <CampaignContainer navigation={props.navigation}/>
+      <NavBar navigation={props.navigation} />
+      <NewCampaignButton navigation={props.navigation} />
+    </View>
+  );
 };
 
 export default Feed;

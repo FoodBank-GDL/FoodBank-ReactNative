@@ -2,18 +2,60 @@ import { ScrollView, Text, View } from "react-native";
 import { Button, StatusBar, TitleBar } from "../../components";
 import ProgressBar from "../../components/ProgressBar";
 import { Styles } from "./Styles";
-import Icon from "react-native-vector-icons/FontAwesome5";
+import { IconFA5, IconMCI } from "../../../lib/icons";
+import { parseDateYYYYMMDD_NoYear } from "../../../lib/parseDate";
 
 const iconSize = 20;
-const CampaignDetail = ({ navigation }) => {
+const CampaignDetail = ({ navigation, ...props }) => {
+  const {
+    title,
+    user,
+    startDate,
+    finishDate,
+    location,
+    progress,
+    description,
+    categoriaEnseres,
+    categoriaFrutasVerduras,
+    categoriaNoPerecederos,
+    categoriaRopa,
+    accessibility,
+    ...campaignInfo
+  } = props.route.params;
   return (
     <View style={Styles.container}>
       <StatusBar />
-      <TitleBar title="Campaña" />
+      <TitleBar title="Campaña" navigation={navigation} />
       <ScrollView style={Styles.content}>
-        <Text style={Styles.title}>ITESM Invierno 2022</Text>
+        <View style={Styles.category_icons}>
+          <IconMCI
+            name="food-apple"
+            size={15}
+            color={categoriaFrutasVerduras ? "#50BE1C" : "gray"}
+            style={Styles.category}
+          />
+          <IconFA5
+            name="tshirt"
+            size={15}
+            color={categoriaRopa ? "#71D1FB" : "gray"}
+            style={Styles.category}
+          />
+          <IconMCI
+            name="bottle-soda"
+            size={15}
+            color={categoriaNoPerecederos ? "#FFE86D" : "gray"}
+            style={Styles.category}
+          />
+          <IconFA5
+            name="shopping-basket"
+            size={15}
+            color={categoriaEnseres ? "#FC8181" : "gray"}
+            style={Styles.category}
+          />
+        </View>
+        <Text style={Styles.title}>{title}</Text>
         <ProgressBar
-          percentage={`${75}%`}
+          percentage={`${progress}%`}
           height={10}
           backgroundColor={"#D9D9D9"}
           completedColor={"#8BE794"}
@@ -31,16 +73,16 @@ const CampaignDetail = ({ navigation }) => {
         </View>
 
         <View style={Styles.bullet_point}>
-          <Icon
+          <IconFA5
             name="user-alt"
             color="#FF9900"
             style={Styles.icon}
             size={iconSize}
           />
-          <Text style={Styles.info}>Regina Armenta</Text>
+          <Text style={Styles.info}>{user}</Text>
         </View>
         <View style={Styles.bullet_point}>
-          <Icon
+          <IconFA5
             name="envelope"
             color="#FF9900"
             style={Styles.icon}
@@ -49,46 +91,40 @@ const CampaignDetail = ({ navigation }) => {
           <Text style={Styles.info}>regina.armenta@gmail.com</Text>
         </View>
         <View style={Styles.bullet_point}>
-          <Icon
+          <IconFA5
             name="clock"
             color="#FF9900"
             style={Styles.icon}
             size={iconSize}
           />
-          <Text style={Styles.info}>24 de agosto - 25 de septiembre</Text>
+          <Text style={Styles.info}>
+            {parseDateYYYYMMDD_NoYear(startDate)} -{" "}
+            {parseDateYYYYMMDD_NoYear(finishDate)}
+          </Text>
         </View>
         <View style={Styles.bullet_point}>
-          <Icon
+          <IconFA5
             name="map-marker-alt"
             color="#FF9900"
             style={Styles.icon}
             size={iconSize}
           />
-          <Text style={Styles.info}>
-            Tecnológico de Monterrey, Campus Guadalajara
-          </Text>
+          <Text style={Styles.info}>{location}</Text>
         </View>
         <View style={Styles.bullet_point}>
-          <Icon
+          <IconFA5
             name="globe-americas"
             color="#FF9900"
             style={Styles.icon}
             size={iconSize}
           />
-          <Text style={Styles.info}>Pública</Text>
+          <Text style={Styles.info}>{accessibility || "Pública"}</Text>
         </View>
         <View style={{ paddingTop: 16 }}>
           <Text style={Styles.subtitle}>Descripción</Text>
         </View>
 
-        <Text style={Styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-        </Text>
+        <Text style={Styles.description}>{description}</Text>
       </ScrollView>
     </View>
   );

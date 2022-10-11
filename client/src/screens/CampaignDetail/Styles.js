@@ -8,6 +8,10 @@ export const Styles = StyleSheet.create({
   content: {
     padding: 24,
   },
+  category_icons: {
+    flexDirection: "row",
+
+  },
   title: {
     fontWeight: "bold",
     fontSize: 32,

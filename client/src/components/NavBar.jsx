@@ -23,7 +23,7 @@ const NavBar = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={() => handleNavigate("Login")}
+                    onPress={() => handleNavigate("MapScreen")}
                 >
                     <IconFA
                         name="map"
@@ -32,7 +32,7 @@ const NavBar = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={() => handleNavigate("Register")}
+                    onPress={() => handleNavigate("Profile")}
                 >
                     <IconFA
                         name="user"
