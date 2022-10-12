@@ -3,7 +3,11 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, ActivityIndicator }
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
+<<<<<<< HEAD
 const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation, loading }) => {
+=======
+const DonationList = ({ donations, status, handleChangeStatus }) => {
+>>>>>>> main
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -24,23 +28,21 @@ const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonati
             </View>
 
             <View style={Styles.bottomBar}>
-                <TouchableOpacity onPress={handleChangeStatus}
-                >
-                    <View style={Styles.completed}>
-                        {status === "pendiente" ?
-                            <IconF
-                                name="checkbox-passive"
-                                style={Styles.checkbox}
-                            /> :
-                            <IconF
-                                name="checkbox-active"
-                                style={Styles.checkbox}
-                            />
-                        }
+                <View style={Styles.completed}>
+                    {status === "pendiente" ?
+                        <IconF
+                            name="checkbox-passive"
+                            style={Styles.checkbox}
+                            onPress={handleChangeStatus}
+                        /> :
+                        <IconF
+                            name="checkbox-active"
+                            style={Styles.checkbox}
+                        />
+                    }
 
-                        <Text style={{ fontSize: 15 }}>Completado</Text>
-                    </View>
-                </TouchableOpacity>
+                    <Text style={{ fontSize: 15 }}>Completado</Text>
+                </View>
 
                 {loading ?
                     <ActivityIndicator size="large" color="orange" />

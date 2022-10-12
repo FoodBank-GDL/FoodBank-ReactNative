@@ -9,7 +9,7 @@ import { useState } from "react";
 import DonationCard from "./DonationCard";
 import IconMCI from "react-native-vector-icons/MaterialCommunityIcons"
 
-const DonationsComponent = ({ data, campaignId, setDonationErased }) => {
+const DonationsComponent = ({ data, campaignId }) => {
 
     const [selected, setSelected] = useState("")
 
@@ -26,7 +26,6 @@ const DonationsComponent = ({ data, campaignId, setDonationErased }) => {
             donations={item.donaciones}
             selected={selected}
             handleSelection={handleSelection}
-            setDonationErased={setDonationErased}
         />
     )
 
