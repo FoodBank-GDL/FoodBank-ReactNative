@@ -56,12 +56,11 @@ class DonationClass {
       //We add user, status, and create an empty array of donations for each user
       for(const donation of campaignDonationsObject){
         formatedInfo[donation.userId]={};
-        const currUserInfo=await userClass.userInfoGet(donation);
+        const currUserInfo=await userClass.userInfoGet(donation.userId);
         formatedInfo[donation.userId]['user']=currUserInfo;
         formatedInfo[donation.userId]['estado']='completado';
         formatedInfo[donation.userId]['donaciones']=[];
       }
-
       //Now we add the donation info to each user
       for(const donation of campaignDonationsObject){
         if(donation.estado=='pendiente'){
