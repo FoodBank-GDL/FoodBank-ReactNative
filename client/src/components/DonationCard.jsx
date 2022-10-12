@@ -9,13 +9,12 @@ import axios from "axios";
 import { API_URL } from "../../lib/constants";
 import { Alert } from "react-native";
 
-const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection }) => {
+const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection, setDonationErased }) => {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
 
     const [statusState, setStatusState] = useState(status)
-
 
     const selectCard = () => {
         if (id === selected) {
@@ -26,21 +25,41 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
     }
 
     const handleChangeStatus = () => {
-        axios.post(`${API_URL}/donation/changeStatus`, {
+        axios.put(`${API_URL}/donation/changeStatus`, {
             userId: id,
             campaignId: campaignId,
-            newState: status === "pendiente" ? "completado" : "pendiente"
+            newState: statusState === "pendiente" ? "completado" : "pendiente"
         })
             .then((res) => {
                 setLoading(false);
+                setStatusState(statusState === "pendiente" ? "completado" : "pendiente")
             })
             .catch((err) =>
                 Alert.alert(
                     err.response.data
                 )
             )
+    }
 
-        setStatusState(status === "pendiente" ? "completado" : "pendiente")
+    const handleEraseDonation = () => {
+        setLoading(true)
+
+        axios.delete(`${API_URL}/donation/deleteDonation`, {
+            data: {
+                userId: id,
+                campaignId: campaignId
+            }
+        })
+            .then((res) => {
+                setLoading(false);
+                setDonationErased((prev) => !prev)
+            })
+            .catch((err) => {
+                Alert.alert(
+                    err.response.data
+                )
+            }
+            )
     }
 
     return (
@@ -66,7 +85,7 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
             </TouchableOpacity>
 
             {selected === id &&
-                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} />
+                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} handleEraseDonation={handleEraseDonation} loading={loading} />
             }
 
         </View>

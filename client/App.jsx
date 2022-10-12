@@ -15,8 +15,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Feed" options={{ headerShown: false }}>
-          {(props) => <Feed {...props} />}
+        {/* <Stack.Screen name="Feed" options={{ headerShown: false }}>
+          {props => <Feed {...props} />}
         </Stack.Screen>
         <Stack.Screen
           name="CreateCampaign"
@@ -36,6 +36,9 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen
           name="Donations"
+          {props => <CreateCampaign {...props} />}
+        </Stack.Screen> */}
+        <Stack.Screen name="Donations"
           options={{
             headerTitle: "Donaciones",
             headerStyle: {
