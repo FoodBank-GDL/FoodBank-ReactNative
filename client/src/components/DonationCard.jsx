@@ -16,7 +16,6 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
 
     const [statusState, setStatusState] = useState(status)
 
-
     const selectCard = () => {
         if (id === selected) {
             handleSelection("")
