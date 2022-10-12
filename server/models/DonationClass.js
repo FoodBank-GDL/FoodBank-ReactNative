@@ -57,7 +57,7 @@ class DonationClass {
       for(const donation of campaignDonationsObject){
         formatedInfo[donation.userId]={};
         const currUserInfo=await userClass.userInfoGet(donation);
-        formatedInfo[donation.userId]['user']=currUserInfo[0]
+        formatedInfo[donation.userId]['user']=currUserInfo;
         formatedInfo[donation.userId]['estado']='completado';
         formatedInfo[donation.userId]['donaciones']=[];
       }

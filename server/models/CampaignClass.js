@@ -25,7 +25,7 @@ async function completeCampaignInfo(campRef) {
     campRef.forEach(async (currDoc) => {
       const currInfo = currDoc.data();
       const currUserInfo = await userClass.userInfoGet(currInfo);
-      currInfo["user"] = currUserInfo[0];
+      currInfo["user"] = currUserInfo;
       currInfo["campaignId"] = currDoc.id;
       activeCampaignsObject.push(currInfo);
     });
