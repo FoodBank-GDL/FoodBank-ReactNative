@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Register, Login, CampaignDetail, Feed } from "./src/screens";
 import Donations from "./src/screens/Donations";
 import CreateCampaign from "./src/screens/CreateCampaign/CreateCampaign";
+import { AuthProvider } from "./src/contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -14,55 +15,44 @@ export default function App() {
   //Navigation
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen name="Feed" options={{ headerShown: false }}>
-          {props => <Feed {...props} />}
-        </Stack.Screen>
-        <Stack.Screen
-          name="CreateCampaign"
-          options={{
-            headerTitle: "Crea una campaña",
-            headerStyle: {
-              textAlign: "center",
-            },
-            headerTitleStyle: {
-              fontWeight: "bold",
-              textAlign: "center",
-            },
-            headerTitleAlign: "center",
-          }}
-        >
-          {(props) => <CreateCampaign {...props} />}
-        </Stack.Screen>
-        <Stack.Screen
-          name="Donations"
-          {props => <CreateCampaign {...props} />}
-        </Stack.Screen> */}
-        <Stack.Screen name="Donations"
-          options={{
-            headerTitle: "Donaciones",
-            headerStyle: {
-              textAlign: "center",
-            },
-            headerTitleStyle: {
-              fontWeight: "bold",
-              textAlign: "center",
-            },
-            headerTitleAlign: "center",
-          }}
-        >
-          {(props) => <Donations {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
-          {(props) => <Login {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Profile" options={{ headerShown: false }}>
-          {(props) => <Register {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
-          {(props) => <CampaignDetail {...props} />}
-        </Stack.Screen>
-      </Stack.Navigator>
+      <AuthProvider>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" options={{ headerShown: false }}>
+            {(props) => <Login {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Register" options={{ headerShown: false }}>
+            {(props) => <Register {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Feed" options={{ headerShown: false }}>
+            {(props) => <Feed {...props} />}
+          </Stack.Screen>
+          <Stack.Screen
+            name="Donations"
+            options={{
+              headerTitle: "Donaciones",
+              headerStyle: {
+                textAlign: "center",
+              },
+              headerTitleStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+              },
+              headerTitleAlign: "center",
+            }}
+          >
+            {(props) => <Donations {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
+            {(props) => <Login {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="Profile" options={{ headerShown: false }}>
+            {(props) => <Register {...props} />}
+          </Stack.Screen>
+          <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
+            {(props) => <CampaignDetail {...props} />}
+          </Stack.Screen>
+        </Stack.Navigator>
+      </AuthProvider>
     </NavigationContainer>
   );
 }
