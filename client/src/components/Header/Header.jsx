@@ -45,7 +45,7 @@ const Styles = StyleSheet.create({
         fontWeight: 'bold',
         textShadowColor: 'rgba(0, 0, 0, 0.2)',
         textShadowOffset: { width: -0.5, height: 0.5 },
-        textShadowRadius: 10,
+        textShadowRadius: 2,
     },
     image_logo: {
         width: 150,

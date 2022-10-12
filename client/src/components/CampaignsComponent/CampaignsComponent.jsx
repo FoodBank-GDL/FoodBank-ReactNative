@@ -12,6 +12,8 @@ const CampaignsComponent = ({ campaigns, ...props }) => {
       startDate={item.fechaInicio}
       finishDate={item.fechaExpiracion}
       progress={Math.round((item.donativosTotales * 100) / item.metaDonativos)}
+      donativosTotales={item.donativosTotales}
+      metaDonativos={item.metaDonativos}
       categoriaEnseres={item.categoriaEnseres}
       categoriaFrutasVerduras={item.categoriaFrutasVerduras}
       categoriaNoPerecederos={item.categoriaNoPerecederos}
