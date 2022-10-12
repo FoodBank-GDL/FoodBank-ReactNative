@@ -9,7 +9,7 @@ import axios from "axios";
 import { API_URL } from "../../lib/constants";
 import { Alert } from "react-native";
 
-const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection }) => {
+const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection, setDonationErased }) => {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
@@ -42,6 +42,25 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
             )
     }
 
+    const handleEraseDonation = () => {
+        axios.delete(`${API_URL}/donation/deleteDonation`, {
+            data: {
+                userId: id,
+                campaignId: campaignId
+            }
+        })
+            .then((res) => {
+                setLoading(false);
+                setDonationErased((prev) => !prev)
+            })
+            .catch((err) => {
+                Alert.alert(
+                    err.response.data
+                )
+            }
+            )
+    }
+
     return (
         <View style={selected === id ? Styles.containerExpanded : Styles.container}>
             <TouchableOpacity onPress={selectCard}>
@@ -65,7 +84,7 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
             </TouchableOpacity>
 
             {selected === id &&
-                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} />
+                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} handleEraseDonation={handleEraseDonation} />
             }
 
         </View>

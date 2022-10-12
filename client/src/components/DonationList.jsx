@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
-const DonationList = ({ donations, status, handleChangeStatus }) => {
+const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation }) => {
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -45,6 +45,7 @@ const DonationList = ({ donations, status, handleChangeStatus }) => {
                 <IconFA
                     name="trash"
                     style={Styles.checkbox}
+                    onPress={handleEraseDonation}
                 />
 
             </View>
