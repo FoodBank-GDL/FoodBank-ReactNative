@@ -1,9 +1,13 @@
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
 
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
+<<<<<<< HEAD
+const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation, loading }) => {
+=======
 const DonationList = ({ donations, status, handleChangeStatus }) => {
+>>>>>>> main
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -40,10 +44,18 @@ const DonationList = ({ donations, status, handleChangeStatus }) => {
                     <Text style={{ fontSize: 15 }}>Completado</Text>
                 </View>
 
-                <IconFA
-                    name="trash"
-                    style={Styles.checkbox}
-                />
+                {loading ?
+                    <ActivityIndicator size="large" color="orange" />
+                    :
+                    <TouchableOpacity onPress={handleEraseDonation}>
+                        <IconFA
+                            name="trash"
+                            style={Styles.checkbox}
+                        />
+                    </TouchableOpacity>
+                }
+
+
 
             </View>
         </View>
