@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
-const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation }) => {
+const DonationList = ({ donations, status, handleChangeStatus }) => {
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -24,28 +24,25 @@ const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonati
             </View>
 
             <View style={Styles.bottomBar}>
-                <TouchableOpacity onPress={handleChangeStatus}
-                >
-                    <View style={Styles.completed}>
-                        {status === "pendiente" ?
-                            <IconF
-                                name="checkbox-passive"
-                                style={Styles.checkbox}
-                            /> :
-                            <IconF
-                                name="checkbox-active"
-                                style={Styles.checkbox}
-                            />
-                        }
+                <View style={Styles.completed}>
+                    {status === "pendiente" ?
+                        <IconF
+                            name="checkbox-passive"
+                            style={Styles.checkbox}
+                            onPress={handleChangeStatus}
+                        /> :
+                        <IconF
+                            name="checkbox-active"
+                            style={Styles.checkbox}
+                        />
+                    }
 
-                        <Text style={{ fontSize: 15 }}>Completado</Text>
-                    </View>
-                </TouchableOpacity>
+                    <Text style={{ fontSize: 15 }}>Completado</Text>
+                </View>
 
                 <IconFA
                     name="trash"
                     style={Styles.checkbox}
-                    onPress={handleEraseDonation}
                 />
 
             </View>

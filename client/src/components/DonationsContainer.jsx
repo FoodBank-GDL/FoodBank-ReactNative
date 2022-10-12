@@ -16,8 +16,6 @@ const DonationsContainer = ({ campaignId }) => {
     const [error, setError] = useState(null)
     const [data, setData] = useState()
 
-    const [donationErased, setDonationErased] = useState(false)
-
     const getDonations = async () => {
         axios.get(`${API_URL}/donation/campaignDonations/${campaignId}`).then((res) => {
             setLoading(false);
@@ -36,7 +34,7 @@ const DonationsContainer = ({ campaignId }) => {
 
         getDonations()
 
-    }, [donationErased])
+    }, [])
 
     if (loading || error) {
         return (
@@ -45,7 +43,7 @@ const DonationsContainer = ({ campaignId }) => {
     }
 
     return (
-        <DonationsComponent data={data} campaignId={campaignId} setDonationErased={setDonationErased} />
+        <DonationsComponent data={data} campaignId={campaignId} />
     );
 };
 

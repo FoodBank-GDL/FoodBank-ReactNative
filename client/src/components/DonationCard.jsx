@@ -9,7 +9,7 @@ import axios from "axios";
 import { API_URL } from "../../lib/constants";
 import { Alert } from "react-native";
 
-const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection, setDonationErased }) => {
+const DonationCard = ({ id, campaignId, name, status, selected, donations, handleSelection }) => {
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
@@ -26,39 +26,21 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
     }
 
     const handleChangeStatus = () => {
-        axios.put(`${API_URL}/donation/changeStatus`, {
+        axios.post(`${API_URL}/donation/changeStatus`, {
             userId: id,
             campaignId: campaignId,
-            newState: statusState === "pendiente" ? "completado" : "pendiente"
+            newState: status === "pendiente" ? "completado" : "pendiente"
         })
             .then((res) => {
                 setLoading(false);
-                setStatusState(statusState === "pendiente" ? "completado" : "pendiente")
             })
             .catch((err) =>
                 Alert.alert(
                     err.response.data
                 )
             )
-    }
 
-    const handleEraseDonation = () => {
-        axios.delete(`${API_URL}/donation/deleteDonation`, {
-            data: {
-                userId: id,
-                campaignId: campaignId
-            }
-        })
-            .then((res) => {
-                setLoading(false);
-                setDonationErased((prev) => !prev)
-            })
-            .catch((err) => {
-                Alert.alert(
-                    err.response.data
-                )
-            }
-            )
+        setStatusState(status === "pendiente" ? "completado" : "pendiente")
     }
 
     return (
@@ -84,7 +66,7 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
             </TouchableOpacity>
 
             {selected === id &&
-                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} handleEraseDonation={handleEraseDonation} />
+                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} />
             }
 
         </View>
