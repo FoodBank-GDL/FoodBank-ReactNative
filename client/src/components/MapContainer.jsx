@@ -29,9 +29,9 @@ const MapContainer = (props) => {
         // getCampaigns();
     }, []);
 
-    if (loading || error) {
-        return <Loading />;
-    }
+    // if (loading || error) {
+    //     return <Loading />;
+    // }
 
     return <MapComponent />;
 };
