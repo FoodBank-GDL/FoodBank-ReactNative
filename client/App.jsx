@@ -37,12 +37,6 @@ export default function App() {
         >
           {props => <CreateCampaign {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
-          {(props) => <Login {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Profile" options={{ headerShown: false }}>
-          {(props) => <Register {...props} />}
-        </Stack.Screen>
         <Stack.Screen name="Donations"
           options={{
             headerTitle: "Donaciones",
@@ -56,6 +50,12 @@ export default function App() {
             headerTitleAlign: 'center'
           }}>
           {props => <Donations {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
+          {(props) => <Login {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Profile" options={{ headerShown: false }}>
+          {(props) => <Register {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
