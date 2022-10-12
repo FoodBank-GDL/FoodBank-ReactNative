@@ -5,7 +5,7 @@ import { Styles } from "./Styles";
 import { IconFA5, IconMCI } from "../../../lib/icons";
 import { parseDateYYYYMMDD_NoYear } from "../../../lib/parseDate";
 
-const iconSize = 20;
+const iconSize = 16;
 const CampaignDetail = ({ navigation, ...props }) => {
   const {
     title,

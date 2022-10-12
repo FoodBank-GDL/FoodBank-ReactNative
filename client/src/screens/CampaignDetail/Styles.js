@@ -13,7 +13,7 @@ export const Styles = StyleSheet.create({
 
   },
   title: {
-    fontWeight: "bold",
+    fontWeight: "500",
     fontSize: 32,
   },
   secondary: {
@@ -39,14 +39,14 @@ export const Styles = StyleSheet.create({
     paddingEnd: 8,
   },
   info: {
-    fontSize: 18,
+    fontSize: 12,
     paddingVertical: 4,
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
   },
   description: {
-    fontSize: 16,
+    fontSize: 12,
   },
 });
