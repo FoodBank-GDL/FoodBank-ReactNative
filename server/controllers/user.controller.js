@@ -53,7 +53,7 @@ controller.userUpdate = async (req, res) => {
 
 controller.userInfoGetter=async (req, res) => {
     try {
-        const response = await userInfoGet(req.body);
+        const response = await userInfoGet(req.params.userId);
 
         res.send(response);
     } catch (error) {
