@@ -3,11 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, FlatList, ActivityIndicator }
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
-<<<<<<< HEAD
 const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation, loading }) => {
-=======
-const DonationList = ({ donations, status, handleChangeStatus }) => {
->>>>>>> main
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -28,26 +24,28 @@ const DonationList = ({ donations, status, handleChangeStatus }) => {
             </View>
 
             <View style={Styles.bottomBar}>
-                <View style={Styles.completed}>
-                    {status === "pendiente" ?
-                        <IconF
-                            name="checkbox-passive"
-                            style={Styles.checkbox}
-                            onPress={handleChangeStatus}
-                        /> :
-                        <IconF
-                            name="checkbox-active"
-                            style={Styles.checkbox}
-                        />
-                    }
+                <TouchableOpacity onPress={handleChangeStatus}>
+                    <View style={Styles.completed}>
+                        {status === "pendiente" ?
+                            <IconF
+                                name="checkbox-passive"
+                                style={Styles.checkbox}
+                            />
+                            :
+                            <IconF
+                                name="checkbox-active"
+                                style={Styles.checkbox}
+                            />
+                        }
 
-                    <Text style={{ fontSize: 15 }}>Completado</Text>
-                </View>
+                        <Text style={{ fontSize: 15 }}>Completado</Text>
+                    </View>
+                </TouchableOpacity>
 
                 {loading ?
                     <ActivityIndicator size="large" color="orange" />
                     :
-                    <TouchableOpacity onPress={handleEraseDonation}>
+                    <TouchableOpacity onPress={handleEraseDonation} style={Styles.eraseIcon}>
                         <IconFA
                             name="trash"
                             style={Styles.checkbox}
@@ -92,6 +90,9 @@ const Styles = StyleSheet.create({
     checkbox: {
         color: "orange",
         fontSize: 21
+    },
+    eraseIcon: {
+        width: 20
     }
 })
 
