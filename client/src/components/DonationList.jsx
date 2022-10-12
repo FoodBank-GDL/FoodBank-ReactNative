@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
 
 import IconF from "react-native-vector-icons/Fontisto"
 import IconFA from "react-native-vector-icons/FontAwesome"
 
-const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation }) => {
+const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonation, loading }) => {
 
     const renderItem = ({ item }) => (
         <View style={Styles.item}>
@@ -42,11 +42,18 @@ const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonati
                     </View>
                 </TouchableOpacity>
 
-                <IconFA
-                    name="trash"
-                    style={Styles.checkbox}
-                    onPress={handleEraseDonation}
-                />
+                {loading ?
+                    <ActivityIndicator size="large" color="orange" />
+                    :
+                    <TouchableOpacity onPress={handleEraseDonation}>
+                        <IconFA
+                            name="trash"
+                            style={Styles.checkbox}
+                        />
+                    </TouchableOpacity>
+                }
+
+
 
             </View>
         </View>

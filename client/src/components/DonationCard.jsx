@@ -43,6 +43,8 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
     }
 
     const handleEraseDonation = () => {
+        setLoading(true)
+
         axios.delete(`${API_URL}/donation/deleteDonation`, {
             data: {
                 userId: id,
@@ -50,8 +52,8 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
             }
         })
             .then((res) => {
-                setLoading(false);
                 setDonationErased((prev) => !prev)
+                setLoading(false);
             })
             .catch((err) => {
                 Alert.alert(
@@ -84,7 +86,7 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
             </TouchableOpacity>
 
             {selected === id &&
-                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} handleEraseDonation={handleEraseDonation} />
+                <DonationList donations={donations} status={statusState} handleChangeStatus={handleChangeStatus} handleEraseDonation={handleEraseDonation} loading={loading} />
             }
 
         </View>
