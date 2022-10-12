@@ -24,8 +24,8 @@ async function completeCampaignInfo(campRef) {
 
     campRef.forEach(async (currDoc) => {
       const currInfo = currDoc.data();
-      const currUserInfo = await userClass.userInfoGet(currInfo);
-      currInfo["user"] = currUserInfo[0];
+      const currUserInfo = await userClass.userInfoGet(currInfo.userId);
+      currInfo["user"] = currUserInfo;
       currInfo["campaignId"] = currDoc.id;
       activeCampaignsObject.push(currInfo);
     });
@@ -39,20 +39,6 @@ async function completeCampaignInfo(campRef) {
 class CampaignClass {
   static async getHomeCardInfo(userId) {
     try {
-      //tambien queremos saber cuales campañas son
-      /*
-      PRIMERO QUIERO LA ACTIVE CAMPAIGN DEL USUARIO (TE LO PASO COMO)
-
-      {
-        userCampaign: [{}]
-        donativosPendientes:[{}]
-        donativosCompletados:[{}]
-        activeCampaigns:[{}]
-      }
-
-      
-      */
-
       //Active campaigns que no sean del usuario
       const activeCampaignsQuery = Firestore.query(
         Firestore.collection(db, "campaigns"),
