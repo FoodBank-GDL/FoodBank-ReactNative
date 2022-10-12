@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Register, Login, CampaignDetail, Feed } from "./src/screens";
 import Donations from "./src/screens/Donations";
 import CreateCampaign from "./src/screens/CreateCampaign/CreateCampaign";
+import MapScreen from "./src/screens/MapScreen";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -15,6 +16,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
+          {props => <MapScreen {...props} />}
+        </Stack.Screen>
         <Stack.Screen name="Feed" options={{ headerShown: false }}>
           {props => <Feed {...props} />}
         </Stack.Screen>
@@ -49,7 +53,7 @@ export default function App() {
         >
           {(props) => <Donations {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
+        <Stack.Screen name="Login" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Profile" options={{ headerShown: false }}>
