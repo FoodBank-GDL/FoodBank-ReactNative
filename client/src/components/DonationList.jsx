@@ -45,7 +45,7 @@ const DonationList = ({ donations, status, handleChangeStatus, handleEraseDonati
                 {loading ?
                     <ActivityIndicator size="large" color="orange" />
                     :
-                    <TouchableOpacity onPress={handleEraseDonation}>
+                    <TouchableOpacity onPress={handleEraseDonation} style={Styles.eraseIcon}>
                         <IconFA
                             name="trash"
                             style={Styles.checkbox}
@@ -90,6 +90,9 @@ const Styles = StyleSheet.create({
     checkbox: {
         color: "orange",
         fontSize: 21
+    },
+    eraseIcon: {
+        width: 20
     }
 })
 
