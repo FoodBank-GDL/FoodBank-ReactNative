@@ -12,7 +12,7 @@ const {
 
 // Core
 router.get("/test", getTesting);
-router.get("/info", userInfoGetter);
+router.get("/info/:userId", userInfoGetter);
 router.post("/login", userLogin);
 router.post("/register", userRegister);
 router.put("/updateUserInfo", userUpdate);

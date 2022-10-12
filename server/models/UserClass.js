@@ -92,11 +92,11 @@ class UserClass {
         }
     }
 
-    static async userInfoGet(body){
+    static async userInfoGet(userId){
         try {
             const userInfoQuery = Firestore.query(
                 Firestore.collection(db, "usuarios"),
-                where("userId", "==", body.userId)
+                where("userId", "==", userId)
               );
               const userInfoQuerySnap = await Firestore.getDocs(userInfoQuery);
               const userInfoObject=userInfoQuerySnap.docs.map((doc) => doc.data());
