@@ -200,7 +200,7 @@ class CampaignClass {
       const campaignDocument=await getDoc(campaignDocumentRef);
       const campaignData=campaignDocument.data();
       const userData=await userClass.userInfoGet(campaignData.userId);
-      campaignData['user']=userData[0];
+      campaignData['user']=userData;
       return campaignData;
     } catch (error) {
       throw new Error(error);
