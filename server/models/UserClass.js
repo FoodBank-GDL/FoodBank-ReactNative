@@ -100,7 +100,7 @@ class UserClass {
               );
               const userInfoQuerySnap = await Firestore.getDocs(userInfoQuery);
               const userInfoObject=userInfoQuerySnap.docs.map((doc) => doc.data());
-              return userInfoObject
+              return userInfoObject[0];
         } catch (error) {
             throw new Error(error);
         }
