@@ -6,6 +6,9 @@ import Loading from "./Loading/Loading";
 
 import IconMI from "react-native-vector-icons/MaterialIcons"
 
+import Geocoder from 'react-native-geocoding';
+
+Geocoder.init("AIzaSyDt5vtCyrrAg076KW0WMCwOKItIVeySLI8"); // use a valid API key
 
 const MapComponent = () => {
 
@@ -18,6 +21,10 @@ const MapComponent = () => {
 
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null);
+
+
+    const [marker, setMarker] = useState()
+    const [markerReady, setMarkerReady] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -41,9 +48,23 @@ const MapComponent = () => {
 
             setLoading(false)
         })();
+
+        Geocoder.from("Mi casa")
+            .then(json => {
+                var location = json.results[0].geometry.location;
+                setMarker({
+                    latitude: location.lat,
+                    longitude: location.lng,
+                    latitudeDelta: 0.01,
+                    longitudeDelta: 0.01,
+                })
+                setMarkerReady(true)
+                console.log(location);
+            })
+            .catch(error => console.log(error));
     }, []);
 
-    if (loading || errorMsg) {
+    if (loading || errorMsg || !markerReady) {
         return <Loading />
     }
 
@@ -64,6 +85,11 @@ const MapComponent = () => {
                         size={30}
                         color="#1A73E9"
                     />
+                </Marker>
+                <Marker
+                    key={2}
+                    coordinate={marker}
+                >
                 </Marker>
             </MapView>
         </View>
