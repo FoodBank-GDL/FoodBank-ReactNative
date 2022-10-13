@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { storeCredentials } = useAuth();
+  const { storeCredentials, idToken, userId } = useAuth();
 
   useEffect(() => {
     const keyboardShown = Keyboard.addListener("keyboardDidShow", () => {
@@ -67,7 +67,8 @@ const Login = ({ navigation }) => {
           res.data.credentials._tokenResponse.idToken,
           res.data.credentials.user.uid
         );
-        navigation.navigate("Feed");
+
+        //No need to navigate, is handled by Routes.jsx
       })
       .catch((err) => {
         setLoading(false);
@@ -103,6 +104,7 @@ const Login = ({ navigation }) => {
             placeholder="usuario@correo.com"
             handleTextChange={(val) => handleTextChange("email", val)}
             value={credentials.email}
+            keyboardType="email-address"
           />
           <Input
             placeholder="Contraseña"

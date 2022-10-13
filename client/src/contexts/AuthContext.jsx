@@ -20,8 +20,7 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     AsyncStorage.clear();
     setAuth(INITIAL_AUTH);
-    //TODO: NAVIGATE TO LOGIN
-    console.log("LOGOUT");
+    //No need to navigate, is handles by Routes.jsx
   };
 
   useEffect(() => {
