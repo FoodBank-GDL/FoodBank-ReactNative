@@ -12,17 +12,17 @@ const Donate = ({ campaignID }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dataGet, setDataGet] = useState();
-  const [count, setCount] = useState(2);
-  const [itemsArray, setItemsArray] = useState([]);
+  const [count, setCount] = useState(1);
+  const [items, setItems] = useState([]);
   const [saveArray] = useState([]);
 
-  const campaignId = "NcbSs5ml72TqTpg26Kzc"
+  const campaignId = "NcbSs5ml72TqTpg26Kzc";
 
   const getCampaign = async () => {
+    setLoading(true);
 
-    setLoading(true)
-
-    axios.get(`${API_URL}/campaign/info/${campaignId}`)
+    axios
+      .get(`${API_URL}/campaign/info/${campaignId}`)
       .then((res) => {
         setDataGet(res.data);
         setLoading(false);
@@ -34,9 +34,9 @@ const Donate = ({ campaignID }) => {
       });
   };
 
-    useEffect(() => {
-      getCampaign();
-    }, []);
+  useEffect(() => {
+    getCampaign();
+  }, []);
 
   const pullDonation = (pullData) => {
     if (saveArray.length < count - 1) {
@@ -46,10 +46,23 @@ const Donate = ({ campaignID }) => {
     }
   };
 
+  const newItemComponents = items.map((item) => {
+    return (
+      <ItemInput
+        key={item}
+        count={item}
+        pullData={pullDonation}
+        delete={() => deleteItem()}
+      />
+    );
+  });
+
+  useEffect(() => {
+    setItems((prevItems) => [...prevItems, count]);
+  }, [count]);
+
   const createDonation = async () => {
     setLoading(true);
-
-    console.log("create: ", itemsArray)
 
     for (let i = 0; i < saveArray.length; i++) {
       await axios
@@ -62,7 +75,7 @@ const Donate = ({ campaignID }) => {
           estado: "pendiente",
         })
         .then((res) => {
-            Alert.alert("Donaciones creadas exitosamente");
+          Alert.alert("Donaciones creadas exitosamente");
         })
         .catch((err) => {
           Alert.alert(
@@ -71,50 +84,15 @@ const Donate = ({ campaignID }) => {
           );
         });
     }
-    setLoading(false)
+    setLoading(false);
   };
 
-  const newItem = () => {
-    setCount(count + 1);
-    console.log(count)
-    const newComponent = (
-      <ItemInput key={count} count={count} pullData={pullDonation} delete={() => cancelDonation(count)}/>
-    );
-    // const newarr = itemsArray
-    // newarr.push(newItem)
-    // console.log("new: ", newarr)
-    setItemsArray((prevItemsArray) => [...prevItemsArray, newComponent]);
-    console.log("items: ", itemsArray)
+  const deleteItem = (e) => {
+    console.log(items);
   };
-
-  const cancelDonation = (index) => {
-    console.log("index: ", index)
-    // console.log("before: ", saveArray)
-    // if(index == 1)
-    //   saveArray.pop()
-    // else {
-    //   saveArray.splice(index-2, 1)
-    // }
-    // console.log("after: ", saveArray)
-    // console.log("save: ", saveArray)
-    // const auxArray = itemsArray
-    console.log("arr1: ", itemsArray)
-    setItemsArray((prevItemsArray) => prevItemsArray.map((item) => {
-      if (count === index) {
-        setCount(prevCount => prevCount)
-      }
-    }));
-    console.log("arr2: ", itemsArray)
-    // setItemsArray(auxArray)
-    // console.log("items: ", itemsArray)
-    // console.log("index: ", index)
-    setCount(itemsArray.length+3)
-  }
 
   if (loading || error) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   return (
@@ -126,15 +104,39 @@ const Donate = ({ campaignID }) => {
             campaña:
           </Text>
           <View style={{ flexDirection: "row", marginBottom: 5, marginTop: 5 }}>
-          <Category color="#50BE1C" footer="Frutas y verduras" show={dataGet.categoriaFrutasVerduras} />
-            <Category color="#71D1FB" footer="Ropa" show={dataGet.categoriaRopa} />
-            <Category color="#FFE86D" footer="No perecederos" show={dataGet.categoriaNoPerecederos} />
-            <Category color="#FC8181" footer="Enseres" show={dataGet.categoriaEnseres} />
+            <Category
+              color="#50BE1C"
+              footer="Frutas y verduras"
+              show={dataGet.categoriaFrutasVerduras}
+            />
+            <Category
+              color="#71D1FB"
+              footer="Ropa"
+              show={dataGet.categoriaRopa}
+            />
+            <Category
+              color="#FFE86D"
+              footer="No perecederos"
+              show={dataGet.categoriaNoPerecederos}
+            />
+            <Category
+              color="#FC8181"
+              footer="Enseres"
+              show={dataGet.categoriaEnseres}
+            />
           </View>
-          <ItemInput key={1} count={1} pullData={pullDonation} delete={() => cancelDonation(1)}/>
-          {itemsArray}
+          {/*
+          <ItemInput
+            key={1}
+            count={1}
+            pullData={pullDonation}
+            delete={(e) => cancelDonation(e)}
+          />*/}
+          {newItemComponents}
           <View style={{ width: "100%", alignItems: "center" }}>
-            <TouchableOpacity onPress={newItem}>
+            <TouchableOpacity
+              onPress={() => setCount((prevCount) => prevCount + 1)}
+            >
               <View style={Styles.circle}>
                 <IconAD name="plus" color={"white"} size={24} />
               </View>
