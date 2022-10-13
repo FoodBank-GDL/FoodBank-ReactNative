@@ -49,6 +49,8 @@ const Donate = ({ campaignID }) => {
   const createDonation = async () => {
     setLoading(true);
 
+    console.log("create: ", itemsArray)
+
     for (let i = 0; i < saveArray.length; i++) {
       await axios
         .post(`${API_URL}/donation/create`, {
@@ -74,11 +76,40 @@ const Donate = ({ campaignID }) => {
 
   const newItem = () => {
     setCount(count + 1);
-    const newItem = (
-      <ItemInput key={count} count={count} pullData={pullDonation} />
+    console.log(count)
+    const newComponent = (
+      <ItemInput key={count} count={count} pullData={pullDonation} delete={() => cancelDonation(count)}/>
     );
-    setItemsArray((prevItemsArray) => [...prevItemsArray, newItem]);
+    // const newarr = itemsArray
+    // newarr.push(newItem)
+    // console.log("new: ", newarr)
+    setItemsArray((prevItemsArray) => [...prevItemsArray, newComponent]);
+    console.log("items: ", itemsArray)
   };
+
+  const cancelDonation = (index) => {
+    console.log("index: ", index)
+    // console.log("before: ", saveArray)
+    // if(index == 1)
+    //   saveArray.pop()
+    // else {
+    //   saveArray.splice(index-2, 1)
+    // }
+    // console.log("after: ", saveArray)
+    // console.log("save: ", saveArray)
+    // const auxArray = itemsArray
+    console.log("arr1: ", itemsArray)
+    setItemsArray((prevItemsArray) => prevItemsArray.map((item) => {
+      if (count === index) {
+        setCount(prevCount => prevCount)
+      }
+    }));
+    console.log("arr2: ", itemsArray)
+    // setItemsArray(auxArray)
+    // console.log("items: ", itemsArray)
+    // console.log("index: ", index)
+    setCount(itemsArray.length+3)
+  }
 
   if (loading || error) {
     return (
@@ -91,7 +122,7 @@ const Donate = ({ campaignID }) => {
       <ScrollView style={Styles.container}>
         <View style={Styles.content}>
           <Text style={{ fontWeight: "bold" }}>
-            Favor de ingresar artículos relevaantes a la(s) categoría(s) de la
+            Favor de ingresar artículos relevantes a la(s) categoría(s) de la
             campaña:
           </Text>
           <View style={{ flexDirection: "row", marginBottom: 5, marginTop: 5 }}>
@@ -100,7 +131,7 @@ const Donate = ({ campaignID }) => {
             <Category color="#FFE86D" footer="No perecederos" show={dataGet.categoriaNoPerecederos} />
             <Category color="#FC8181" footer="Enseres" show={dataGet.categoriaEnseres} />
           </View>
-          <ItemInput key={1} count={1} pullData={pullDonation} />
+          <ItemInput key={1} count={1} pullData={pullDonation} delete={() => cancelDonation(1)}/>
           {itemsArray}
           <View style={{ width: "100%", alignItems: "center" }}>
             <TouchableOpacity onPress={newItem}>

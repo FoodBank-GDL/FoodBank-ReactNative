@@ -164,10 +164,30 @@ const CreateCampaign = ({ navigation }) => {
               color="#50BE1C"
               footer="Frutas y verduras"
               data={campData}
+              show={true}
+              isClickable={true}
             />
-            <Category color="#71D1FB" footer="Ropa" data={campData} />
-            <Category color="#FFE86D" footer="No perecederos" data={campData} />
-            <Category color="#FC8181" footer="Enseres" data={campData} />
+            <Category
+              color="#71D1FB"
+              footer="Ropa"
+              data={campData}
+              show={true}
+              isClickable={true}
+            />
+            <Category
+              color="#FFE86D"
+              footer="No perecederos"
+              data={campData}
+              show={true}
+              isClickable={true}
+            />
+            <Category
+              color="#FC8181"
+              footer="Enseres"
+              data={campData}
+              show={true}
+              isClickable={true}
+            />
           </View>
         </View>
         <View style={Styles.field}>
@@ -217,7 +237,10 @@ const CreateCampaign = ({ navigation }) => {
               style={Styles.check}
               fillColor="#FF9900"
               text="Privada"
-              textStyle={{ marginLeft: -6, textDecorationLine: "none" }}
+              textStyle={{
+                marginLeft: -6,
+                textDecorationLine: "none",
+              }}
               innerIconStyle={{ borderColor: "#B0B0B0" }}
               onPress={privateSelection}
             />

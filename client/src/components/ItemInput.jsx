@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import IconFA from "react-native-vector-icons/FontAwesome";
+import IconAD from "react-native-vector-icons/AntDesign";
 
 const ItemInput = (props) => {
   const Styles = StyleSheet.create({
@@ -53,16 +54,16 @@ const ItemInput = (props) => {
     },
   });
 
+  const [focusProduct, setFocusProduct] = useState(false);
+  const [focusCant, setFocusCant] = useState(false);
+  const [focusUnit, setFocusUnit] = useState(false);
+  const [textColor, setTextColor] = useState("#B0B0B0");
+
   const [donationData, setDonationData] = useState({
     cantidad: "",
     medida: "",
     producto: ""
   });
-
-  const [focusProduct, setFocusProduct] = useState(false);
-  const [focusCant, setFocusCant] = useState(false);
-  const [focusUnit, setFocusUnit] = useState(false);
-  const [textColor, setTextColor] = useState("#B0B0B0");
 
   const handleTextChange = (field, val) => {
     if(field == "medida")
@@ -77,7 +78,17 @@ const ItemInput = (props) => {
 
   return (
     <View style={Styles.container}>
-      <Text style={{ fontSize: 18, color: "#FF9900" }}>{"Artículo " + props.count}</Text>
+      <View style={{flexDirection: "row"}}>
+        <Text style={{ fontSize: 18, color: "#FF9900" }}>{"Artículo " + props.count}</Text>
+        <TouchableOpacity onPress={() => props.delete(props.count)}>
+          <IconAD
+              name="close"
+              color="#FF9900"
+              size={22}
+              style={{ marginBottom: 2, left: 230, top: 10 }}
+          />
+        </TouchableOpacity>
+      </View>
       <TextInput
         onChangeText={(val) => handleTextChange("producto", val)}
         value={donationData.producto}

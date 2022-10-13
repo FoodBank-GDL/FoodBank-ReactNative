@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Register, Login, CampaignDetail, Feed } from "./src/screens";
 import Donations from "./src/screens/Donations";
 import CreateCampaign from "./src/screens/CreateCampaign/CreateCampaign";
+import Donate from "./src/screens/Donate/Donate";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -15,6 +16,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Donate" 
+        options={{
+          headerTitle: "Donar",
+          headerStyle: {
+            textAlign: "center"
+          },
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerTitleAlign: 'center'
+        }}
+        >
+          {props => <Donate {...props} />}
+        </Stack.Screen>
         {/* <Stack.Screen name="Feed" options={{ headerShown: false }}>
           {props => <Feed {...props} />}
         </Stack.Screen>
