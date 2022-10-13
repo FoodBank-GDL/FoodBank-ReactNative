@@ -8,9 +8,9 @@ import IconMI from "react-native-vector-icons/MaterialIcons"
 
 import Geocoder from 'react-native-geocoding';
 
-Geocoder.init("AIzaSyDt5vtCyrrAg076KW0WMCwOKItIVeySLI8"); // use a valid API key
+Geocoder.init("AIzaSyDt5vtCyrrAg076KW0WMCwOKItIVeySLI8");
 
-const MapComponent = () => {
+const MapComponent = ({ campaigns }) => {
 
     const [position, setPosition] = useState({
         latitude: 10,
@@ -22,13 +22,41 @@ const MapComponent = () => {
     const [loading, setLoading] = useState(false);
     const [errorMsg, setErrorMsg] = useState(null);
 
+    const [markers, setMarkers] = useState([])
+    const [markersReady, setMarkersReady] = useState(false)
 
-    const [marker, setMarker] = useState()
-    const [markerReady, setMarkerReady] = useState(false)
+    const handleGetCoords = (address, counter) => {
+        Geocoder.from(address)
+            .then(json => {
+                var location = json.results[0].geometry.location;
+
+                let marker = <Marker
+                    key={counter}
+                    coordinate={{
+                        latitude: location.lat,
+                        longitude: location.lng,
+                    }}
+                >
+                </Marker>
+
+                setMarkers((prev) => [...prev, marker])
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }
+
+    const handleAddCampaigns = () => {
+        let counter = 2
+        campaigns.map((campaign) => {
+            handleGetCoords(campaign.ubicacion, counter)
+            counter += 1
+        })
+        setMarkersReady(true)
+    }
 
     useEffect(() => {
         (async () => {
-
             setLoading(true)
 
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -45,26 +73,18 @@ const MapComponent = () => {
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01,
             })
-
             setLoading(false)
         })();
-
-        Geocoder.from("Mi casa")
-            .then(json => {
-                var location = json.results[0].geometry.location;
-                setMarker({
-                    latitude: location.lat,
-                    longitude: location.lng,
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01,
-                })
-                setMarkerReady(true)
-                console.log(location);
-            })
-            .catch(error => console.log(error));
     }, []);
 
-    if (loading || errorMsg || !markerReady) {
+    useEffect(() => {
+        if (campaigns) {
+            handleAddCampaigns()
+        }
+
+    }, [campaigns])
+
+    if (loading || errorMsg || !markersReady) {
         return <Loading />
     }
 
@@ -86,11 +106,7 @@ const MapComponent = () => {
                         color="#1A73E9"
                     />
                 </Marker>
-                <Marker
-                    key={2}
-                    coordinate={marker}
-                >
-                </Marker>
+                {markers}
             </MapView>
         </View>
     );
@@ -104,6 +120,7 @@ const Styles = StyleSheet.create({
     mapStyle: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
+        position: "absolute"
     },
 });
 

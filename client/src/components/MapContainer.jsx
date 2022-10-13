@@ -11,29 +11,29 @@ const MapContainer = (props) => {
     const [error, setError] = useState(null);
     const [data, setData] = useState();
 
-    // const getCampaigns = async () => {
-    //     axios
-    //         .get(`${API_URL}/campaign/homeCards/JhcZP5uKzORJ3x0aKPvNfXO0Qoi1`)
-    //         .then((res) => {
-    //             setLoading(false);
-    //             setData(res.data);
-    //         })
-    //         .catch((err) => {
-    //             setError(err.response.data);
-    //             setLoading(false);
-    //             Alert.alert(err.response.data);
-    //         });
-    // };
+    const getCampaigns = async () => {
+        axios
+            .get(`${API_URL}/campaign/homeCards/JhcZP5uKzORJ3x0aKPvNfXO0Qoi1`)
+            .then((res) => {
+                setLoading(false);
+                setData(res.data);
+            })
+            .catch((err) => {
+                setError(err.response.data);
+                setLoading(false);
+                Alert.alert(err.response.data);
+            });
+    };
 
     useEffect(() => {
-        // getCampaigns();
+        getCampaigns();
     }, []);
 
-    // if (loading || error) {
-    //     return <Loading />;
-    // }
+    if (loading || error) {
+        return <Loading />;
+    }
 
-    return <MapComponent />;
+    return <MapComponent campaigns={data} />;
 };
 
 export default MapContainer;
