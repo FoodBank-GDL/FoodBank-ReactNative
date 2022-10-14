@@ -9,8 +9,8 @@ import NewCampaignButton from "../../components/NewCampaignButton";
 const Feed = (props) => {
   return (
     <View style={Styles.container}>
-      <Header title={"Campaña"} />
-      <CampaignContainer navigation={props.navigation}/>
+      <Header title={"Campañas"} />
+      <CampaignContainer navigation={props.navigation} />
       <NavBar navigation={props.navigation} />
       <NewCampaignButton navigation={props.navigation} />
     </View>

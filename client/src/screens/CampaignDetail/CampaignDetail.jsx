@@ -14,6 +14,8 @@ const CampaignDetail = ({ navigation, ...props }) => {
     finishDate,
     location,
     progress,
+    donativosTotales,
+    metaDonativos,
     description,
     categoriaEnseres,
     categoriaFrutasVerduras,
@@ -54,14 +56,16 @@ const CampaignDetail = ({ navigation, ...props }) => {
           />
         </View>
         <Text style={Styles.title}>{title}</Text>
-        <ProgressBar
-          percentage={`${progress}%`}
-          height={10}
-          backgroundColor={"#D9D9D9"}
-          completedColor={"#8BE794"}
-        />
-        <Text style={Styles.secondary}>576 de 700 donaciones recolectadas</Text>
-        <View style={[Styles.centered, { paddingTop: 12 }]}>
+        <View style={Styles.progressBar}>
+          <ProgressBar
+            percentage={`${progress}%`}
+            height={10}
+            backgroundColor={"#D9D9D9"}
+            completedColor={"#8BE794"}
+          />
+          <Text style={Styles.secondary}>{donativosTotales} de {metaDonativos} donaciones recolectadas</Text>
+        </View>
+        <View style={[Styles.centered, { paddingVertical: 12 }]}>
           <View style={Styles.button}>
             <Button
               text="Donar"
@@ -72,59 +76,64 @@ const CampaignDetail = ({ navigation, ...props }) => {
           </View>
         </View>
 
-        <View style={Styles.bullet_point}>
-          <IconFA5
-            name="user-alt"
-            color="#FF9900"
-            style={Styles.icon}
-            size={iconSize}
-          />
-          <Text style={Styles.info}>{user}</Text>
-        </View>
-        <View style={Styles.bullet_point}>
-          <IconFA5
-            name="envelope"
-            color="#FF9900"
-            style={Styles.icon}
-            size={iconSize}
-          />
-          <Text style={Styles.info}>regina.armenta@gmail.com</Text>
-        </View>
-        <View style={Styles.bullet_point}>
-          <IconFA5
-            name="clock"
-            color="#FF9900"
-            style={Styles.icon}
-            size={iconSize}
-          />
-          <Text style={Styles.info}>
-            {parseDateYYYYMMDD_NoYear(startDate)} -{" "}
-            {parseDateYYYYMMDD_NoYear(finishDate)}
-          </Text>
-        </View>
-        <View style={Styles.bullet_point}>
-          <IconFA5
-            name="map-marker-alt"
-            color="#FF9900"
-            style={Styles.icon}
-            size={iconSize}
-          />
-          <Text style={Styles.info}>{location}</Text>
-        </View>
-        <View style={Styles.bullet_point}>
-          <IconFA5
-            name="globe-americas"
-            color="#FF9900"
-            style={Styles.icon}
-            size={iconSize}
-          />
-          <Text style={Styles.info}>{accessibility || "Pública"}</Text>
-        </View>
-        <View style={{ paddingTop: 16 }}>
-          <Text style={Styles.subtitle}>Descripción</Text>
+        <View style={Styles.detailsContainer}>
+          <View style={Styles.bullet_point}>
+            <IconFA5
+              name="user-alt"
+              color="#FF9900"
+              style={Styles.icon}
+              size={iconSize}
+            />
+            <Text style={Styles.info}>{user}</Text>
+          </View>
+          <View style={Styles.bullet_point}>
+            <IconFA5
+              name="envelope"
+              color="#FF9900"
+              style={Styles.icon}
+              size={iconSize}
+            />
+            <Text style={Styles.info}>regina.armenta@gmail.com</Text>
+          </View>
+          <View style={Styles.bullet_point}>
+            <IconFA5
+              name="clock"
+              color="#FF9900"
+              style={Styles.icon}
+              size={iconSize}
+            />
+            <Text style={Styles.info}>
+              {parseDateYYYYMMDD_NoYear(startDate)} -{" "}
+              {parseDateYYYYMMDD_NoYear(finishDate)}
+            </Text>
+          </View>
+          <View style={Styles.bullet_point}>
+            <IconFA5
+              name="map-marker-alt"
+              color="#FF9900"
+              style={Styles.icon}
+              size={iconSize}
+            />
+            <Text style={Styles.info}>{location}</Text>
+          </View>
+          <View style={Styles.bullet_point}>
+            <IconFA5
+              name="globe-americas"
+              color="#FF9900"
+              style={Styles.icon}
+              size={iconSize}
+            />
+            <Text style={Styles.info}>{accessibility || "Pública"}</Text>
+          </View>
         </View>
 
-        <Text style={Styles.description}>{description}</Text>
+        <View>
+          <View style={{ paddingTop: 16 }}>
+            <Text style={Styles.subtitle}>Descripción</Text>
+          </View>
+
+          <Text style={Styles.description}>{description}</Text>
+        </View>
       </ScrollView>
     </View>
   );

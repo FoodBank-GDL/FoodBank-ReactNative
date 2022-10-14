@@ -10,7 +10,9 @@ export const Styles = StyleSheet.create({
   },
   category_icons: {
     flexDirection: "row",
-
+    width: 100,
+    justifyContent: "space-around",
+    marginBottom: 15
   },
   title: {
     fontWeight: "500",
@@ -49,4 +51,10 @@ export const Styles = StyleSheet.create({
   description: {
     fontSize: 12,
   },
+  progressBar: {
+    marginVertical: 10
+  },
+  detailsContainer: {
+    marginVertical: 10
+  }
 });
