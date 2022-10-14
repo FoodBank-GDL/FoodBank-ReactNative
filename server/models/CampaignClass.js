@@ -198,9 +198,9 @@ class CampaignClass {
     try {
       const campaignDocumentRef=doc(db, "campaigns", campaignId);
       const campaignDocument=await getDoc(campaignDocumentRef);
-      const campaignData=campaignDocument.data()
-      const userData=await userClass.userInfoGet(campaignData);
-      campaignData['user']=userData[0];
+      const campaignData=campaignDocument.data();
+      const userData=await userClass.userInfoGet(campaignData.userId);
+      campaignData['user']=userData;
       return campaignData;
     } catch (error) {
       throw new Error(error);
