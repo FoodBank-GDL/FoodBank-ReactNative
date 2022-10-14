@@ -10,7 +10,6 @@ export const Styles = StyleSheet.create({
   },
   category_icons: {
     flexDirection: "row",
-
   },
   title: {
     fontWeight: "500",
@@ -26,8 +25,11 @@ export const Styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  button: {
+  button_donar: {
     width: "30%",
+  },
+  button_gestionar: {
+    width: "60%",
   },
   bullet_point: {
     flexDirection: "row",

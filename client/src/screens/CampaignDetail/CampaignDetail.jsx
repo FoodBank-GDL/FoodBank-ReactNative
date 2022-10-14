@@ -4,12 +4,15 @@ import ProgressBar from "../../components/ProgressBar";
 import { Styles } from "./Styles";
 import { IconFA5, IconMCI } from "../../../lib/icons";
 import { parseDateYYYYMMDD_NoYear } from "../../../lib/parseDate";
+import { useAuth } from "../../contexts/AuthContext";
 
 const iconSize = 16;
 const CampaignDetail = ({ navigation, ...props }) => {
   const {
     title,
-    user,
+    owner,
+    ownerId,
+    ownerEmail,
     startDate,
     finishDate,
     location,
@@ -22,6 +25,9 @@ const CampaignDetail = ({ navigation, ...props }) => {
     accessibility,
     ...campaignInfo
   } = props.route.params;
+
+  const { userId } = useAuth();
+
   return (
     <View style={Styles.container}>
       <StatusBar />
@@ -62,14 +68,25 @@ const CampaignDetail = ({ navigation, ...props }) => {
         />
         <Text style={Styles.secondary}>576 de 700 donaciones recolectadas</Text>
         <View style={[Styles.centered, { paddingTop: 12 }]}>
-          <View style={Styles.button}>
-            <Button
-              text="Donar"
-              handlePress={() => navigation.navigate("Feed")}
-              height={40}
-              borderRadius={30}
-            />
-          </View>
+          {ownerId === userId ? (
+            <View style={Styles.button_gestionar}>
+              <Button
+                text="Gestionar donaciones"
+                handlePress={() => navigation.navigate("Feed")}
+                height={40}
+                borderRadius={30}
+              />
+            </View>
+          ) : (
+            <View style={Styles.button_donar}>
+              <Button
+                text="Donar"
+                handlePress={() => navigation.navigate("Feed")}
+                height={40}
+                borderRadius={30}
+              />
+            </View>
+          )}
         </View>
 
         <View style={Styles.bullet_point}>
@@ -79,7 +96,7 @@ const CampaignDetail = ({ navigation, ...props }) => {
             style={Styles.icon}
             size={iconSize}
           />
-          <Text style={Styles.info}>{user}</Text>
+          <Text style={Styles.info}>{owner}</Text>
         </View>
         <View style={Styles.bullet_point}>
           <IconFA5
@@ -88,7 +105,7 @@ const CampaignDetail = ({ navigation, ...props }) => {
             style={Styles.icon}
             size={iconSize}
           />
-          <Text style={Styles.info}>regina.armenta@gmail.com</Text>
+          <Text style={Styles.info}>{ownerEmail}</Text>
         </View>
         <View style={Styles.bullet_point}>
           <IconFA5

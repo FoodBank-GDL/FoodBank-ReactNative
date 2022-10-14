@@ -11,7 +11,9 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 const CapmpaignCard = ({
   status,
   title,
-  user,
+  owner,
+  ownerId,
+  ownerEmail,
   location,
   startDate,
   finishDate,
@@ -49,7 +51,9 @@ const CapmpaignCard = ({
         navigation.navigate("CampaignDetail", {
           status,
           title,
-          user,
+          owner,
+          ownerId,
+          ownerEmail,
           location,
           startDate,
           finishDate,
@@ -116,7 +120,7 @@ const CapmpaignCard = ({
           <View style={Styles.content}>
             <IconFA name="user" size={15} style={Styles.icon} />
 
-            <Text style={Styles.contentText}>{user}</Text>
+            <Text style={Styles.contentText}>{owner}</Text>
           </View>
           <View style={Styles.content}>
             <IconE name="location-pin" size={15} style={Styles.icon} />
