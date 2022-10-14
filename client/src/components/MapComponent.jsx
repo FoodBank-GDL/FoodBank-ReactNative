@@ -32,6 +32,7 @@ const MapComponent = ({ campaigns }) => {
 
                 let marker = <Marker
                     key={counter}
+                    pinColor={'#ffc773'}
                     coordinate={{
                         latitude: location.lat,
                         longitude: location.lng,
@@ -96,6 +97,14 @@ const MapComponent = ({ campaigns }) => {
                 initialRegion={position}
                 mapType="standard"
             >
+                <MapView.Circle
+                    key={0}
+                    center={position}
+                    radius={1500}
+                    strokeWidth={1}
+                    strokeColor={'#1a66ff'}
+                    fillColor={'rgba(230,238,255,0.5)'}
+                />
                 <Marker
                     key={1}
                     coordinate={position}
