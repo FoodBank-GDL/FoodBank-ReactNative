@@ -16,11 +16,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
-          {props => <MapScreen {...props} />}
-        </Stack.Screen>
         <Stack.Screen name="Feed" options={{ headerShown: false }}>
-          {props => <Feed {...props} />}
+          {(props) => <Feed {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
+          {(props) => <MapScreen {...props} />}
         </Stack.Screen>
         <Stack.Screen
           name="CreateCampaign"
@@ -38,7 +38,8 @@ export default function App() {
         >
           {(props) => <CreateCampaign {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="Donations"
+        <Stack.Screen
+          name="Donations"
           options={{
             headerTitle: "Donaciones",
             headerStyle: {
