@@ -17,6 +17,8 @@ const CampaignDetail = ({ navigation, ...props }) => {
     finishDate,
     location,
     progress,
+    donativosTotales,
+    metaDonativos,
     description,
     categoriaEnseres,
     categoriaFrutasVerduras,
@@ -141,7 +143,13 @@ const CampaignDetail = ({ navigation, ...props }) => {
           <Text style={Styles.subtitle}>Descripción</Text>
         </View>
 
-        <Text style={Styles.description}>{description}</Text>
+        <View>
+          <View style={{ paddingTop: 16 }}>
+            <Text style={Styles.subtitle}>Descripción</Text>
+          </View>
+
+          <Text style={Styles.description}>{description}</Text>
+        </View>
       </ScrollView>
     </View>
   );

@@ -18,6 +18,8 @@ const CapmpaignCard = ({
   startDate,
   finishDate,
   progress,
+  donativosTotales,
+  metaDonativos,
   categoriaEnseres,
   categoriaFrutasVerduras,
   categoriaNoPerecederos,
@@ -58,6 +60,8 @@ const CapmpaignCard = ({
           startDate,
           finishDate,
           progress,
+          donativosTotales,
+          metaDonativos,
           categoriaEnseres,
           categoriaFrutasVerduras,
           categoriaNoPerecederos,
@@ -73,8 +77,8 @@ const CapmpaignCard = ({
             ? Styles.container
             : status === "Donativo pendiente" ||
               status === "Donativo completado"
-            ? Styles.containerDonativo
-            : Styles.containerLider
+              ? Styles.containerDonativo
+              : Styles.containerLider
         }
       >
         <View style={Styles.header}>
@@ -130,9 +134,8 @@ const CapmpaignCard = ({
           <View style={Styles.content}>
             <IconAnt name="clockcircleo" size={15} style={Styles.icon} />
 
-            <Text style={Styles.contentText}>{`${startDate.split("T")[0]} - ${
-              finishDate.split("T")[0]
-            }`}</Text>
+            <Text style={Styles.contentText}>{`${startDate.split("T")[0]} - ${finishDate.split("T")[0]
+              }`}</Text>
           </View>
         </View>
 
