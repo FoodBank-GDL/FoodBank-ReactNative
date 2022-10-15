@@ -45,7 +45,8 @@ class UserClass {
                         email:body.email,
                         nombre:body.nombre,
                         telefono:body.telefono,
-                        userId:re.userCredentials.user.uid
+                        userId:re.userCredentials.user.uid,
+                        ubicacion:""
                     }).catch((error)=>{
                         return { "message": error.code, "status": "error" };
                     });
