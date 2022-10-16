@@ -1,5 +1,5 @@
-import { FlatList, StyleSheet, View, Dimensions } from "react-native";
-import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+import { FlatList, StyleSheet, View, Dimensions, Text } from "react-native";
+import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 import Loading from "./Loading/Loading";
@@ -8,6 +8,7 @@ import IconMI from "react-native-vector-icons/MaterialIcons";
 
 import { MAPS_KEY } from "@env";
 import Geocoder from "react-native-geocoding";
+import MapCampaignDetails from "./MapCampaignDetails";
 Geocoder.init(MAPS_KEY);
 
 const MapComponent = ({ campaigns }) => {
@@ -37,7 +38,17 @@ const MapComponent = ({ campaigns }) => {
               latitude: location.lat,
               longitude: location.lng,
             }}
-          ></Marker>
+          >
+            <Callout>
+              <MapCampaignDetails
+                title={"ITESM Invierno 2022"}
+                leader={"Regina Armenta"}
+                startDate={"24 de agosto"}
+                finishDate={"25 de septiembre"}
+              />
+            </Callout>
+
+          </Marker>
         );
 
         setMarkers((prev) => [...prev, marker]);
@@ -101,6 +112,7 @@ const MapComponent = ({ campaigns }) => {
           center={position}
           radius={1500}
           strokeWidth={1}
+          zIndex={1}
           strokeColor={"#1a66ff"}
           fillColor={"rgba(230,238,255,0.5)"}
         />
