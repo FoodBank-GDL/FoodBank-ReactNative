@@ -11,7 +11,7 @@ const Profile = () => {
   return (
     <View>
       <StatusBar />
-      <Button text={"Cerrar sesión"} handlePress={() => logout()} />
+      <Button text={"Cerrar sesión"} handlePress={() => handleLogOut()} />
     </View>
   );
 };
