@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, View, Dimensions, Text, Vibration } from "react-native";
-import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker, Callout, Circle } from "react-native-maps";
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
 import Loading from "./Loading/Loading";
@@ -52,7 +52,7 @@ const MapComponent = ({ campaigns, navigation }) => {
         let marker = (
           <Marker
             key={counter}
-            pinColor={"#ffc773"}
+            pinColor={"orange"}
             coordinate={{
               latitude: loc.lat,
               longitude: loc.lng,
@@ -132,8 +132,8 @@ const MapComponent = ({ campaigns, navigation }) => {
       setPosition({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
+        latitudeDelta: 0.05,
+        longitudeDelta: 0.05,
       });
       setLoading(false);
     })();
@@ -157,17 +157,20 @@ const MapComponent = ({ campaigns, navigation }) => {
         initialRegion={position}
         mapType="standard"
       >
-        <MapView.Circle
+        <Circle
+          fillColor={"rgba(230,238,255,0.5)"}
+          strokeColor={"blue"}
+          strokeWidth={2}
           key={0}
           center={position}
           radius={1500}
-          strokeWidth={1}
           zIndex={1}
-          strokeColor={"#1a66ff"}
-          fillColor={"rgba(230,238,255,0.5)"}
         />
         <Marker key={1} coordinate={position}>
           <IconMI name="my-location" size={30} color="#1A73E9" />
+          <Callout>
+            <Text style={{ width: 100, textAlign: "center" }}>Tu ubicación</Text>
+          </Callout>
         </Marker>
         {markers}
       </MapView>
