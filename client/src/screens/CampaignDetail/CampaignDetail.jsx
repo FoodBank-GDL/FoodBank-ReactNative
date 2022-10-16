@@ -25,9 +25,9 @@ const CampaignDetail = ({ navigation, ...props }) => {
     categoriaNoPerecederos,
     categoriaRopa,
     accessibility,
+    campaignId,
     ...campaignInfo
   } = props.route.params;
-
   const { userId } = useAuth();
 
   return (
@@ -74,7 +74,9 @@ const CampaignDetail = ({ navigation, ...props }) => {
             <View style={Styles.button_gestionar}>
               <Button
                 text="Gestionar donaciones"
-                handlePress={() => navigation.navigate("Feed")}
+                handlePress={() =>
+                  navigation.navigate("Donations", { campaignId })
+                }
                 height={40}
                 borderRadius={30}
               />
@@ -138,9 +140,6 @@ const CampaignDetail = ({ navigation, ...props }) => {
             size={iconSize}
           />
           <Text style={Styles.info}>{accessibility || "Pública"}</Text>
-        </View>
-        <View style={{ paddingTop: 16 }}>
-          <Text style={Styles.subtitle}>Descripción</Text>
         </View>
 
         <View>

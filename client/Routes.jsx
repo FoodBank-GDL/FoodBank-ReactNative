@@ -2,9 +2,16 @@ import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Register, Login, CampaignDetail, Feed } from "./src/screens";
-import Donations from "./src/screens/Donations";
-import Profile from "./src/screens/Profile";
+import {
+  Register,
+  Login,
+  CampaignDetail,
+  Feed,
+  Donations,
+  CreateCampaign,
+  MapScreen,
+  Profile,
+} from "./src/screens";
 
 import { useAuth } from "./src/contexts/AuthContext";
 
@@ -61,7 +68,7 @@ const Routes = () => {
           {(props) => <Donations {...props} />}
         </Stack.Screen>
         <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
-          {(props) => <Login {...props} />}
+          {(props) => <MapScreen {...props} />}
         </Stack.Screen>
         <Stack.Screen name="Profile" options={{ headerShown: false }}>
           {(props) => <Profile {...props} />}

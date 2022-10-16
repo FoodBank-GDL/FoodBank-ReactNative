@@ -23,6 +23,7 @@ const CampaignsComponent = ({ campaigns, ...props }) => {
       description={item.descripcion}
       accessibility={item.accesibilidad}
       navigation={props.navigation}
+      campaignId={item.campaignId}
     />
   );
 
