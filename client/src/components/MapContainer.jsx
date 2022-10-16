@@ -33,7 +33,7 @@ const MapContainer = (props) => {
         return <Loading />;
     }
 
-    return <MapComponent campaigns={data} />;
+    return <MapComponent campaigns={data} navigation={props.navigation} />;
 };
 
 export default MapContainer;
