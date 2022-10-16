@@ -9,6 +9,8 @@ import {
 import IconFA from "react-native-vector-icons/FontAwesome"
 import IconI from "react-native-vector-icons/Ionicons"
 
+import { parseDateYYYYMMDD_NoYear } from "../../lib/parseDate";
+
 const MapCampaignDetails = ({ title, leader, startDate, finishDate }) => {
 
     return (
@@ -18,21 +20,26 @@ const MapCampaignDetails = ({ title, leader, startDate, finishDate }) => {
 
             <View style={Styles.detailsContainer}>
                 <View style={Styles.detailsRow}>
-                    <IconFA
-                        name="user"
-                        size={17}
-                        color="orange"
-                    />
+                    <View style={{ width: 20 }}>
+                        <IconFA
+                            name="user"
+                            size={17}
+                            color="orange"
+                        />
+                    </View>
                     <Text style={Styles.detailsText}>{leader}</Text>
                 </View>
 
                 <View style={Styles.detailsRow}>
-                    <IconI
-                        name="time-outline"
-                        size={16}
-                        color="orange"
-                    />
-                    <Text style={Styles.detailsText}>{startDate} - {finishDate}</Text>
+                    <View style={{ width: 20 }}>
+
+                        <IconI
+                            name="time-outline"
+                            size={16}
+                            color="orange"
+                        />
+                    </View>
+                    <Text style={Styles.detailsText}>{parseDateYYYYMMDD_NoYear(startDate)} - {parseDateYYYYMMDD_NoYear(finishDate)}</Text>
                 </View>
             </View>
 
@@ -49,11 +56,6 @@ const MapCampaignDetails = ({ title, leader, startDate, finishDate }) => {
 
 const Styles = StyleSheet.create({
     container: {
-        // position: "absolute",
-        // top: 50,
-        // left: 50,
-        // borderWidth: 1,
-        // borderColor: "black",
         backgroundColor: "#F8F8F8",
         width: 230,
         height: 150,
@@ -79,7 +81,6 @@ const Styles = StyleSheet.create({
         marginBottom: 7
     },
     detailsText: {
-        marginLeft: 10,
         fontSize: 11,
     },
     detailsButton: {

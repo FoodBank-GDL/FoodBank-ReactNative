@@ -12,12 +12,6 @@ const Feed = (props) => {
     <View style={Styles.container}>
       <Header title={"Campañas"} />
       <CampaignContainer navigation={props.navigation} />
-      {/* <MapCampaignDetails
-        title={"ITESM Invierno 2022"}
-        leader={"Regina Armenta"}
-        startDate={"24 de agosto"}
-        finishDate={"25 de septiembre"}
-      /> */}
       <NavBar navigation={props.navigation} />
       <NewCampaignButton navigation={props.navigation} />
     </View>

@@ -25,7 +25,7 @@ const MapComponent = ({ campaigns }) => {
   const [markers, setMarkers] = useState([]);
   const [markersReady, setMarkersReady] = useState(false);
 
-  const handleGetCoords = (address, counter) => {
+  const handleGetCoords = (address, counter, campaign) => {
     Geocoder.from(address)
       .then((json) => {
         var location = json.results[0].geometry.location;
@@ -39,12 +39,12 @@ const MapComponent = ({ campaigns }) => {
               longitude: location.lng,
             }}
           >
-            <Callout>
+            <Callout tooltip={true}>
               <MapCampaignDetails
-                title={"ITESM Invierno 2022"}
-                leader={"Regina Armenta"}
-                startDate={"24 de agosto"}
-                finishDate={"25 de septiembre"}
+                title={campaign.titulo}
+                leader={campaign.user.nombre}
+                startDate={campaign.fechaInicio}
+                finishDate={campaign.fechaExpiracion}
               />
             </Callout>
 
@@ -61,7 +61,7 @@ const MapComponent = ({ campaigns }) => {
   const handleAddCampaigns = () => {
     let counter = 2;
     campaigns.map((campaign) => {
-      handleGetCoords(campaign.ubicacion, counter);
+      handleGetCoords(campaign.ubicacion, counter, campaign);
       counter += 1;
     });
     setMarkersReady(true);
