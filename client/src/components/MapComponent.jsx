@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View, Dimensions, Text } from "react-native";
+import { FlatList, StyleSheet, View, Dimensions, Text, Vibration } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
 import { useState, useEffect } from "react";
 import * as Location from "expo-location";
@@ -9,9 +9,11 @@ import IconMI from "react-native-vector-icons/MaterialIcons";
 import { MAPS_KEY } from "@env";
 import Geocoder from "react-native-geocoding";
 import MapCampaignDetails from "./MapCampaignDetails";
+
 Geocoder.init(MAPS_KEY);
 
-const MapComponent = ({ campaigns }) => {
+const MapComponent = ({ campaigns, navigation }) => {
+
   const [position, setPosition] = useState({
     latitude: 10,
     longitude: 10,
@@ -26,25 +28,73 @@ const MapComponent = ({ campaigns }) => {
   const [markersReady, setMarkersReady] = useState(false);
 
   const handleGetCoords = (address, counter, campaign) => {
+
+    let status = campaign.status
+    let title = campaign.titulo
+    let user = campaign.user.nombre
+    let location = campaign.ubicacion
+    let startDate = campaign.fechaInicio
+    let finishDate = campaign.fechaExpiracion
+    let progress = (campaign.donativosTotales * 100) / campaign.metaDonativos
+    let donativosTotales = campaign.donativosTotales
+    let metaDonativos = campaign.metaDonativos
+    let categoriaEnseres = campaign.categoriaEnseres
+    let categoriaFrutasVerduras = campaign.categoriaFrutasVerduras
+    let categoriaNoPerecederos = campaign.categoriaNoPerecederos
+    let categoriaRopa = campaign.categoriaRopa
+    let accessibility = campaign.accesibilidad
+    let description = campaign.descripcion
+
     Geocoder.from(address)
       .then((json) => {
-        var location = json.results[0].geometry.location;
+        var loc = json.results[0].geometry.location;
 
         let marker = (
           <Marker
             key={counter}
             pinColor={"#ffc773"}
             coordinate={{
-              latitude: location.lat,
-              longitude: location.lng,
+              latitude: loc.lat,
+              longitude: loc.lng,
             }}
           >
-            <Callout tooltip={true}>
+            <Callout tooltip={true} onPress={() => {
+              navigation.navigate("CampaignDetail", {
+                status,
+                title,
+                user,
+                location,
+                startDate,
+                finishDate,
+                progress,
+                donativosTotales,
+                metaDonativos,
+                categoriaEnseres,
+                categoriaFrutasVerduras,
+                categoriaNoPerecederos,
+                categoriaRopa,
+                accessibility,
+                description,
+              })
+            }
+            }>
               <MapCampaignDetails
                 title={campaign.titulo}
-                leader={campaign.user.nombre}
+                user={campaign.user.nombre}
                 startDate={campaign.fechaInicio}
                 finishDate={campaign.fechaExpiracion}
+                status={campaign.status}
+                location={campaign.ubicacion}
+                progress={(campaign.donativosTotales * 100) / campaign.metaDonativos}
+                donativosTotales={campaign.donativosTotales}
+                metaDonativos={campaign.metaDonativos}
+                categoriaEnseres={campaign.categoriaEnseres}
+                categoriaFrutasVerduras={campaign.categoriaFrutasVerduras}
+                categoriaNoPerecederos={campaign.categoriaNoPerecederos}
+                categoriaRopa={campaign.categoriaRopa}
+                accessibility={campaign.accesibilidad}
+                description={campaign.descripcion}
+                navigation={navigation}
               />
             </Callout>
 

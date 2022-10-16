@@ -11,7 +11,22 @@ import IconI from "react-native-vector-icons/Ionicons"
 
 import { parseDateYYYYMMDD_NoYear } from "../../lib/parseDate";
 
-const MapCampaignDetails = ({ title, leader, startDate, finishDate }) => {
+const MapCampaignDetails = ({ status,
+    title,
+    user,
+    location,
+    startDate,
+    finishDate,
+    progress,
+    donativosTotales,
+    metaDonativos,
+    categoriaEnseres,
+    categoriaFrutasVerduras,
+    categoriaNoPerecederos,
+    categoriaRopa,
+    accessibility,
+    description,
+    navigation }) => {
 
     return (
         <View style={Styles.container}>
@@ -27,7 +42,7 @@ const MapCampaignDetails = ({ title, leader, startDate, finishDate }) => {
                             color="orange"
                         />
                     </View>
-                    <Text style={Styles.detailsText}>{leader}</Text>
+                    <Text style={Styles.detailsText}>{user}</Text>
                 </View>
 
                 <View style={Styles.detailsRow}>

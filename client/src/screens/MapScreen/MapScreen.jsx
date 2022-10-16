@@ -9,7 +9,7 @@ const MapScreen = (props) => {
     return (
         <View style={Styles.container}>
             <Header title={"Mapa"} />
-            <MapContainer />
+            <MapContainer navigation={props.navigation} />
             <NavBar navigation={props.navigation} />
         </View>
     );
