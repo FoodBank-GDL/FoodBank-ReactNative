@@ -7,6 +7,8 @@ import CreateCampaign from "./src/screens/CreateCampaign/CreateCampaign";
 import MapScreen from "./src/screens/MapScreen";
 import ProfileDetails from "./src/screens/ProfileDetails";
 
+import Profile from "./src/screens/Profile/Profile";
+
 const Stack = createNativeStackNavigator();
 export default function App() {
   //Push notifs
@@ -17,9 +19,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="ProfileDetails" options={{ headerShown: false }}>
-          {props => <ProfileDetails {...props} />}
-      </Stack.Screen>
+        <Stack.Screen name="Profile" options={{ headerShown: false }}>
+          {(props) => <Profile {...props} />}
+        </Stack.Screen>
         <Stack.Screen name="Feed" options={{ headerShown: false }}>
           {(props) => <Feed {...props} />}
         </Stack.Screen>
@@ -60,9 +62,6 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name="Login" options={{ headerShown: false }}>
           {(props) => <Login {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Profile" options={{ headerShown: false }}>
-          {(props) => <Register {...props} />}
         </Stack.Screen>
         <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
           {(props) => <CampaignDetail {...props} />}

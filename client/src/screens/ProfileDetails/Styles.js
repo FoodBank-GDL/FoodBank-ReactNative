@@ -75,13 +75,13 @@ export const Styles = StyleSheet.create({
     borderBottomWidth: 2.5,
     marginTop: 18,
     marginBottom: 16,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2.22,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
   iconRight: {
     position: "absolute",
