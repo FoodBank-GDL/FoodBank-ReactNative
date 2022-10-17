@@ -13,7 +13,9 @@ import { parseDateYYYYMMDD_NoYear } from "../../../lib/parseDate";
 const CapmpaignCard = ({
   status,
   title,
-  user,
+  owner,
+  ownerId,
+  ownerEmail,
   location,
   startDate,
   finishDate,
@@ -27,6 +29,7 @@ const CapmpaignCard = ({
   navigation,
   accessibility,
   description,
+  campaignId,
   ...props
 }) => {
   const renderIcon = () => {
@@ -53,7 +56,9 @@ const CapmpaignCard = ({
         navigation.navigate("CampaignDetail", {
           status,
           title,
-          user,
+          owner,
+          ownerId,
+          ownerEmail,
           location,
           startDate,
           finishDate,
@@ -66,6 +71,8 @@ const CapmpaignCard = ({
           categoriaRopa,
           accessibility,
           description,
+          campaignId,
+          props,
         })
       }
     >
@@ -122,7 +129,7 @@ const CapmpaignCard = ({
           <View style={Styles.content}>
             <IconFA name="user" size={15} style={Styles.icon} />
 
-            <Text style={Styles.contentText}>{user}</Text>
+            <Text style={Styles.contentText}>{owner}</Text>
           </View>
           <View style={Styles.content}>
             <IconE name="location-pin" size={15} style={Styles.icon} />

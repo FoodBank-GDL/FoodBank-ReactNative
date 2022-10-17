@@ -1,19 +1,25 @@
-import { FlatList, StyleSheet, View, Text, Alert } from "react-native";
+import { Alert } from "react-native";
 import { useEffect, useState } from "react";
 import CampaignsComponent from "../CampaignsComponent/CampaignsComponent";
 
 import axios from "axios";
 import { API_URL } from "../../../lib/constants";
 import Loading from "../Loading/Loading";
+import { useAuth } from "../../contexts/AuthContext";
 
 const CampaignContainer = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState();
 
+  const { userId } = useAuth();
+
   const getCampaigns = async () => {
+    if (userId === "") {
+      return;
+    }
     axios
-      .get(`${API_URL}/campaign/homeCards/JhcZP5uKzORJ3x0aKPvNfXO0Qoi1`)
+      .get(`${API_URL}/campaign/homeCards/${userId}`)
       .then((res) => {
         setLoading(false);
         setData(res.data);
@@ -27,7 +33,7 @@ const CampaignContainer = (props) => {
 
   useEffect(() => {
     getCampaigns();
-  }, []);
+  }, [userId]);
 
   if (loading || error) {
     return <Loading />;

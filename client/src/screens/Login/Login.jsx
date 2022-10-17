@@ -5,16 +5,14 @@ import {
   Alert,
   Image,
   Keyboard,
+  Platform,
   ScrollView,
   Text,
   View,
 } from "react-native";
+import { useAuth } from "../../contexts/AuthContext";
 import { API_URL } from "../../../lib/constants";
-import Button from "../../components/Button";
-import Divider from "../../components/Divider";
-import Input from "../../components/Input";
-
-import StatusBar from "../../components/StatusBar";
+import { Button, Divider, Input, StatusBar } from "../../components";
 import { Styles } from "./Styles";
 
 const Login = ({ navigation }) => {
@@ -25,6 +23,8 @@ const Login = ({ navigation }) => {
   const [keyboardShown, setKeyboardShown] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { storeCredentials, idToken, userId } = useAuth();
 
   useEffect(() => {
     const keyboardShown = Keyboard.addListener("keyboardDidShow", () => {
@@ -63,15 +63,25 @@ const Login = ({ navigation }) => {
       })
       .then((res) => {
         setLoading(false);
-        //TODO: NAVIGATE
-        console.log(res);
+        storeCredentials(
+          res.data.credentials._tokenResponse.idToken,
+          res.data.credentials.user.uid
+        );
+
+        //No need to navigate, is handled by Routes.jsx
       })
-      .catch((err) =>
+      .catch((err) => {
+        setLoading(false);
+        if (Platform.OS === "web") {
+          alert(
+            "Ocurrió un error al intentar iniciar sesión: " + err.response.data
+          );
+        }
         Alert.alert(
           "Ocurrió un error al intentar iniciar sesión",
           err.response.data
-        )
-      );
+        );
+      });
   };
 
   return (
@@ -82,7 +92,7 @@ const Login = ({ navigation }) => {
           <Image
             style={Styles.image_logo}
             source={{
-              uri: "https://github.com/FoodBank-GDL/FoodBank-ReactNative/blob/client-register/client/assets/FoodBank_Big.png?raw=true",
+              uri: "https://raw.githubusercontent.com/FoodBank-GDL/FoodBank-ReactNative/main/client/assets/FoodBank_Big.png",
             }}
           />
         </View>
@@ -94,6 +104,7 @@ const Login = ({ navigation }) => {
             placeholder="usuario@correo.com"
             handleTextChange={(val) => handleTextChange("email", val)}
             value={credentials.email}
+            keyboardType="email-address"
           />
           <Input
             placeholder="Contraseña"

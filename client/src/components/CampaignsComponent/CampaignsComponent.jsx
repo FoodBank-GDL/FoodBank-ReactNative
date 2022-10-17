@@ -7,7 +7,9 @@ const CampaignsComponent = ({ campaigns, ...props }) => {
     <CapmpaignCard
       status={item.status}
       title={item.titulo}
-      user={item.user ? item.user.nombre : "Tu"}
+      owner={item.user ? item.user.nombre : "Tu"}
+      ownerId={item.userId}
+      ownerEmail={item.user.email}
       location={item.ubicacion}
       startDate={item.fechaInicio}
       finishDate={item.fechaExpiracion}
@@ -21,6 +23,7 @@ const CampaignsComponent = ({ campaigns, ...props }) => {
       description={item.descripcion}
       accessibility={item.accesibilidad}
       navigation={props.navigation}
+      campaignId={item.campaignId}
     />
   );
 

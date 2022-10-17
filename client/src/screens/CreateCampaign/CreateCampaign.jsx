@@ -93,7 +93,6 @@ const CreateCampaign = ({ navigation }) => {
     else campData.fechaExpiracion = dateEnd.dia + " " + dateEnd.mes + " 2022";
 
     setLoading(true);
-    console.log(campData);
 
     await axios
       .post(`${API_URL}/campaign/create`, {

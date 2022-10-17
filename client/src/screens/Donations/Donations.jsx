@@ -1,14 +1,9 @@
-import {
-    View,
-    Text
-} from "react-native";
+import { View, Text } from "react-native";
 import DonationsContainer from "../../components/DonationsContainer";
 
-const Donations = ({ }) => {
-
-    return (
-        <DonationsContainer campaignId={"NcbSs5ml72TqTpg26Kzc"} />
-    );
+const Donations = ({ route }) => {
+  const campaignId = route.params;
+  return <DonationsContainer campaignId={campaignId} />;
 };
 
 export default Donations;

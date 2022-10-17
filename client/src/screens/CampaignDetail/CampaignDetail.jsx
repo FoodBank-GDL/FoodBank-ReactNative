@@ -4,12 +4,15 @@ import ProgressBar from "../../components/ProgressBar";
 import { Styles } from "./Styles";
 import { IconFA5, IconMCI } from "../../../lib/icons";
 import { parseDateYYYYMMDD_NoYear } from "../../../lib/parseDate";
+import { useAuth } from "../../contexts/AuthContext";
 
 const iconSize = 16;
 const CampaignDetail = ({ navigation, ...props }) => {
   const {
     title,
-    user,
+    owner,
+    ownerId,
+    ownerEmail,
     startDate,
     finishDate,
     location,
@@ -22,8 +25,11 @@ const CampaignDetail = ({ navigation, ...props }) => {
     categoriaNoPerecederos,
     categoriaRopa,
     accessibility,
+    campaignId,
     ...campaignInfo
   } = props.route.params;
+  const { userId } = useAuth();
+
   return (
     <View style={Styles.container}>
       <StatusBar />
@@ -56,75 +62,84 @@ const CampaignDetail = ({ navigation, ...props }) => {
           />
         </View>
         <Text style={Styles.title}>{title}</Text>
-        <View style={Styles.progressBar}>
-          <ProgressBar
-            percentage={`${progress}%`}
-            height={10}
-            backgroundColor={"#D9D9D9"}
-            completedColor={"#8BE794"}
-          />
-          <Text style={Styles.secondary}>{donativosTotales} de {metaDonativos} donaciones recolectadas</Text>
-        </View>
-        <View style={[Styles.centered, { paddingVertical: 12 }]}>
-          <View style={Styles.button}>
-            <Button
-              text="Donar"
-              handlePress={() => navigation.navigate("Feed")}
-              height={40}
-              borderRadius={30}
-            />
-          </View>
+        <ProgressBar
+          percentage={`${progress}%`}
+          height={10}
+          backgroundColor={"#D9D9D9"}
+          completedColor={"#8BE794"}
+        />
+        <Text style={Styles.secondary}>576 de 700 donaciones recolectadas</Text>
+        <View style={[Styles.centered, { paddingTop: 12 }]}>
+          {ownerId === userId ? (
+            <View style={Styles.button_gestionar}>
+              <Button
+                text="Gestionar donaciones"
+                handlePress={() =>
+                  navigation.navigate("Donations", { campaignId })
+                }
+                height={40}
+                borderRadius={30}
+              />
+            </View>
+          ) : (
+            <View style={Styles.button_donar}>
+              <Button
+                text="Donar"
+                handlePress={() => navigation.navigate("Feed")}
+                height={40}
+                borderRadius={30}
+              />
+            </View>
+          )}
         </View>
 
-        <View style={Styles.detailsContainer}>
-          <View style={Styles.bullet_point}>
-            <IconFA5
-              name="user-alt"
-              color="#FF9900"
-              style={Styles.icon}
-              size={iconSize}
-            />
-            <Text style={Styles.info}>{user}</Text>
-          </View>
-          <View style={Styles.bullet_point}>
-            <IconFA5
-              name="envelope"
-              color="#FF9900"
-              style={Styles.icon}
-              size={iconSize}
-            />
-            <Text style={Styles.info}>regina.armenta@gmail.com</Text>
-          </View>
-          <View style={Styles.bullet_point}>
-            <IconFA5
-              name="clock"
-              color="#FF9900"
-              style={Styles.icon}
-              size={iconSize}
-            />
-            <Text style={Styles.info}>
-              {parseDateYYYYMMDD_NoYear(startDate)} -{" "}
-              {parseDateYYYYMMDD_NoYear(finishDate)}
-            </Text>
-          </View>
-          <View style={Styles.bullet_point}>
-            <IconFA5
-              name="map-marker-alt"
-              color="#FF9900"
-              style={Styles.icon}
-              size={iconSize}
-            />
-            <Text style={Styles.info}>{location}</Text>
-          </View>
-          <View style={Styles.bullet_point}>
-            <IconFA5
-              name="globe-americas"
-              color="#FF9900"
-              style={Styles.icon}
-              size={iconSize}
-            />
-            <Text style={Styles.info}>{accessibility || "Pública"}</Text>
-          </View>
+        <View style={Styles.bullet_point}>
+          <IconFA5
+            name="user-alt"
+            color="#FF9900"
+            style={Styles.icon}
+            size={iconSize}
+          />
+          <Text style={Styles.info}>{owner}</Text>
+        </View>
+        <View style={Styles.bullet_point}>
+          <IconFA5
+            name="envelope"
+            color="#FF9900"
+            style={Styles.icon}
+            size={iconSize}
+          />
+          <Text style={Styles.info}>{ownerEmail}</Text>
+        </View>
+        <View style={Styles.bullet_point}>
+          <IconFA5
+            name="clock"
+            color="#FF9900"
+            style={Styles.icon}
+            size={iconSize}
+          />
+          <Text style={Styles.info}>
+            {parseDateYYYYMMDD_NoYear(startDate)} -{" "}
+            {parseDateYYYYMMDD_NoYear(finishDate)}
+          </Text>
+        </View>
+        <View style={Styles.bullet_point}>
+          <IconFA5
+            name="map-marker-alt"
+            color="#FF9900"
+            style={Styles.icon}
+            size={iconSize}
+          />
+          <Text style={Styles.info}>{location}</Text>
+        </View>
+        <View style={Styles.bullet_point}>
+          <IconFA5
+            name="globe-americas"
+            color="#FF9900"
+            style={Styles.icon}
+            size={iconSize}
+          />
+          <Text style={Styles.info}>{accessibility || "Pública"}</Text>
         </View>
 
         <View>
