@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import {
   Register,
@@ -27,6 +28,8 @@ const Routes = () => {
       setIsLoggedIn(false);
     }
   }, [idToken, userId]);
+
+  const Tab = createBottomTabNavigator();
   const Stack = createNativeStackNavigator();
 
   const PublicStack = () => (
@@ -80,7 +83,23 @@ const Routes = () => {
     </NavigationContainer>
   );
 
-  return isLoggedIn === true ? <PrivateStack /> : <PublicStack />;
+  const PublicTab = () => (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Feed" options={{ headerShown: false }} >
+          {(props) => <Feed {...props} />}
+        </Tab.Screen>
+        <Tab.Screen name="MapScreen" options={{ headerShown: false }} >
+          {(props) => <MapScreen {...props} />}
+        </Tab.Screen>
+        <Tab.Screen name="Profile" options={{ headerShown: false }} >
+          {(props) => <Profile {...props} />}
+        </Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
+
+  return isLoggedIn === true ? <PrivateStack /> : <PublicTab />;
 };
 
 export default Routes;
