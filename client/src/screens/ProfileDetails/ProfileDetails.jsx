@@ -148,7 +148,6 @@ const ProfileDetails = (props) => {
   if (loading || error) {
     return <Loading />;
   } else {
-    // TODO change making two different variables (phoneDisplay, phoneInput) and changing the variable not re defining it
 
     const phoneDisplay = (
       <View style={Styles.mailContainer}>

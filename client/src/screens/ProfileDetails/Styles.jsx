@@ -25,7 +25,7 @@ export const Styles = StyleSheet.create({
     fontSize: 17,
     height: 54,
     flexDirection: "row",
-    justifyContent: "right",
+    justifyContent: "flex-end",
     alignItems: "center",
     marginBottom: 23,
   },
