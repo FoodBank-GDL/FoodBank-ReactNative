@@ -12,10 +12,12 @@ export const Styles = StyleSheet.create({
     flex: 1,
     padding: 40,
     paddingTop: 0,
+    paddingBottom: 60
   },
   name: {
     fontSize: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginTop: -12
   },
   mailContainer: {
     flex: 1,
@@ -25,13 +27,13 @@ export const Styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "right",
     alignItems: "center",
-    marginBottom: 20,
+    marginBottom: 23,
   },
   inputContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 25,
+    marginBottom: 29,
   },
   input: {
     flex: 1,
@@ -58,7 +60,7 @@ export const Styles = StyleSheet.create({
     marginBottom: 24,
   },
   verticalLine: {
-    height: "55%",
+    height: 30,
     width: 1.5,
     backgroundColor: "#B0B0B0",
     position: "absolute",
@@ -71,8 +73,8 @@ export const Styles = StyleSheet.create({
     width: "100%",
     borderBottomColor: "#FF9900",
     borderBottomWidth: 2.5,
-    marginTop: 15,
-    marginBottom: 30,
+    marginTop: 18,
+    marginBottom: 16,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

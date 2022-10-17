@@ -6,7 +6,7 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import { Styles } from "./Styles";
 import axios from "axios";
@@ -16,8 +16,9 @@ import { IconFA, IconI, IconMCI, IconMI } from "../../../lib/icons";
 import { Button } from "../../components";
 import { API_URL } from "../../../lib/constants";
 import Loading from "../../components/Loading/Loading";
+import NavBar from "../../components/NavBar";
 
-const userId = "JhcZP5uKzORJ3x0aKPvNfXO0Qoi1"
+const userId = "JhcZP5uKzORJ3x0aKPvNfXO0Qoi1";
 
 const ProfileDetails = (props) => {
   const [data, setData] = useState({
@@ -28,8 +29,7 @@ const ProfileDetails = (props) => {
   const [getData, setGetData] = useState();
   const [focusTel, setFocusTel] = useState(false);
   const [focusLoc, setFocusLoc] = useState(false);
-  const [editTel, setEditTel] = useState(false);
-  const [editLoc, setEditLoc] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const [loading, setLoading] = useState(true);
@@ -41,7 +41,6 @@ const ProfileDetails = (props) => {
     axios
       .get(`${API_URL}/user/info/${userId}`)
       .then((res) => {
-        console.log("si")
         setGetData(res.data);
         setLoading(false);
       })
@@ -75,7 +74,6 @@ const ProfileDetails = (props) => {
   // }, [data]);
 
   const saveChanges = () => {
-
     setLoading(true);
     setLoading(false);
 
@@ -111,55 +109,48 @@ const ProfileDetails = (props) => {
     //   });
   };
 
-  if (editLoc || editTel) {     // TODO Una sola variable
-    location = (
-      <View style={Styles.inputContainer}>
-        <IconMI
-          name="location-on"
-          size={32}
-          color={"#FF9900"}
-          style={Styles.iconLeft}
-        />
-        <View style={Styles.verticalLine}></View>
-        <TextInput
-          onChangeText={(val) => handleTextChange("ubicacion", val)}
-          value={data.ubicacion}
-          placeholder="Escribe aquí"
-          onFocus={() => setFocusLoc(true)}
-          onBlur={() => setFocusLoc(false)}
-          style={focusLoc ? Styles.inputFocused : Styles.input}
-        />
-      </View>
-    );
-  }
+  const locationInput = (
+    <View style={Styles.inputContainer}>
+      <IconMI
+        name="location-on"
+        size={32}
+        color={"#FF9900"}
+        style={Styles.iconLeft}
+      />
+      <View style={Styles.verticalLine}></View>
+      <TextInput
+        onChangeText={(val) => handleTextChange("ubicacion", val)}
+        value={data.ubicacion}
+        placeholder="Escribe aquí"
+        placeholderTextColor={"#000"}
+        onFocus={() => setFocusLoc(true)}
+        onBlur={() => setFocusLoc(false)}
+        style={focusLoc ? Styles.inputFocused : Styles.input}
+      />
+    </View>
+  );
 
-  if (editTel || editLoc) {     // TODO Una sola variablke
-    phone = (
-      <View style={Styles.inputContainer}>
-        <IconFA name="phone" size={30} color={"#FF9900"} style={Styles.phone} />
-        <View style={Styles.verticalLine}></View>
-        <TextInput
-          onChangeText={(val) => handleTextChange("telefono", val)}
-          value={data.telefono}
-          placeholder="Escribe aquí"
-          onFocus={() => setFocusTel(true)}
-          onBlur={() => setFocusTel(false)}
-          style={focusTel ? Styles.inputFocused : Styles.input}
-        />
-      </View>
-    );
-  }
+  const phoneInput = (
+    <View style={Styles.inputContainer}>
+      <IconFA name="phone" size={30} color={"#FF9900"} style={Styles.phone} />
+      <View style={Styles.verticalLine}></View>
+      <TextInput
+        onChangeText={(val) => handleTextChange("telefono", val)}
+        value={data.telefono}
+        placeholder="Escribe aquí"
+        onFocus={() => setFocusTel(true)}
+        onBlur={() => setFocusTel(false)}
+        style={focusTel ? Styles.inputFocused : Styles.input}
+      />
+    </View>
+  );
 
   if (loading || error) {
-
-    return <Loading />
-
+    return <Loading />;
   } else {
-
-
     // TODO change making two different variables (phoneDisplay, phoneInput) and changing the variable not re defining it
 
-    let phone = (
+    const phoneDisplay = (
       <View style={Styles.mailContainer}>
         <IconFA
           name="phone"
@@ -168,9 +159,9 @@ const ProfileDetails = (props) => {
           style={Styles.iconLeft}
         />
         <View style={Styles.verticalLine}></View>
-        <Text style={{ fontSize: 19 }}>{getData.telefono}</Text>
+        <Text style={{ fontSize: 17 }}>{getData.telefono}</Text>
         <TouchableOpacity
-          onPress={() => setEditTel(true)}
+          onPress={() => setEdit(true)}
           style={Styles.iconRight}
         >
           <IconMI name="edit" size={25} color={"#FF9900"} />
@@ -178,7 +169,7 @@ const ProfileDetails = (props) => {
       </View>
     );
 
-    let location = (
+    const locationDisplay = (
       <View style={Styles.mailContainer}>
         <IconMI
           name="location-on"
@@ -187,9 +178,11 @@ const ProfileDetails = (props) => {
           style={Styles.iconLeft}
         />
         <View style={Styles.verticalLine}></View>
-        <Text style={{ fontSize: 19 }}>{getData.ubicacion === "" ? "Ubicación" : getData.ubicacion}</Text>
+        <Text style={{ fontSize: 17 }}>
+          {getData.ubicacion === "" ? "Ubicación" : getData.ubicacion}
+        </Text>
         <TouchableOpacity
-          onPress={() => setEditLoc(true)}
+          onPress={() => setEdit(true)}
           style={Styles.iconRight}
         >
           <IconMI name="edit" size={25} color={"#FF9900"} />
@@ -197,9 +190,8 @@ const ProfileDetails = (props) => {
       </View>
     );
 
-
     return (
-      <ScrollView style={Styles.container}>
+      <View style={Styles.container}>
         <Header title={"Perfil"} />
         <View style={Styles.content}>
           <View
@@ -208,8 +200,8 @@ const ProfileDetails = (props) => {
               justifyContent: "center",
             }}
           >
-            <IconI name="person-circle-outline" size={300} color={"#FF9900"} />
-            <Text style={Styles.name}>{getData.name}</Text>
+            <IconI name="person-circle-outline" size={270} color={"#FF9900"} />
+            <Text style={Styles.name}>{getData.nombre}</Text>
             <View style={Styles.horizontalLine}></View>
           </View>
           <View style={Styles.mailContainer}>
@@ -220,24 +212,29 @@ const ProfileDetails = (props) => {
               style={Styles.iconLeft}
             />
             <View style={Styles.verticalLine}></View>
-            <Text style={{ fontSize: 19 }}>Hello</Text>
+            <Text style={{ fontSize: 17 }}>{getData.email}</Text>
           </View>
-          {phone}
-          {location}
-          <View style={{ height: 50 }}></View>
-          <Button
-            handlePress={() => saveChanges()}
-            disabled={buttonDisabled}
-            text={
-              loading === false ? (
-                "Guardar"
-              ) : (
-                <ActivityIndicator color="white" size={30} />
-              )
-            }
-          />
+          {edit ? phoneInput : phoneDisplay}
+          {edit ? locationInput : locationDisplay}
+          <View style={{ height: 10 }}></View>
+          {edit ? (
+            <Button
+              handlePress={() => saveChanges()}
+              disabled={buttonDisabled}
+              text={
+                loading === false ? (
+                  "Guardar"
+                ) : (
+                  <ActivityIndicator color="white" size={30} />
+                )
+              }
+            />
+          ) : (
+            <></>
+          )}
         </View>
-      </ScrollView>
+        <NavBar />
+      </View>
     );
   }
 };
