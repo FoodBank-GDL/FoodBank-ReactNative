@@ -30,7 +30,8 @@ const Routes = () => {
   }, [idToken, userId]);
 
   const Tab = createBottomTabNavigator();
-  const Stack = createNativeStackNavigator();
+  const FeedStack = createNativeStackNavigator();
+  const MapStack = createNativeStackNavigator();
 
   const PublicStack = () => (
     <NavigationContainer>
@@ -45,53 +46,62 @@ const Routes = () => {
     </NavigationContainer>
   );
 
-  const PrivateStack = () => (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Feed" options={{ headerShown: false }}>
-          {(props) => <Feed {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CreateCampaign" options={{ headerShown: false }}>
-          {(props) => <CreateCampaign {...props} />}
-        </Stack.Screen>
-        <Stack.Screen
-          name="Donations"
-          options={{
-            headerTitle: "Donaciones",
-            headerStyle: {
-              textAlign: "center",
-            },
-            headerTitleStyle: {
-              fontWeight: "bold",
-              textAlign: "center",
-            },
-            headerTitleAlign: "center",
-          }}
-        >
-          {(props) => <Donations {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="MapScreen" options={{ headerShown: false }}>
-          {(props) => <MapScreen {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Profile" options={{ headerShown: false }}>
-          {(props) => <Profile {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="CampaignDetail" options={{ headerShown: false }}>
-          {(props) => <CampaignDetail {...props} />}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  const FeedScreens = () => (
+    <FeedStack.Navigator>
+      <FeedStack.Screen name="Feed" options={{ headerShown: false }}>
+        {(props) => <Feed {...props} />}
+      </FeedStack.Screen>
+      <FeedStack.Screen name="CampaignDetail" options={{ headerShown: false }}>
+        {(props) => <CampaignDetail {...props} />}
+      </FeedStack.Screen>
+      <FeedStack.Screen name="CreateCampaign" options={{
+        headerTitle: "Crear campaña",
+        headerStyle: {
+          textAlign: "center",
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+          textAlign: "center",
+        },
+        headerTitleAlign: "center",
+      }}>
+        {(props) => <CreateCampaign {...props} />}
+      </FeedStack.Screen>
+      <FeedStack.Screen
+        name="Donations"
+        options={{
+          headerTitle: "Donaciones",
+          headerStyle: {
+            textAlign: "center",
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            textAlign: "center",
+          },
+          headerTitleAlign: "center",
+        }}
+      >
+        {(props) => <Donations {...props} />}
+      </FeedStack.Screen>
+    </FeedStack.Navigator >
+  )
 
-  const PublicTab = () => (
+  const MapScreens = () => (
+    <MapStack.Navigator>
+      <MapStack.Screen name="MapScreen" options={{ headerShown: false }}>
+        {(props) => <MapScreen {...props} />}
+      </MapStack.Screen>
+      <MapStack.Screen name="CampaignDetail" options={{ headerShown: false }}>
+        {(props) => <CampaignDetail {...props} />}
+      </MapStack.Screen>
+    </MapStack.Navigator>
+  )
+
+  const PrivateTab = () => (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Feed" options={{ headerShown: false }} >
-          {(props) => <Feed {...props} />}
-        </Tab.Screen>
-        <Tab.Screen name="MapScreen" options={{ headerShown: false }} >
-          {(props) => <MapScreen {...props} />}
-        </Tab.Screen>
+        <Tab.Screen name="FeedScreens" options={{ headerShown: false }} component={FeedScreens} />
+        <Tab.Screen name="MapScreens" options={{ headerShown: false }} component={MapScreens} />
         <Tab.Screen name="Profile" options={{ headerShown: false }} >
           {(props) => <Profile {...props} />}
         </Tab.Screen>
@@ -99,7 +109,7 @@ const Routes = () => {
     </NavigationContainer>
   )
 
-  return isLoggedIn === true ? <PrivateStack /> : <PublicTab />;
+  return isLoggedIn === true ? <PrivateTab /> : < PublicStack />;
 };
 
 export default Routes;
