@@ -8,6 +8,8 @@ import IconE from "react-native-vector-icons/Entypo";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
+import { parseDateYYYYMMDD_NoYear } from "../../../lib/parseDate";
+
 const CapmpaignCard = ({
   status,
   title,
@@ -80,8 +82,8 @@ const CapmpaignCard = ({
             ? Styles.container
             : status === "Donativo pendiente" ||
               status === "Donativo completado"
-            ? Styles.containerDonativo
-            : Styles.containerLider
+              ? Styles.containerDonativo
+              : Styles.containerLider
         }
       >
         <View style={Styles.header}>
@@ -137,9 +139,7 @@ const CapmpaignCard = ({
           <View style={Styles.content}>
             <IconAnt name="clockcircleo" size={15} style={Styles.icon} />
 
-            <Text style={Styles.contentText}>{`${startDate.split("T")[0]} - ${
-              finishDate.split("T")[0]
-            }`}</Text>
+            <Text style={Styles.contentText}>{parseDateYYYYMMDD_NoYear(startDate)} - {parseDateYYYYMMDD_NoYear(finishDate)}</Text>
           </View>
         </View>
 
