@@ -3,6 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import IconE from "react-native-vector-icons/Entypo"
+import IconFA from "react-native-vector-icons/FontAwesome"
+
 import {
   Register,
   Login,
@@ -30,6 +33,7 @@ const Routes = () => {
   }, [idToken, userId]);
 
   const Tab = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator()
   const FeedStack = createNativeStackNavigator();
   const MapStack = createNativeStackNavigator();
 
@@ -99,7 +103,37 @@ const Routes = () => {
 
   const PrivateTab = () => (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+
+        screenOptions={({ route }) => ({
+          tabBarStyle: {
+            height: 90,
+            paddingHorizontal: 5,
+            paddingTop: 0,
+            backgroundColor: 'orange',
+            borderTopLeftRadius: 10,
+            borderTopRightRadius: 10,
+            borderTopWidth: 0,
+          },
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'FeedScreens') {
+              iconName = 'home';
+            } else if (route.name === 'MapScreens') {
+              iconName = 'map'
+            }
+            else if (route.name === 'Profile') {
+              iconName = 'user';
+            }
+
+            // You can return any component that you like here!
+            return <IconE name={iconName} size={focused ? 35 : 25} color={focused ? "white" : "#888"} />;
+          },
+          tabBarShowLabel: false
+        })}
+
+      >
         <Tab.Screen name="FeedScreens" options={{ headerShown: false }} component={FeedScreens} />
         <Tab.Screen name="MapScreens" options={{ headerShown: false }} component={MapScreens} />
         <Tab.Screen name="Profile" options={{ headerShown: false }} >
