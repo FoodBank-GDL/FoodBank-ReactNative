@@ -31,6 +31,7 @@ const ProfileDetails = (props) => {
   const [editTel, setEditTel] = useState(false);
   const [editLoc, setEditLoc] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -40,6 +41,7 @@ const ProfileDetails = (props) => {
     axios
       .get(`${API_URL}/user/info/${userId}`)
       .then((res) => {
+        console.log("si")
         setGetData(res.data);
         setLoading(false);
       })
@@ -52,7 +54,6 @@ const ProfileDetails = (props) => {
 
   useEffect(() => {
     getUser();
-    console.log("data: ", getData)
   }, []);
 
   const handleTextChange = (field, val) => {
@@ -76,7 +77,6 @@ const ProfileDetails = (props) => {
   const saveChanges = () => {
 
     setLoading(true);
-    console.log(data);
     setLoading(false);
 
     // await axios
@@ -111,63 +111,8 @@ const ProfileDetails = (props) => {
     //   });
   };
 
-  let phone = (
-    <View style={Styles.mailContainer}>
-      <IconFA
-        name="phone"
-        size={30}
-        color={"#FF9900"}
-        style={Styles.iconLeft}
-      />
-      <View style={Styles.verticalLine}></View>
-      <Text style={{ fontSize: 19 }}>{getData.telefono}</Text>
-      <TouchableOpacity
-          onPress={() => setEditTel(true)}
-          style={Styles.iconRight}
-        >
-          <IconMI name="edit" size={25} color={"#FF9900"} />
-        </TouchableOpacity>
-    </View>
-  );
-
-  if (editTel || editLoc) {
-    phone =   (
-      <View style={Styles.inputContainer}>
-        <IconFA name="phone" size={30} color={"#FF9900"} style={Styles.phone} />
-        <View style={Styles.verticalLine}></View>
-        <TextInput
-          onChangeText={(val) => handleTextChange("telefono", val)}
-          value={data.telefono}
-          placeholder="Escribe aquí"
-          onFocus={() => setFocusTel(true)}
-          onBlur={() => setFocusTel(false)}
-          style={focusTel ? Styles.inputFocused : Styles.input}
-        />
-      </View>
-    );
-  }
-
-  let location = (
-    <View style={Styles.mailContainer}>
-      <IconMI
-        name="location-on"
-        size={32}
-        color={"#FF9900"}
-        style={Styles.iconLeft}
-      />
-      <View style={Styles.verticalLine}></View>
-      <Text style={{ fontSize: 19 }}>{getData.ubicacion === "" ? "Ubicación" : getData.ubicacion }</Text>
-      <TouchableOpacity
-          onPress={() => setEditLoc(true)}
-          style={Styles.iconRight}
-        >
-          <IconMI name="edit" size={25} color={"#FF9900"} />
-        </TouchableOpacity>
-    </View>
-  );
-
-  if (editLoc || editTel) {
-    location =   (
+  if (editLoc || editTel) {     // TODO Una sola variable
+    location = (
       <View style={Styles.inputContainer}>
         <IconMI
           name="location-on"
@@ -188,51 +133,113 @@ const ProfileDetails = (props) => {
     );
   }
 
-  if(loading || error) {
-    console.log(getData)
-    return <Loading />
-  } 
-  return (
-    <ScrollView style={Styles.container}>
-      <Header title={"Perfil"} />
-      <View style={Styles.content}>
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <IconI name="person-circle-outline" size={300} color={"#FF9900"} />
-          <Text style={Styles.name}>{getData}</Text>
-          <View style={Styles.horizontalLine}></View>
-        </View>
-        <View style={Styles.mailContainer}>
-          <IconMCI
-            name="email"
-            size={31}
-            color={"#FF9900"}
-            style={Styles.iconLeft}
-          />
-          <View style={Styles.verticalLine}></View>
-          <Text style={{ fontSize: 19 }}>Hello</Text>
-        </View>
-        {phone}
-        {location}
-        <View style={{height: 50}}></View>
-        <Button
-          handlePress={() => saveChanges()}
-          disabled={buttonDisabled}
-          text={
-            loading === false ? (
-              "Guardar"
-            ) : (
-              <ActivityIndicator color="white" size={30} />
-            )
-          }
+  if (editTel || editLoc) {     // TODO Una sola variablke
+    phone = (
+      <View style={Styles.inputContainer}>
+        <IconFA name="phone" size={30} color={"#FF9900"} style={Styles.phone} />
+        <View style={Styles.verticalLine}></View>
+        <TextInput
+          onChangeText={(val) => handleTextChange("telefono", val)}
+          value={data.telefono}
+          placeholder="Escribe aquí"
+          onFocus={() => setFocusTel(true)}
+          onBlur={() => setFocusTel(false)}
+          style={focusTel ? Styles.inputFocused : Styles.input}
         />
       </View>
-    </ScrollView>
-  );
+    );
+  }
+
+  if (loading || error) {
+
+    return <Loading />
+
+  } else {
+
+
+    // TODO change making two different variables (phoneDisplay, phoneInput) and changing the variable not re defining it
+
+    let phone = (
+      <View style={Styles.mailContainer}>
+        <IconFA
+          name="phone"
+          size={30}
+          color={"#FF9900"}
+          style={Styles.iconLeft}
+        />
+        <View style={Styles.verticalLine}></View>
+        <Text style={{ fontSize: 19 }}>{getData.telefono}</Text>
+        <TouchableOpacity
+          onPress={() => setEditTel(true)}
+          style={Styles.iconRight}
+        >
+          <IconMI name="edit" size={25} color={"#FF9900"} />
+        </TouchableOpacity>
+      </View>
+    );
+
+    let location = (
+      <View style={Styles.mailContainer}>
+        <IconMI
+          name="location-on"
+          size={32}
+          color={"#FF9900"}
+          style={Styles.iconLeft}
+        />
+        <View style={Styles.verticalLine}></View>
+        <Text style={{ fontSize: 19 }}>{getData.ubicacion === "" ? "Ubicación" : getData.ubicacion}</Text>
+        <TouchableOpacity
+          onPress={() => setEditLoc(true)}
+          style={Styles.iconRight}
+        >
+          <IconMI name="edit" size={25} color={"#FF9900"} />
+        </TouchableOpacity>
+      </View>
+    );
+
+
+    return (
+      <ScrollView style={Styles.container}>
+        <Header title={"Perfil"} />
+        <View style={Styles.content}>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <IconI name="person-circle-outline" size={300} color={"#FF9900"} />
+            <Text style={Styles.name}>{getData.name}</Text>
+            <View style={Styles.horizontalLine}></View>
+          </View>
+          <View style={Styles.mailContainer}>
+            <IconMCI
+              name="email"
+              size={31}
+              color={"#FF9900"}
+              style={Styles.iconLeft}
+            />
+            <View style={Styles.verticalLine}></View>
+            <Text style={{ fontSize: 19 }}>Hello</Text>
+          </View>
+          {phone}
+          {location}
+          <View style={{ height: 50 }}></View>
+          <Button
+            handlePress={() => saveChanges()}
+            disabled={buttonDisabled}
+            text={
+              loading === false ? (
+                "Guardar"
+              ) : (
+                <ActivityIndicator color="white" size={30} />
+              )
+            }
+          />
+        </View>
+      </ScrollView>
+    );
+  }
 };
 
 export default ProfileDetails;
