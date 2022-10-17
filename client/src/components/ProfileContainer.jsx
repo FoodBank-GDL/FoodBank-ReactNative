@@ -13,13 +13,21 @@ const ProfileContainer = ({ userId }) => {
     const [error, setError] = useState(null);
     const [data, setData] = useState();
 
+    const [edited, setEdited] = useState(false)
+
+    const [formData, setFormData] = useState({
+        telefono: "",
+        ubicacion: "",
+      });
+
     const getUser = async () => {
         setLoading(true);
+
+        console.log(edited)
 
         axios.get(`${API_URL}/user/info/${userId}`)
             .then((res) => {
                 setData(res.data);
-                console.log(res.data)
                 setLoading(false);
             })
             .catch((err) => {
@@ -31,13 +39,21 @@ const ProfileContainer = ({ userId }) => {
 
     useEffect(() => {
         getUser();
-    }, []);
+    }, [edited]);
+
+    const handleEditedFields = () => {
+        setEdited((prev) => !prev);
+    }
+
+    // useEffect(() => {
+    //     getUser();
+    // }, [data]);
 
     if (loading || error) {
         return <Loading />;
     }
 
-    return <ProfileComponent data={data} />
+    return <ProfileComponent data={data} handleEditedFields={handleEditedFields}/>
 };
 
 export default ProfileContainer;

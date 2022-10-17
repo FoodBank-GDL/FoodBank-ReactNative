@@ -5,7 +5,6 @@ import { Register, Login, CampaignDetail, Feed } from "./src/screens";
 import Donations from "./src/screens/Donations";
 import CreateCampaign from "./src/screens/CreateCampaign/CreateCampaign";
 import MapScreen from "./src/screens/MapScreen";
-import ProfileDetails from "./src/screens/ProfileDetails";
 
 import Profile from "./src/screens/Profile/Profile";
 

@@ -7,37 +7,86 @@ import {
     Text,
     TouchableOpacity,
     ActivityIndicator,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from "react-native";
+import axios from "axios";
 
 import { IconFA, IconI, IconMCI, IconMI } from "../../lib/icons";
 import Button from "./Button";
+import { API_URL } from "../../lib/constants";
 
-const ProfileComponent = ({ data }) => {
-    //   const [data, setData] = useState({
-    //     telefono: "",
-    //     ubicacion: "",
-    //   });
+const ProfileComponent = ({ data, handleEditedFields }) => {
+      const [formData, setFormData] = useState({
+        telefono: "",
+        ubicacion: "",
+      });
 
     const [edit, setEdit] = useState(false);
 
     const saveChanges = () => {
+        handlePutChanges()
         setEdit(false)
     }
+
+    const handlePutChanges = () => {
+        let phonePut, locationPut;
+        if(formData.telefono === "") {
+            phonePut = data.telefono
+        }
+        else {
+            phonePut = formData.telefono
+        }
+        if(formData.ubicacion === "") {
+            locationPut = data.ubicacion
+        }
+        else {
+            locationPut = formData.ubicacion
+        }
+        const test = {
+            userId: data.userId,
+            email: data.email,
+            telefono: phonePut,
+            ubicacion: locationPut
+        }
+        console.log("TEST: ", test)
+        axios.put(`${API_URL}/user/updateUserInfo`, {
+            userId: data.userId,
+            email: data.email,
+            telefono: phonePut,
+            ubicacion: locationPut
+        })
+            .then((res) => {
+                handleEditedFields()
+            })
+            .catch((err) =>{
+                Alert.alert(
+                    err.response.data
+                )
+            }
+            )
+    }
+
+    const handleTextChange = (field, val) => {
+        setFormData({
+          ...formData,
+          [field]: val,
+        });
+      };
 
     const handleClickEditData = () => {
         setEdit((prev) => !prev)
     }
 
     const phoneDisplay = <Text style={Styles.detailDisplayText}>{data.telefono}</Text>
-    const phoneInput = <TextInput style={Styles.detailDisplayText}>{data.telefono}</TextInput>
+    const phoneInput = <TextInput style={Styles.detailDisplayText} onChangeText={(val) => handleTextChange("telefono", val)}>{data.telefono}</TextInput>
 
     const locationDisplay = <Text style={Styles.detailDisplayText}>{data.ubicacion != "" ?
         <Text style={Styles.detailDisplayText}>{data.ubicacion}</Text> :
         <Text style={{
             color: "#BABABA", width: "78%"
         }}>Escribe aqui</Text>}</Text>
-    const locationInput = <TextInput style={Styles.detailDisplayText}>{data.ubicacion != "" &&
+    const locationInput = <TextInput style={Styles.detailDisplayText} onChangeText={(val) => handleTextChange("ubicacion", val)}>{data.ubicacion != "" &&
         <Text style={Styles.detailDisplayText}>{data.ubicacion}</Text>}</TextInput>
 
     return (

@@ -12,7 +12,6 @@ const userId = "JhcZP5uKzORJ3x0aKPvNfXO0Qoi1";
 
 const Profile = (props) => {
 
-
     return (
         <View style={Styles.container}>
             <Header title={"Perfil"} />
