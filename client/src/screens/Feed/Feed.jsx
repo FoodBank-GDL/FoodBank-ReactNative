@@ -12,7 +12,7 @@ const Feed = (props) => {
     <View style={Styles.container}>
       <Header title={"Campañas"} />
       <CampaignContainer navigation={props.navigation} />
-      <NavBar navigation={props.navigation} />
+      {/* <NavBar navigation={props.navigation} /> */}
       <NewCampaignButton navigation={props.navigation} />
     </View>
   );
