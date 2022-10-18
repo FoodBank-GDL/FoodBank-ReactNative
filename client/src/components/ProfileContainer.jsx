@@ -15,15 +15,8 @@ const ProfileContainer = ({ userId }) => {
 
     const [edited, setEdited] = useState(false)
 
-    const [formData, setFormData] = useState({
-        telefono: "",
-        ubicacion: "",
-      });
-
     const getUser = async () => {
         setLoading(true);
-
-        console.log(edited)
 
         axios.get(`${API_URL}/user/info/${userId}`)
             .then((res) => {
@@ -45,15 +38,11 @@ const ProfileContainer = ({ userId }) => {
         setEdited((prev) => !prev);
     }
 
-    // useEffect(() => {
-    //     getUser();
-    // }, [data]);
-
     if (loading || error) {
         return <Loading />;
     }
 
-    return <ProfileComponent data={data} handleEditedFields={handleEditedFields}/>
+    return <ProfileComponent data={data} handleEditedFields={handleEditedFields} />
 };
 
 export default ProfileContainer;

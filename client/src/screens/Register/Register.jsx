@@ -7,11 +7,11 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import StatusBar from "../../components/StatusBar";
+import { StatusBar, Input, Button } from "../../components";
+
 import { Styles } from "./Styles";
-import Input from "../../components/Input";
+
 import axios from "axios";
-import Button from "../../components/Button";
 import { useEffect, useState } from "react";
 import { API_URL } from "../../../lib/constants";
 

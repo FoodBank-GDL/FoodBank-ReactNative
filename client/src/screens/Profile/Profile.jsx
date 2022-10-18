@@ -19,6 +19,6 @@ const Profile = (props) => {
             <NavBar />
         </View>
     )
-};
+}
 
-export default Profile;
+export default Profile

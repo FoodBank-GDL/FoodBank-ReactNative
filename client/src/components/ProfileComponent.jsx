@@ -11,16 +11,22 @@ import {
     Alert
 } from "react-native";
 import axios from "axios";
+import { useAuth } from "../contexts/AuthContext"
 
 import { IconFA, IconI, IconMCI, IconMI } from "../../lib/icons";
 import Button from "./Button";
 import { API_URL } from "../../lib/constants";
 
 const ProfileComponent = ({ data, handleEditedFields }) => {
-      const [formData, setFormData] = useState({
+    // const { logout } = useAuth();
+    // const handleLogOut = () => {
+    //     logout();
+    // };
+
+    const [formData, setFormData] = useState({
         telefono: "",
         ubicacion: "",
-      });
+    });
 
     const [edit, setEdit] = useState(false);
 
@@ -31,25 +37,19 @@ const ProfileComponent = ({ data, handleEditedFields }) => {
 
     const handlePutChanges = () => {
         let phonePut, locationPut;
-        if(formData.telefono === "") {
+        if (formData.telefono === "") {
             phonePut = data.telefono
         }
         else {
             phonePut = formData.telefono
         }
-        if(formData.ubicacion === "") {
+        if (formData.ubicacion === "") {
             locationPut = data.ubicacion
         }
         else {
             locationPut = formData.ubicacion
         }
-        const test = {
-            userId: data.userId,
-            email: data.email,
-            telefono: phonePut,
-            ubicacion: locationPut
-        }
-        console.log("TEST: ", test)
+
         axios.put(`${API_URL}/user/updateUserInfo`, {
             userId: data.userId,
             email: data.email,
@@ -59,7 +59,7 @@ const ProfileComponent = ({ data, handleEditedFields }) => {
             .then((res) => {
                 handleEditedFields()
             })
-            .catch((err) =>{
+            .catch((err) => {
                 Alert.alert(
                     err.response.data
                 )
@@ -69,10 +69,10 @@ const ProfileComponent = ({ data, handleEditedFields }) => {
 
     const handleTextChange = (field, val) => {
         setFormData({
-          ...formData,
-          [field]: val,
+            ...formData,
+            [field]: val,
         });
-      };
+    };
 
     const handleClickEditData = () => {
         setEdit((prev) => !prev)
@@ -161,12 +161,17 @@ const ProfileComponent = ({ data, handleEditedFields }) => {
 
                     {
                         edit &&
-                        <Button text={"Guardar cambios"} handlePress={saveChanges} />
+                        <View style={{ width: 150, marginLeft: "auto", marginRight: "auto", marginBottom: 15 }}>
+                            <Button text={"Guardar cambios"} handlePress={saveChanges} />
+                        </View>
                     }
 
 
                 </View>
 
+            </View>
+            <View style={{ width: 150, marginLeft: "auto", marginRight: "auto" }}>
+                <Button text={"Cerrar sesión"} handlePress={() => handleLogOut()} />
             </View>
         </ScrollView>
     );
