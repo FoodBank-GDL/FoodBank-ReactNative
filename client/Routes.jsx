@@ -98,6 +98,22 @@ const Routes = () => {
       <MapStack.Screen name="CampaignDetail" options={{ headerShown: false }}>
         {(props) => <CampaignDetail {...props} />}
       </MapStack.Screen>
+      <MapStack.Screen
+        name="Donations"
+        options={{
+          headerTitle: "Donaciones",
+          headerStyle: {
+            textAlign: "center",
+          },
+          headerTitleStyle: {
+            fontWeight: "bold",
+            textAlign: "center",
+          },
+          headerTitleAlign: "center",
+        }}
+      >
+        {(props) => <Donations {...props} />}
+      </MapStack.Screen>
     </MapStack.Navigator>
   )
 
