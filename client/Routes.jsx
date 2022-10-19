@@ -19,6 +19,7 @@ import {
 } from "./src/screens";
 
 import { useAuth } from "./src/contexts/AuthContext";
+import Donate from "./src/screens/Donate/Donate";
 
 const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -88,6 +89,19 @@ const Routes = () => {
       >
         {(props) => <Donations {...props} />}
       </FeedStack.Screen>
+      <FeedStack.Screen name="CreateDonation" options={{
+        headerTitle: "Donar",
+        headerStyle: {
+          textAlign: "center",
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+          textAlign: "center",
+        },
+        headerTitleAlign: "center",
+      }}>
+        {(props) => <Donate {...props} />}
+      </FeedStack.Screen>
     </FeedStack.Navigator >
   )
 
@@ -114,6 +128,19 @@ const Routes = () => {
         }}
       >
         {(props) => <Donations {...props} />}
+      </MapStack.Screen>
+      <MapStack.Screen name="CreateDonation" options={{
+        headerTitle: "Donar",
+        headerStyle: {
+          textAlign: "center",
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+          textAlign: "center",
+        },
+        headerTitleAlign: "center",
+      }}>
+        {(props) => <Donate {...props} />}
       </MapStack.Screen>
     </MapStack.Navigator>
   )
