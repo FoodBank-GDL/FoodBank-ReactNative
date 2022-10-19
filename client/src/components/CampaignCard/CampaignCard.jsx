@@ -75,6 +75,7 @@ const CapmpaignCard = ({
           props,
         })
       }
+      style={{alignItems: "center", paddingTop: 10}}
     >
       <View
         style={
@@ -82,8 +83,8 @@ const CapmpaignCard = ({
             ? Styles.container
             : status === "Donativo pendiente" ||
               status === "Donativo completado"
-              ? Styles.containerDonativo
-              : Styles.containerLider
+            ? Styles.containerDonativo
+            : Styles.containerLider
         }
       >
         <View style={Styles.header}>
@@ -139,7 +140,10 @@ const CapmpaignCard = ({
           <View style={Styles.content}>
             <IconAnt name="clockcircleo" size={15} style={Styles.icon} />
 
-            <Text style={Styles.contentText}>{parseDateYYYYMMDD_NoYear(startDate)} - {parseDateYYYYMMDD_NoYear(finishDate)}</Text>
+            <Text style={Styles.contentText}>
+              {parseDateYYYYMMDD_NoYear(startDate)} -{" "}
+              {parseDateYYYYMMDD_NoYear(finishDate)}
+            </Text>
           </View>
         </View>
 
@@ -157,6 +161,7 @@ const CapmpaignCard = ({
 const Styles = StyleSheet.create({
   container: {
     height: 170,
+    width: "95%",
     backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
@@ -165,7 +170,6 @@ const Styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
     borderColor: "#FAFAFA",
     borderWidth: 3,

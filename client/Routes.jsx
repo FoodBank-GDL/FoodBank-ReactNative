@@ -5,8 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Haptics from 'expo-haptics';
 
-import IconE from "react-native-vector-icons/Entypo"
-import IconFA from "react-native-vector-icons/FontAwesome"
+import { IconE, IconOct, IconFA5 } from "./lib/icons";
 
 import {
   Register,
@@ -158,19 +157,14 @@ const Routes = () => {
             borderTopRightRadius: 10,
           },
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
             if (route.name === 'FeedScreens') {
-              iconName = 'home';
+              return <IconOct name={"home"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
             } else if (route.name === 'MapScreens') {
-              iconName = 'map'
+              return <IconE name={"map"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
             }
             else if (route.name === 'Profile') {
-              iconName = 'user';
+              return <IconFA5 name={"user"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
             }
-
-            // You can return any component that you like here!
-            return <IconE name={iconName} size={focused ? 30 : 25} color={focused ? "white" : "#888"} />;
           },
           tabBarShowLabel: false
         } :
@@ -182,19 +176,15 @@ const Routes = () => {
               borderTopRightRadius: 10,
             },
             tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-
               if (route.name === 'FeedScreens') {
-                iconName = 'home';
+                return <IconOct name={"home"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
               } else if (route.name === 'MapScreens') {
-                iconName = 'map'
+                return <IconE name={"map"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
               }
               else if (route.name === 'Profile') {
-                iconName = 'user';
-              }
-
-              // You can return any component that you like here!
-              return <IconE name={iconName} size={focused ? 25 : 20} color={focused ? "white" : "#888"} />;
+                
+                return <IconFA5 name={"user"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
+              }              
             },
             tabBarShowLabel: false
           }
