@@ -123,13 +123,12 @@ const Routes = () => {
 
         screenOptions={({ route }) => ({
           tabBarStyle: {
-            height: 80,
+            height: 70,
             paddingHorizontal: 5,
             paddingTop: 0,
             backgroundColor: 'orange',
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
-            borderTopWidth: 0,
           },
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
