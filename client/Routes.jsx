@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Platform, Vibration } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as Haptics from 'expo-haptics';
 
-import IconE from "react-native-vector-icons/Entypo"
-import IconFA from "react-native-vector-icons/FontAwesome"
+import { IconE, IconOct, IconFA5 } from "./lib/icons";
 
 import {
   Register,
@@ -18,6 +19,7 @@ import {
 } from "./src/screens";
 
 import { useAuth } from "./src/contexts/AuthContext";
+import Donate from "./src/screens/Donate/Donate";
 
 const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -87,6 +89,19 @@ const Routes = () => {
       >
         {(props) => <Donations {...props} />}
       </FeedStack.Screen>
+      <FeedStack.Screen name="CreateDonation" options={{
+        headerTitle: "Donar",
+        headerStyle: {
+          textAlign: "center",
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+          textAlign: "center",
+        },
+        headerTitleAlign: "center",
+      }}>
+        {(props) => <Donate {...props} />}
+      </FeedStack.Screen>
     </FeedStack.Navigator >
   )
 
@@ -114,6 +129,19 @@ const Routes = () => {
       >
         {(props) => <Donations {...props} />}
       </MapStack.Screen>
+      <MapStack.Screen name="CreateDonation" options={{
+        headerTitle: "Donar",
+        headerStyle: {
+          textAlign: "center",
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+          textAlign: "center",
+        },
+        headerTitleAlign: "center",
+      }}>
+        {(props) => <Donate {...props} />}
+      </MapStack.Screen>
     </MapStack.Navigator>
   )
 
@@ -121,38 +149,63 @@ const Routes = () => {
     <NavigationContainer>
       <Tab.Navigator
 
-        screenOptions={({ route }) => ({
+        screenOptions={({ route }) => (Platform.OS === 'ios' ? {
           tabBarStyle: {
-            height: 90,
-            paddingHorizontal: 5,
-            paddingTop: 0,
+            height: 80,
             backgroundColor: 'orange',
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
-            borderTopWidth: 0,
           },
           tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
             if (route.name === 'FeedScreens') {
-              iconName = 'home';
+              return <IconOct name={"home"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
             } else if (route.name === 'MapScreens') {
-              iconName = 'map'
+              return <IconE name={"map"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
             }
             else if (route.name === 'Profile') {
-              iconName = 'user';
+              return <IconFA5 name={"user"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
             }
-
-            // You can return any component that you like here!
-            return <IconE name={iconName} size={focused ? 35 : 25} color={focused ? "white" : "#888"} />;
           },
           tabBarShowLabel: false
-        })}
+        } :
+          {
+            tabBarStyle: {
+              height: 60,
+              backgroundColor: 'orange',
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+            },
+            tabBarIcon: ({ focused, color, size }) => {
+              if (route.name === 'FeedScreens') {
+                return <IconOct name={"home"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
+              } else if (route.name === 'MapScreens') {
+                return <IconE name={"map"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
+              }
+              else if (route.name === 'Profile') {
+                
+                return <IconFA5 name={"user"} size={focused ? 25 : 20} color={focused ? "white" : "#B17010"} />;
+              }              
+            },
+            tabBarShowLabel: false
+          }
+        )}
 
       >
-        <Tab.Screen name="FeedScreens" options={{ headerShown: false }} component={FeedScreens} />
-        <Tab.Screen name="MapScreens" options={{ headerShown: false }} component={MapScreens} />
-        <Tab.Screen name="Profile" options={{ headerShown: false }} >
+        <Tab.Screen name="FeedScreens" options={{ headerShown: false }} component={FeedScreens} listeners={() => ({
+          tabPress: () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+          },
+        })} />
+        <Tab.Screen name="MapScreens" options={{ headerShown: false }} component={MapScreens} listeners={() => ({
+          tabPress: () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+          },
+        })} />
+        <Tab.Screen name="Profile" options={{ headerShown: false }} listeners={() => ({
+          tabPress: () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+          },
+        })}>
           {(props) => <Profile {...props} />}
         </Tab.Screen>
       </Tab.Navigator>

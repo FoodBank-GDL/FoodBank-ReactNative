@@ -38,6 +38,7 @@ const DatePicker = (props) => {
           props.data.dia = selectedItem;
         }}
         onFocus={() => setFocusDay(true)}
+        onBlur={() => setFocusDay(false)}
         buttonStyle={focusDay ? Styles.dropdownFocused : Styles.dropdown}
         defaultButtonText={"día"}
         buttonTextStyle={{ color: "#555", fontSize: 17 }}
@@ -72,6 +73,7 @@ const DatePicker = (props) => {
           props.data.mes = selectedItem;
         }}
         onFocus={() => setFocusMonth(true)}
+        onBlur={() => setFocusMonth(false)}
         buttonStyle={focusMonth ? Styles.dropdownFocused : Styles.dropdown}
         defaultButtonText={"mes"}
         buttonTextStyle={{ color: "#555", fontSize: 17 }}

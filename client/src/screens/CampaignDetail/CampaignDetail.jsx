@@ -68,7 +68,7 @@ const CampaignDetail = ({ navigation, ...props }) => {
           backgroundColor={"#D9D9D9"}
           completedColor={"#8BE794"}
         />
-        <Text style={Styles.secondary}>576 de 700 donaciones recolectadas</Text>
+        <Text style={Styles.secondary}>{donativosTotales} de {metaDonativos} donaciones recolectadas</Text>
         <View style={[Styles.centered, { paddingTop: 12 }]}>
           {ownerId === userId ? (
             <View style={Styles.button_gestionar}>
@@ -85,7 +85,14 @@ const CampaignDetail = ({ navigation, ...props }) => {
             <View style={Styles.button_donar}>
               <Button
                 text="Donar"
-                handlePress={() => navigation.navigate("Feed")}
+                handlePress={() => navigation.navigate("CreateDonation", {
+                  campaignId,
+                  userId,
+                  categoriaEnseres,
+                  categoriaFrutasVerduras,
+                  categoriaNoPerecederos,
+                  categoriaRopa
+                })}
                 height={40}
                 borderRadius={30}
               />
