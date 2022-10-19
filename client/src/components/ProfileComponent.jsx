@@ -18,10 +18,10 @@ import Button from "./Button";
 import { API_URL } from "../../lib/constants";
 
 const ProfileComponent = ({ data, handleEditedFields }) => {
-    // const { logout } = useAuth();
-    // const handleLogOut = () => {
-    //     logout();
-    // };
+    const { logout } = useAuth();
+    const handleLogOut = () => {
+        logout();
+    };
 
     const [formData, setFormData] = useState({
         telefono: "",
@@ -79,14 +79,14 @@ const ProfileComponent = ({ data, handleEditedFields }) => {
     }
 
     const phoneDisplay = <Text style={Styles.detailDisplayText}>{data.telefono}</Text>
-    const phoneInput = <TextInput style={Styles.detailDisplayText} onChangeText={(val) => handleTextChange("telefono", val)}>{data.telefono}</TextInput>
+    const phoneInput = <TextInput keyboardType="phone-pad" style={Styles.detailEditText} onChangeText={(val) => handleTextChange("telefono", val)}>{data.telefono}</TextInput>
 
     const locationDisplay = <Text style={Styles.detailDisplayText}>{data.ubicacion != "" ?
         <Text style={Styles.detailDisplayText}>{data.ubicacion}</Text> :
         <Text style={{
             color: "#BABABA", width: "78%"
         }}>Escribe aqui</Text>}</Text>
-    const locationInput = <TextInput style={Styles.detailDisplayText} onChangeText={(val) => handleTextChange("ubicacion", val)}>{data.ubicacion != "" &&
+    const locationInput = <TextInput style={Styles.detailEditText} onChangeText={(val) => handleTextChange("ubicacion", val)}>{data.ubicacion != "" &&
         <Text style={Styles.detailDisplayText}>{data.ubicacion}</Text>}</TextInput>
 
     return (
@@ -95,7 +95,7 @@ const ProfileComponent = ({ data, handleEditedFields }) => {
 
                 <View style={Styles.userHeader}>
 
-                    <IconFA name="user-circle-o" color="orange" size={190} />
+                    {!edit && <IconFA name="user-circle-o" color="orange" size={190} />}
 
                     <Text style={Styles.userName}>{data.nombre}</Text>
 
@@ -215,6 +215,10 @@ const Styles = StyleSheet.create({
     detailDisplayText: {
         fontSize: 14,
         width: "78%"
+    },
+    detailEditText: {
+        fontSize: 14,
+        width: "100%"
     },
     verticalLine: {
         borderRightWidth: 1.5,
