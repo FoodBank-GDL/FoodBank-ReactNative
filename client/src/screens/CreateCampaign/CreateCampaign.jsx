@@ -152,6 +152,7 @@ const CreateCampaign = ({ navigation }) => {
             value={campData.titulo}
             placeholder="Escribe aquí"
             onFocus={() => setFocusTitle(true)}
+            onBlur={() => setFocusTitle(false)}
             style={focusTitle ? Styles.inputTitleFocused : Styles.inputTitle}
           />
         </View>
@@ -163,10 +164,30 @@ const CreateCampaign = ({ navigation }) => {
               color="#50BE1C"
               footer="Frutas y verduras"
               data={campData}
+              show={true}
+              isButton={true}
             />
-            <Category color="#71D1FB" footer="Ropa" data={campData} />
-            <Category color="#FFE86D" footer="No perecederos" data={campData} />
-            <Category color="#FC8181" footer="Enseres" data={campData} />
+            <Category
+              color="#71D1FB"
+              footer="Ropa"
+              data={campData}
+              show={true}
+              isButton={true}
+            />
+            <Category
+              color="#FFE86D"
+              footer="No perecederos"
+              data={campData}
+              show={true}
+              isButton={true}
+            />
+            <Category
+              color="#FC8181"
+              footer="Enseres"
+              data={campData}
+              show={true}
+              isButton={true}
+            />
           </View>
         </View>
         <View style={Styles.field}>
@@ -186,6 +207,7 @@ const CreateCampaign = ({ navigation }) => {
               value={campData.metaDonativos}
               keyboardType="numeric"
               onFocus={() => setFocusMeta(true)}
+              onBlur={() => setFocusMeta(false)}
               style={focusMeta ? Styles.inputMetaFocused : Styles.inputMeta}
             />
             <Text style={Styles.subtitle}>donaciones</Text>
@@ -205,20 +227,8 @@ const CreateCampaign = ({ navigation }) => {
               value={campData.ubicacion}
               placeholder="Escribe aquí"
               onFocus={() => setFocusLoc(true)}
+              onBlur={() => setFocusLoc(false)}
               style={focusLoc ? Styles.inputLocFocused : Styles.inputLoc}
-            />
-          </View>
-        </View>
-        <View style={Styles.field}>
-          <Text style={Styles.titulo}>Accesibilidad</Text>
-          <View style={Styles.row}>
-            <BouncyCheckbox
-              style={Styles.check}
-              fillColor="#FF9900"
-              text="Privada"
-              textStyle={{ marginLeft: -6, textDecorationLine: "none" }}
-              innerIconStyle={{ borderColor: "#B0B0B0" }}
-              onPress={privateSelection}
             />
           </View>
         </View>
@@ -228,6 +238,7 @@ const CreateCampaign = ({ navigation }) => {
             onChangeText={(val) => handleTextChange("descripcion", val)}
             value={campData.descripcion}
             onFocus={() => setFocusDesc(true)}
+            onBlur={() => setFocusDesc(false)}
             style={focusDesc ? Styles.inputDescFocused : Styles.inputDesc}
             multiline={true}
           />
