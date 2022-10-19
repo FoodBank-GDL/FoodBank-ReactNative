@@ -6,5 +6,16 @@ import IconE from "react-native-vector-icons/Entypo";
 import IconAD from "react-native-vector-icons/AntDesign";
 import IconMI from "react-native-vector-icons/MaterialIcons";
 import IconI from "react-native-vector-icons/Ionicons";
+import IconOct from "react-native-vector-icons/Octicons";
 
-export { IconAnt, IconE, IconFA, IconFA5, IconMCI, IconAD, IconMI, IconI };
+export {
+  IconAnt,
+  IconE,
+  IconFA,
+  IconFA5,
+  IconMCI,
+  IconAD,
+  IconMI,
+  IconI,
+  IconOct,
+};
