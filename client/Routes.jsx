@@ -123,7 +123,7 @@ const Routes = () => {
 
         screenOptions={({ route }) => ({
           tabBarStyle: {
-            height: 90,
+            height: 80,
             paddingHorizontal: 5,
             paddingTop: 0,
             backgroundColor: 'orange',

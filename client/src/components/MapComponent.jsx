@@ -31,7 +31,9 @@ const MapComponent = ({ campaigns, navigation }) => {
 
     let status = campaign.status
     let title = campaign.titulo
-    let user = campaign.user.nombre
+    let owner = campaign.user.nombre
+    let ownerEmail = campaign.user.email
+    let ownerId = campaign.user.userId
     let location = campaign.ubicacion
     let startDate = campaign.fechaInicio
     let finishDate = campaign.fechaExpiracion
@@ -62,7 +64,9 @@ const MapComponent = ({ campaigns, navigation }) => {
               navigation.navigate("CampaignDetail", {
                 status,
                 title,
-                user,
+                owner,
+                ownerId,
+                ownerEmail,
                 location,
                 startDate,
                 finishDate,
