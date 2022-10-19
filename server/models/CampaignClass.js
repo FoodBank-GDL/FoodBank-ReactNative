@@ -119,20 +119,6 @@ class CampaignClass {
           ).toDate();
       }
 
-      for (const pendingDonation of pendingDonationsObject) {
-        if (formatedInfo.hasOwnProperty(pendingDonation.campaignId)) {
-          formatedInfo[pendingDonation.campaignId]["status"] =
-            "Donativo pendiente";
-        }
-      }
-
-      for (const completedDonation of completedDonationsObject) {
-        if (formatedInfo.hasOwnProperty(completedDonation.campaignId)) {
-          formatedInfo[completedDonation.campaignId]["status"] =
-            "Donativo completado";
-        }
-      }
-
       for (const currentCamp of activeCampaignsObject) {
         formatedInfo[currentCamp.campaignId] = currentCamp;
         formatedInfo[currentCamp.campaignId]["status"] = "";
@@ -150,6 +136,20 @@ class CampaignClass {
                 currentCamp.fechaExpiracion.nanoseconds / 1000000
             )
           ).toDate();
+      }
+
+      for (const pendingDonation of pendingDonationsObject) {
+        if (formatedInfo.hasOwnProperty(pendingDonation.campaignId)) {
+          formatedInfo[pendingDonation.campaignId]["status"] =
+            "Donativo pendiente";
+        }
+      }
+
+      for (const completedDonation of completedDonationsObject) {
+        if (formatedInfo.hasOwnProperty(completedDonation.campaignId)) {
+          formatedInfo[completedDonation.campaignId]["status"] =
+            "Donativo completado";
+        }
       }
 
       const res = [];
@@ -196,11 +196,11 @@ class CampaignClass {
   }
   static async getCampaignInfo(campaignId) {
     try {
-      const campaignDocumentRef=doc(db, "campaigns", campaignId);
-      const campaignDocument=await getDoc(campaignDocumentRef);
-      const campaignData=campaignDocument.data();
-      const userData=await userClass.userInfoGet(campaignData.userId);
-      campaignData['user']=userData;
+      const campaignDocumentRef = doc(db, "campaigns", campaignId);
+      const campaignDocument = await getDoc(campaignDocumentRef);
+      const campaignData = campaignDocument.data();
+      const userData = await userClass.userInfoGet(campaignData.userId);
+      campaignData["user"] = userData;
       return campaignData;
     } catch (error) {
       throw new Error(error);
