@@ -68,6 +68,7 @@ const ItemInput = (props) => {
           buttonTextStyle={{
             color: textColor,
             fontSize: 15,
+            textAlign: "left",
           }}
           renderDropdownIcon={(isOpened) => {
             return (
