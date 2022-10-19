@@ -11,8 +11,8 @@ import { IconAD } from "../../../lib/icons";
 const initialItem = { key: 1, cantidad: "", medida: "", producto: "" };
 let verifDonation = false;
 
-const Donate = ({ campaignId, categorias }) => {
-  const [loading, setLoading] = useState(true);
+const Donate = ({ campaignId, userId, categoriaEnseres, categoriaFrutasVerduras, categoriaNoPerecederos, categoriaRopa }) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([initialItem]);
 
@@ -40,7 +40,7 @@ const Donate = ({ campaignId, categorias }) => {
           cantidad: items[i].cantidad,
           medida: items[i].medida,
           producto: items[i].producto,
-          userId: "JhcZP5uKzORJ3x0aKPvNfXO0Qoi1",
+          userId: userId,
           estado: "pendiente",
         })
         .then((res) => {
@@ -71,7 +71,7 @@ const Donate = ({ campaignId, categorias }) => {
   };
 
   const deleteItem = (key) => {
-    if(items.length === 1) {
+    if (items.length === 1) {
       Alert.alert("Debe conservar mínimo un artículo a donar")
       return
     }
@@ -99,22 +99,22 @@ const Donate = ({ campaignId, categorias }) => {
             <Category
               color="#50BE1C"
               footer="Frutas y verduras"
-              show={categorias.categoriaFrutasVerduras}
+              show={categoriaFrutasVerduras}
             />
             <Category
               color="#71D1FB"
               footer="Ropa"
-              show={categorias.categoriaRopa}
+              show={categoriaRopa}
             />
             <Category
               color="#FFE86D"
               footer="No perecederos"
-              show={categorias.categoriaNoPerecederos}
+              show={categoriaNoPerecederos}
             />
             <Category
               color="#FC8181"
               footer="Enseres"
-              show={categorias.categoriaEnseres}
+              show={categoriaEnseres}
             />
           </View>
           {newItemComponents}

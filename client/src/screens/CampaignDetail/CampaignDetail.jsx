@@ -85,7 +85,14 @@ const CampaignDetail = ({ navigation, ...props }) => {
             <View style={Styles.button_donar}>
               <Button
                 text="Donar"
-                handlePress={() => navigation.navigate("Feed")}
+                handlePress={() => navigation.navigate("CreateDonation", {
+                  campaignId,
+                  userId,
+                  categoriaEnseres,
+                  categoriaFrutasVerduras,
+                  categoriaNoPerecederos,
+                  categoriaRopa
+                })}
                 height={40}
                 borderRadius={30}
               />

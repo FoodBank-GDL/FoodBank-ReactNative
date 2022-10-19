@@ -40,7 +40,7 @@ const ItemInput = (props) => {
         onBlur={() => setFocusProduct(false)}
         style={focusProduct ? Styles.inputProductFocused : Styles.inputProduct}
       />
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", alignItems: "center", height: 50 }}>
         <TextInput
           onChangeText={(value) =>
             props.handleTextChange(value, "cantidad", props.data.key)
@@ -52,7 +52,6 @@ const ItemInput = (props) => {
           style={focusCant ? Styles.inputCantFocused : Styles.inputCant}
           keyboardType="numeric"
         />
-        <Text> </Text>
         <SelectDropdown
           data={["Unidades", "Gramos", "Kilogramos", "Litros", "Mililitros"]}
           // defaultValue={props.setDropValue(props.data.medida, props.data.key)}
@@ -68,7 +67,6 @@ const ItemInput = (props) => {
           buttonTextStyle={{
             color: textColor,
             fontSize: 17,
-            marginBottom: -23,
           }}
           renderDropdownIcon={(isOpened) => {
             return (
@@ -76,7 +74,6 @@ const ItemInput = (props) => {
                 name={isOpened ? "chevron-up" : "chevron-down"}
                 color={isOpened ? "#FF9900" : "#444"}
                 size={12}
-                style={{ marginBottom: -20 }}
               />
             );
           }}
@@ -111,9 +108,9 @@ const Styles = StyleSheet.create({
   inputCant: {
     borderBottomWidth: 1,
     borderBottomColor: "#B0B0B0",
-    marginTop: 25,
     fontSize: 17,
     width: "35%",
+    height: '100%'
   },
   inputCantFocused: {
     borderBottomWidth: 1,
@@ -121,18 +118,21 @@ const Styles = StyleSheet.create({
     marginTop: 25,
     fontSize: 17,
     width: "35%",
+    height: '100%'
   },
   dropdown: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
     borderBottomColor: "#B0B0B0",
+    height: '100%'
   },
   dropdownFocused: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
     borderBottomColor: "#FF9900",
+    height: '100%'
   },
 });
 
