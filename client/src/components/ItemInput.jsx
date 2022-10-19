@@ -40,7 +40,7 @@ const ItemInput = (props) => {
         onBlur={() => setFocusProduct(false)}
         style={focusProduct ? Styles.inputProductFocused : Styles.inputProduct}
       />
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", alignItems: "center", height: 50 }}>
         <TextInput
           onChangeText={(value) =>
             props.handleTextChange(value, "cantidad", props.data.key)
@@ -54,8 +54,6 @@ const ItemInput = (props) => {
         />
         <SelectDropdown
           data={["Unidades", "Gramos", "Kilogramos", "Litros", "Mililitros"]}
-          // defaultValue={props.setDropValue(props.data.medida, props.data.key)}
-          defaultValue="Unidades"
           onSelect={(selectedItem) => {
             props.handleTextChange(selectedItem, "medida", props.data.key);
             setTextColor("#000");
@@ -65,13 +63,11 @@ const ItemInput = (props) => {
           }
           onFocus={() => setFocusUnit(true)}
           onBlur={() => setFocusUnit(false)}
-          buttonStyle={focusUnit ? Styles.dropdownFocused : Styles.dropdownBlur}
+          buttonStyle={focusUnit ? Styles.dropdownFocused : Styles.dropdown}
           defaultButtonText={"Medida"}
           buttonTextStyle={{
             color: textColor,
-            fontSize: 15,
-            marginTop: 24,
-            textAlign: "justify",
+            fontSize: 17,
           }}
           renderDropdownIcon={(isOpened) => {
             return (
@@ -100,7 +96,7 @@ const Styles = StyleSheet.create({
     borderBottomColor: "#B0B0B0",
     marginTop: 3,
     fontSize: 17,
-    marginBottom: -10,
+    marginBottom: -2,
   },
   inputProductFocused: {
     height: 30,
@@ -108,37 +104,37 @@ const Styles = StyleSheet.create({
     borderBottomColor: "#FF9900",
     marginTop: 3,
     fontSize: 17,
-    marginBottom: -10,
+    marginBottom: -2,
   },
   inputCant: {
     borderBottomWidth: 1,
-    marginTop: 25,
     borderBottomColor: "#B0B0B0",
     fontSize: 17,
-    width: "30%",
+    width: "35%",
+    height: '55%',
+    marginRight: 25
   },
   inputCantFocused: {
     borderBottomWidth: 1,
     borderBottomColor: "#FF9900",
-    width: "30%",
-    marginTop: 25,
     fontSize: 17,
+    width: "35%",
+    height: '55%',
+    marginRight: 25
   },
-  dropdownBlur: {
+  dropdown: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
-    height: "100%",
-    marginRight: 20,
     borderBottomColor: "#B0B0B0",
+    height: '53%',
   },
   dropdownFocused: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
-    height: "100%",
-    marginRight: 20,
     borderBottomColor: "#FF9900",
+    height: '53%',
   },
 });
 
