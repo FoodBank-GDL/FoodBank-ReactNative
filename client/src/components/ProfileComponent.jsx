@@ -190,7 +190,7 @@ const Styles = StyleSheet.create({
         marginTop: 15
     },
     userName: {
-        fontSize: '4rem',
+        fontSize: 30,
         fontWeight: "bold",
         marginTop: 15
     },
