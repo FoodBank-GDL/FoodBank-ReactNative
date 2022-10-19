@@ -11,11 +11,18 @@ import { IconAD } from "../../../lib/icons";
 const initialItem = { key: 1, cantidad: "", medida: "", producto: "" };
 let verifDonation = false;
 
-const Donate = ({ campaignId, userId, categoriaEnseres, categoriaFrutasVerduras, categoriaNoPerecederos, categoriaRopa }) => {
+const Donate = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([initialItem]);
-
+  const {
+    campaignId,
+    userId,
+    categoriaEnseres,
+    categoriaFrutasVerduras,
+    categoriaNoPerecederos,
+    categoriaRopa,
+  } = route.params;
   const newItemComponents = items.map((item, index) => {
     return (
       <ItemInput
@@ -72,8 +79,8 @@ const Donate = ({ campaignId, userId, categoriaEnseres, categoriaFrutasVerduras,
 
   const deleteItem = (key) => {
     if (items.length === 1) {
-      Alert.alert("Debe conservar mínimo un artículo a donar")
-      return
+      Alert.alert("Debe conservar mínimo un artículo a donar");
+      return;
     }
     setItems((oldArray) => {
       return oldArray.filter((item) => item.key !== key);
@@ -100,21 +107,25 @@ const Donate = ({ campaignId, userId, categoriaEnseres, categoriaFrutasVerduras,
               color="#50BE1C"
               footer="Frutas y verduras"
               show={categoriaFrutasVerduras}
+              isButton={false}
             />
             <Category
               color="#71D1FB"
               footer="Ropa"
               show={categoriaRopa}
+              isButton={false}
             />
             <Category
               color="#FFE86D"
               footer="No perecederos"
               show={categoriaNoPerecederos}
+              isButton={false}
             />
             <Category
               color="#FC8181"
               footer="Enseres"
               show={categoriaEnseres}
+              isButton={false}
             />
           </View>
           {newItemComponents}

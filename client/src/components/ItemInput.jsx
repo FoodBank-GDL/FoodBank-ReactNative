@@ -26,7 +26,7 @@ const ItemInput = (props) => {
             name="close"
             color="#FF9900"
             size={22}
-            style={{ marginBottom: 2, left: 230, top: 10 }}
+            style={{ marginBottom: 2, paddingLeft: "80%", width: "100%" }}
           />
         </TouchableOpacity>
       </View>
@@ -67,7 +67,7 @@ const ItemInput = (props) => {
           defaultButtonText={"Medida"}
           buttonTextStyle={{
             color: textColor,
-            fontSize: 17,
+            fontSize: 15,
           }}
           renderDropdownIcon={(isOpened) => {
             return (
@@ -111,30 +111,30 @@ const Styles = StyleSheet.create({
     borderBottomColor: "#B0B0B0",
     fontSize: 17,
     width: "35%",
-    height: '55%',
-    marginRight: 25
+    height: "55%",
+    marginRight: 25,
   },
   inputCantFocused: {
     borderBottomWidth: 1,
     borderBottomColor: "#FF9900",
     fontSize: 17,
     width: "35%",
-    height: '55%',
-    marginRight: 25
+    height: "55%",
+    marginRight: 25,
   },
   dropdown: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
     borderBottomColor: "#B0B0B0",
-    height: '53%',
+    height: "53%",
   },
   dropdownFocused: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
     borderBottomColor: "#FF9900",
-    height: '53%',
+    height: "53%",
   },
 });
 
