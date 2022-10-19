@@ -1,6 +1,6 @@
 import { Styles } from "./Styles";
 import { Text, View, Alert, TouchableOpacity, ScrollView } from "react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Category from "../../components/Category";
 import axios from "axios";
 import { API_URL } from "../../../lib/constants";
@@ -9,34 +9,12 @@ import Loading from "../../components/Loading/Loading";
 import { IconAD } from "../../../lib/icons";
 
 const initialItem = { key: 1, cantidad: "", medida: "", producto: "" };
-const campaignId = "NcbSs5ml72TqTpg26Kzc";
 let verifDonation = false;
 
-const Donate = ({ campaignID }) => {
+const Donate = ({ campaignId, categorias }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [dataGet, setDataGet] = useState();
   const [items, setItems] = useState([initialItem]);
-
-  const getCampaign = async () => {
-    setLoading(true);
-
-    axios
-      .get(`${API_URL}/campaign/info/${campaignId}`)
-      .then((res) => {
-        setDataGet(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError(err.response.dataGet);
-        Alert.alert(err.response.dataGet);
-      });
-  };
-
-  useEffect(() => {
-    getCampaign();
-  }, []);
 
   const newItemComponents = items.map((item, index) => {
     return (
@@ -121,22 +99,22 @@ const Donate = ({ campaignID }) => {
             <Category
               color="#50BE1C"
               footer="Frutas y verduras"
-              show={dataGet.categoriaFrutasVerduras}
+              show={categorias.categoriaFrutasVerduras}
             />
             <Category
               color="#71D1FB"
               footer="Ropa"
-              show={dataGet.categoriaRopa}
+              show={categorias.categoriaRopa}
             />
             <Category
               color="#FFE86D"
               footer="No perecederos"
-              show={dataGet.categoriaNoPerecederos}
+              show={categorias.categoriaNoPerecederos}
             />
             <Category
               color="#FC8181"
               footer="Enseres"
-              show={dataGet.categoriaEnseres}
+              show={categorias.categoriaEnseres}
             />
           </View>
           {newItemComponents}
