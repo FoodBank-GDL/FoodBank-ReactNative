@@ -40,7 +40,7 @@ const ItemInput = (props) => {
         onBlur={() => setFocusProduct(false)}
         style={focusProduct ? Styles.inputProductFocused : Styles.inputProduct}
       />
-      <View style={{ flexDirection: "row", alignItems: "center", height: 50 }}>
+      <View style={{ flexDirection: "row" }}>
         <TextInput
           onChangeText={(value) =>
             props.handleTextChange(value, "cantidad", props.data.key)
@@ -60,13 +60,18 @@ const ItemInput = (props) => {
             props.handleTextChange(selectedItem, "medida", props.data.key);
             setTextColor("#000");
           }}
+          buttonTextAfterSelection={(selectedItem, index) =>
+            props.data.medida || "Medida"
+          }
           onFocus={() => setFocusUnit(true)}
           onBlur={() => setFocusUnit(false)}
-          buttonStyle={focusUnit ? Styles.dropdownFocused : Styles.dropdown}
+          buttonStyle={focusUnit ? Styles.dropdownFocused : Styles.dropdownBlur}
           defaultButtonText={"Medida"}
           buttonTextStyle={{
             color: textColor,
-            fontSize: 17,
+            fontSize: 15,
+            marginTop: 24,
+            textAlign: "justify",
           }}
           renderDropdownIcon={(isOpened) => {
             return (
@@ -107,32 +112,33 @@ const Styles = StyleSheet.create({
   },
   inputCant: {
     borderBottomWidth: 1,
+    marginTop: 25,
     borderBottomColor: "#B0B0B0",
     fontSize: 17,
-    width: "35%",
-    height: '100%'
+    width: "30%",
   },
   inputCantFocused: {
     borderBottomWidth: 1,
     borderBottomColor: "#FF9900",
+    width: "30%",
     marginTop: 25,
     fontSize: 17,
-    width: "35%",
-    height: '100%'
   },
-  dropdown: {
+  dropdownBlur: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
+    height: "100%",
+    marginRight: 20,
     borderBottomColor: "#B0B0B0",
-    height: '100%'
   },
   dropdownFocused: {
     flex: 1,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
+    height: "100%",
+    marginRight: 20,
     borderBottomColor: "#FF9900",
-    height: '100%'
   },
 });
 
