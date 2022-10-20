@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
-    "version": "1.0.0",
+    "name": "Food Bank",
+    "slug": "Food_Bank",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/FoodBank_Icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/FoodBank_Icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,17 +26,23 @@
     "android": {
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/FoodBank_Icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyDt5vtCyrrAg076KW0WMCwOKItIVeySLI8"
         }
-      }
+      },
+      "package": "com.Echo.FoodBank"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/FoodBank_Icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1e1fde15-bc81-40eb-a0a5-b127298e7e79"
+      }
     }
   }
 }
