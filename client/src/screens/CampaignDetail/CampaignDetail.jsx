@@ -87,6 +87,7 @@ const CampaignDetail = ({ navigation, ...props }) => {
                 text="Donar"
                 handlePress={() => navigation.navigate("CreateDonation", {
                   campaignId,
+                  title,
                   userId,
                   categoriaEnseres,
                   categoriaFrutasVerduras,

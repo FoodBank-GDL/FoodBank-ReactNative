@@ -6,11 +6,14 @@ import axios from "axios";
 import { API_URL } from "../../../lib/constants";
 import Loading from "../Loading/Loading";
 import { useAuth } from "../../contexts/AuthContext";
+import { useIsFocused } from "@react-navigation/native";
 
 const CampaignContainer = (props) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState();
+
+  const isFocused = useIsFocused();
 
   const { userId } = useAuth();
 
@@ -34,6 +37,11 @@ const CampaignContainer = (props) => {
   useEffect(() => {
     getCampaigns();
   }, [userId]);
+  useEffect(() => {
+    if (isFocused === true) {
+      getCampaigns();
+    }
+  }, [isFocused]);
 
   if (loading || error) {
     return <Loading />;
