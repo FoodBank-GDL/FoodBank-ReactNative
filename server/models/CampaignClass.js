@@ -153,8 +153,26 @@ class CampaignClass {
       }
 
       const res = [];
+      
       for (const i in formatedInfo) {
-        res.push(formatedInfo[i]);
+        if(formatedInfo[i].status=='Campaña activa'){
+          res.push(formatedInfo[i])
+        }
+      }
+      for (const i in formatedInfo) {
+        if(formatedInfo[i].status=='Donativo pendiente'){
+          res.push(formatedInfo[i])
+        }
+      }
+      for (const i in formatedInfo) {
+        if(formatedInfo[i].status=='Donativo completado'){
+          res.push(formatedInfo[i])
+        }
+      }
+      for (const i in formatedInfo) {
+        if(formatedInfo[i].status==''){
+          res.push(formatedInfo[i])
+        }
       }
 
       return res;
