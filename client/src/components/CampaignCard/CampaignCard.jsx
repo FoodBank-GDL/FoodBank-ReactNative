@@ -182,6 +182,7 @@ const Styles = StyleSheet.create({
   },
   containerDonativo: {
     height: 170,
+    width: "95%",
     backgroundColor: "#EDF6FF",
     shadowColor: "#000",
     shadowOffset: {
@@ -203,6 +204,7 @@ const Styles = StyleSheet.create({
   },
   containerLider: {
     height: 170,
+    width: "95%",
     backgroundColor: "#FFFAED",
     shadowColor: "#000",
     shadowOffset: {
