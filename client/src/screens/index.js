@@ -6,6 +6,7 @@ import MapScreen from "./MapScreen";
 import Profile from "./Profile";
 import Donations from "./Donations";
 import CreateCampaign from "./CreateCampaign";
+import Donate from "./Donate";
 
 export {
   Register,
@@ -16,4 +17,5 @@ export {
   Profile,
   Donations,
   CreateCampaign,
+  Donate,
 };

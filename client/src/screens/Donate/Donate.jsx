@@ -11,12 +11,13 @@ import { IconAD } from "../../../lib/icons";
 const initialItem = { key: 1, cantidad: "", medida: "", producto: "" };
 let verifDonation = false;
 
-const Donate = ({ route }) => {
+const Donate = ({ navigation, route }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([initialItem]);
   const {
     campaignId,
+    title,
     userId,
     categoriaEnseres,
     categoriaFrutasVerduras,
@@ -37,6 +38,13 @@ const Donate = ({ route }) => {
   });
 
   const createDonation = async () => {
+    if (items[0].producto === "") {
+      Alert.alert(
+        "¡Error en los artículos!",
+        "Favor de llenar todos los campos"
+      );
+      return;
+    }
     setLoading(true);
 
     for (let i = 0; i < items.length; i++) {
@@ -51,7 +59,14 @@ const Donate = ({ route }) => {
           estado: "pendiente",
         })
         .then((res) => {
-          if (verifDonation) Alert.alert("Donaciones creadas exitosamente");
+          if (verifDonation) {
+            Alert.alert(
+              `¡Gracias por contribuir a ${title}!`,
+              "Tus donaciones fueron registradas correctamente. Acude al centro de acopio para entregarlas.",
+              [{ text: "OK", onPress: () => navigation.navigate("Feed") }]
+            );
+            navigation.navigate("Feed");
+          }
         })
         .catch((err) => {
           Alert.alert(
@@ -139,7 +154,7 @@ const Donate = ({ route }) => {
         </View>
       </ScrollView>
       <TouchableOpacity style={Styles.savebtn} onPress={() => createDonation()}>
-        <Text style={Styles.btntext}>Guardar</Text>
+        <Text style={Styles.btntext}>Donar</Text>
       </TouchableOpacity>
     </>
   );
