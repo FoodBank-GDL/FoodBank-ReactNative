@@ -27,7 +27,7 @@ const DonationCard = ({ id, campaignId, name, status, selected, donations, handl
     const handleChangeStatus = () => {
         axios.put(`${API_URL}/donation/changeStatus`, {
             userId: id,
-            campaignId: campaignId,
+            campaignId: campaignId.campaignId,
             newState: statusState === "pendiente" ? "completado" : "pendiente"
         })
             .then((res) => {
