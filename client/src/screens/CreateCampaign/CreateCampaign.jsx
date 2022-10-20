@@ -15,10 +15,11 @@ import DatePicker from "../../components/DatePicker";
 import axios from "axios";
 import { API_URL } from "../../../lib/constants";
 import { Styles } from "./Styles";
+import { useAuth } from "../../contexts/AuthContext";
 
 const CreateCampaign = ({ navigation }) => {
   let valTitle = true;
-
+  const { userId } = useAuth();
   const [focusTitle, setFocusTitle] = useState(false);
   const [focusMeta, setFocusMeta] = useState(false);
   const [focusLoc, setFocusLoc] = useState(false);
@@ -96,7 +97,7 @@ const CreateCampaign = ({ navigation }) => {
 
     await axios
       .post(`${API_URL}/campaign/create`, {
-        userId: "JhcZP5uKzORJ3x0aKPvNfXO0Qoi1",
+        userId: userId,
         titulo: campData.titulo,
         descripcion: campData.descripcion,
         accesibilidad: campData.accesibilidad,
