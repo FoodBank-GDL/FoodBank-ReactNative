@@ -19,7 +19,7 @@ import {
 } from "./src/screens";
 
 import { useAuth } from "./src/contexts/AuthContext";
-import Donate from "./src/screens/Donate/Donate";
+import Donate from "./src/screens/Donate";
 
 const Routes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
